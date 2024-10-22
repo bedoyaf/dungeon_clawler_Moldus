@@ -1,19 +1,22 @@
 # Specification of the project
 
-My project is an extention of an existing game I created. The game is made in Unity, using C# and tools in the Unity game engine. The only external tool I used is Astar Pathfinding project for pathfinding https://arongranberg.com/astar/.
+The game will be a topdown perspective rogue lite dungeon crawler with proceduraly generated levels. 
+
+This project is an extention of an existing game I created. The game will be in Unity, using C# and tools in the Unity game engine. The only external tool in used will be the Astar Pathfinding project for pathfinding https://arongranberg.com/astar/.
 
 ## The already existing game
+The original game was actualy a game jam game, but it expanded into a Advanced C# project where I redid the whole game.
+### Differences with the original
+The game jam game and the Advanced C# project differed mainly, in the fact, that the game jam game has no procedural generation, it was a broken mess
+### How the game looks like at the moment and how it will be extended
 
-### The even older game jam Moldus
-Moldus was an idea created during the Matfyz Summer Game Jam. The game was quite broken and did not feature procedural generation. I did half of the programming on the game, mainly everything that did not feature enemy AI and pathfinding. I decided to make a new version of the game due to the fact that the idea and assets already exist, so I don't have to create new ones because I can't draw. I would like to give my thanks to Jaromir Prochazka for letting me use his sprites and for creating three new ones.
-
-### Current Game
-The game is a Dungeon Crawler where you need to search a procedurally generated level for the exit. The level is filled with enemies of three types, and you must defeat them using either your starting flamethrower or by switching infections. This can be achieved by killing enough enemies of a certain type and then pressing one of the 1, 2, 3 keys that are associated with the enemy type.
+#### The game created so far
+The game is a Dungeon Crawler where you need to search a procedurally generated level for the exit. The level is filled with enemies of three types, and you must defeat them using either your starting flamethrower or when you kill enaugh enemies of a certain type you can change you form to heal yourself and use the same attack as your enemy temporarily. This can be achieved by killing enough enemies of a certain type and then pressing one of the 1, 2, 3 keys that are associated with the enemy type.
 
 ## What will be added upon and what the new project consists of
 
 ### Upgrading old features and polishing
-I am planning to add much more Dot tween functions and add some much needed polish to the experience. I also want to change certain enemies and their attacks such as the red mushrooms bomb placing. Also considering to change the health system to a heart one.
+I am planning to add much more Dot tween functions, thats an animation engine for Unity, that I can use to add more impact to attacks or more visual clues to what is happing on screen, that the game lcaks and add some much needed polish to the experience. I also want to change certain enemies and their attacks such as the red mushrooms bomb placing. I also will change ty health system from a decreasing value of 100% to hearts that you lose after being hit, with a short time of immortality after being hit.
 
 ### Adding rogue lite elements
 By that there will be a system that lets the player unlock progress even though they lose a session. The system will work by collecting upgrade points by either defeating bosses, or by finding it in chests. 

@@ -1,0 +1,73 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{url}
+
+
+\title{Moldus Specification}
+\author{Filip Bedoya}
+\date{October 2024}
+
+\begin{document}
+
+\maketitle
+
+\section*{Introduction}
+The game called Moldus will be a mushroom themed top down perspective rogue-lite dungeon crawler with procedurally generated levels. This project is an extension of an existing game created as part of the Advanced C\# course. The game will be in Unity, using C\# and tools in the Unity game engine. The only external tool used will be the Astar Pathfinding project for pathfinding: \url{https://arongranberg.com/astar/}.
+
+\subsection*{The already existing game}
+The original game was a game jam game, but it expanded into an Advanced C\# course project where the game was redone. The game jam game and the Advanced C\# course project differed mainly in the fact that the game jam game has no procedural generation.
+
+\subsection*{The new game}
+The game is a top-down dungeon crawler where you need to search a procedurally generated level for the exit. The level is filled with enemies of three types, and you must defeat them. You can defeat them either with your flamethrower or, when enough enemies of a certain type are killed, by changing your infection, which heals you and allows you to temporarily use the same attack as your enemy. Levels are procedurally generated, and upon finishing a level, a new one is created to explore.
+
+\subsection*{Controls}
+The game is controlled by a basic WASD movement, aiming your attacks with your mouse and shooting with a left click. And switching between your forms/infections using number keys 1 2 3. 
+
+\section*{Implementation details}
+The main objective of this project is to extend the existing game.
+
+\subsection*{Upgrading old features and polishing}
+\subsubsection*{Dotween functions}
+Dotween is an animation and timing engine for Unity that enables the creation of smooth and complex animations. The project will integrate additional Dotween functions to enhance the visual and interactive experience of the game. For example, adding animations for being hit by an attack.
+\subsubsection*{Adding more visual and sound polish}
+The game’s visuals will be expanded by adding darkness, shadows, and lights. So some enemies and structures will have a glow to add more immersion. The game's sound design will also be expanded by adding more sounds to certain actions.
+\subsection*{Adding rogue-lite elements}
+There will be a system that allows the player to unlock progress even if they lose a session. The system will work by collecting upgrade points either by defeating bosses or finding them in chests.
+
+\subsubsection*{Upgrades}
+You can visit a scene between levels. In it, you can use your upgrade points to improve the player. When the player dies, the score will be reset, but the upgrades will remain, so the character improves each game. Some of the skills will be simple stat increases, while others will add special abilities or change existing ones.
+\\
+\\
+Abilities that will be added:
+\paragraph{Ability 1}
+Spawning little mushrooms that would benefit the player in combat, such as shooting enemies by themselves.
+\paragraph{Ability 2}
+A little firefly that would show the correct path to the exit. Helping in navigating the maze.
+\paragraph{Ability 3}
+Adding alternate versions of current attack, such as tweaking values.
+\paragraph{Ability 4}
+Having a poisonous field around the character that damages any enemies around.
+\paragraph{Ability 5}
+A shield that would soak up some of the damage.
+\paragraph{Ability 6}
+Adding, effects to attacks. The player would get to choose between freezing enemies in place, making them explode after death or poisoning them.
+\paragraph{Ability 7}
+Passive abilities that change the play style such as dealing more damage when the player's health is low or dealing extra damage to enemies at full health.
+
+\subsection*{Bosses}
+The game will contain three bosses. After their defeat, each boss would drop an upgrade point. There will be one boss for each of the three enemy types, expanding on the original design.
+
+\subsubsection*{First boss}
+Purple mushroom, that will fire a high amount of projectiles in multiple directions that the player will have to dodge.
+\subsubsection*{Second boss}
+Green mushroom, that will spawn minions that would help it defend itself.
+\subsubsection*{Third boss}
+Red Mushroom, that will throw bombs at the player that the player will need to dodge.
+
+\subsection*{Changing the procedural generation}
+Changes will be made in line with the above-mentioned elements, such as adding upgrade points in the level for the player to find and adding bosses as part of the level generation. 
+\\
+Additionally rooms will contain destructible structures that the player can hide behind.
+
+
+\end{document}

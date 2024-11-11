@@ -28,7 +28,7 @@ public class GreenEnemyController : BasicEnemy
     private void Shoot()
     {
         Vector2 shootDirection = (target.position - transform.position).normalized;
-        float bulletSpeed = _rigidBody.velocity.magnitude;
+        float bulletSpeed = _rigidBody.linearVelocity.magnitude;
         Vector3 currentPosition = transform.position;
         currentPosition.z = 0;
         GameObject bullet = Instantiate(bulletPrefab, currentPosition, Quaternion.identity);

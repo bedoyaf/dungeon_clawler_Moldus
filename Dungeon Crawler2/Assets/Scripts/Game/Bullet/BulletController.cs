@@ -69,7 +69,7 @@ public class BulletController : MonoBehaviour
         direction = direction.normalized;
         speed += additionalbulletSpeed;
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.velocity = direction * speed;
+        rb.linearVelocity = direction * speed;
         originalPosition = _originalPosition;
     }
     /// <summary>

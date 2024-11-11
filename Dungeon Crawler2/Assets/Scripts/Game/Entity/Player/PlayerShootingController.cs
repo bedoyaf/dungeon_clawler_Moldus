@@ -159,7 +159,7 @@ public class PlayerShootingController : MonoBehaviour
 
         Vector2 shootDirection = (mousePosition - transform.position).normalized;
 
-        float bulletSpeed = rigidBody.velocity.magnitude;//*dotProduct;
+        float bulletSpeed = rigidBody.linearVelocity.magnitude;//*dotProduct;
                                                   // Debug.Log(bulletSpeed);
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         Vector3 currentPosition = transform.position;

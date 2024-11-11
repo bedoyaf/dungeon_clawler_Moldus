@@ -35,7 +35,7 @@ public class PlayerMovementController : MonoBehaviour
     void FixedUpdate()
     {
         smoothedMovementInput = Vector2.SmoothDamp(smoothedMovementInput, movementInput, ref movementInputSmoothVelocity, 0.1f);
-        _rigidbody.velocity = smoothedMovementInput * speed;
+        _rigidbody.linearVelocity = smoothedMovementInput * speed;
     }
 
     private void OnMove(InputValue inputValue)

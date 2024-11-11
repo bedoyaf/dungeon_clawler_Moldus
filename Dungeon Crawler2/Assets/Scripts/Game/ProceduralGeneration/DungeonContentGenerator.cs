@@ -7,6 +7,7 @@ using UnityEngine.AI;
 using static UnityEngine.CompositeCollider2D;
 using Pathfinding;
 using UnityEngine.Tilemaps;
+using UnityEngine.Rendering.Universal;
 
 /// <summary>
 /// Generator of the contents of the dungeon that are not tiles, like spawners of enemies

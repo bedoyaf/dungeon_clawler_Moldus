@@ -7,17 +7,39 @@ using UnityEngine;
 /// </summary>
 public class FlameController : MonoBehaviour
 {
-    [SerializeField] private int damage = 10;             
+    [SerializeField] private int damage = 10;
+    [SerializeField] private float damageInterval = 0.1f;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Spawner"))
         {
-            IDamageable enemy = collision.GetComponent<IDamageable>();  
-            if (enemy != null)
+            //IDamageable enemy = collision.GetComponent<>();  
+
+            HealthController enemy = collision.GetComponent<HealthController>();
+            if (enemy != null && !enemy.isOnFire)
             {
-                enemy.TakeDamage(damage);
+                enemy.isOnFire = true;
+                StartCoroutine(DamageOverTime(enemy));
             }
         }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        HealthController health = other.GetComponent<HealthController>();
+        if(health != null)
+        {
+            health.isOnFire = false;
+        }
+    }
+    private IEnumerator DamageOverTime(HealthController enemy)
+    {
+        //enemy.IsTakingDamage = true; // Prevent multiple coroutines
+        while (enemy != null && enemy.isOnFire) // Custom flag for tracking flame state
+        {
+            enemy.TakeDamage(damage);
+            yield return new WaitForSeconds(damageInterval);
+        }
+       // enemy.IsTakingDamage = false;
     }
 }

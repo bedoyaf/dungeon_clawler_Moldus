@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,6 +14,15 @@ public class HealthTextController : MonoBehaviour
 
     public void UpdateHealthText(int damage)
     {
-            textMesh.text = $"Health: {healthController.currentHealth}";
+        int startValue = int.Parse(textMesh.text.Replace("Health: ", ""));
+        int targetValue = healthController.currentHealth;
+
+        DOTween.To(() => startValue, x =>
+        {
+            startValue = x;
+            textMesh.text = $"Health: {startValue}";
+        }, targetValue, 0.5f) // Duration of 0.5 seconds
+        .SetEase(Ease.OutQuad); // Smooth easing
+
     }
 }

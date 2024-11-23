@@ -52,6 +52,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -89,7 +92,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &2705601570072019963
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -103,6 +106,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -120,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa46b69a0ab54e4e929fab7600c956b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeTillDestruct: 10
+  timeTillDestruct: 5
 --- !u!82 &8897185041287032098
 AudioSource:
   m_ObjectHideFlags: 0
@@ -132,6 +136,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8c8f268e3afba2642968f471884ab43b, type: 3}
+  m_Resource: {fileID: 8300000, guid: 8c8f268e3afba2642968f471884ab43b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerShootingController : MonoBehaviour
 {
     //attack
-    private ColorEnemy currentInfection = ColorEnemy.Purple; //determins weapons
+    private ColorEnemy currentInfection = ColorEnemy.None; //determins weapons
     [SerializeField] private GameObject bulletPrefab;    
     [SerializeField] private GameObject bombPrefab;       
     [SerializeField] BulletData longRangeBullet;
@@ -73,7 +73,7 @@ public class PlayerShootingController : MonoBehaviour
     /// <summary>
     /// Stops the attack of the flamethrower by destroying the object
     /// </summary>
-    private void StopFlameThrower()
+    public void StopFlameThrower()
     {
         if (isFiring)
         {

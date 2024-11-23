@@ -101,6 +101,7 @@ public class BulletController : MonoBehaviour
             {
                 damageable.TakeDamage(damage);
             }
+            Debug.Log("jdu se znièit");
             Destroy(gameObject);
         }
         else if (gameObject.CompareTag("EnemyBullet") && collision.CompareTag("Player"))

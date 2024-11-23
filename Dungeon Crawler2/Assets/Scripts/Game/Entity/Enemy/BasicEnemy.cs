@@ -7,6 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using DG.Tweening;
 
 /// <summary>
 /// class that sets up functions that are universal for every enemy type, mainly pathfinding
@@ -37,6 +38,7 @@ public abstract class BasicEnemy : MonoBehaviour, IEnemy
     bool isShooting = false;
     [SerializeField] protected float shootingRange, shootingCooldown;
     protected float shootTimer;
+
 
     void Start()
     {
@@ -229,7 +231,27 @@ public abstract class BasicEnemy : MonoBehaviour, IEnemy
         }
         return false;
     }
+    /*
+    public void FlashRed()
+    {
+        if (DOTween.IsTweening(_spriteRenderer))
+        {
+            return;
+        }
 
-
-
+        Color originalColor = _spriteRenderer.color;
+        Color changeColor = new Color(1f, 0f, 0f, 0.5f);
+        _spriteRenderer.DOColor(changeColor, 0.1f).OnComplete(() =>
+        {
+            _spriteRenderer.DOColor(originalColor, 0.1f);
+        });
+    }
+    */
+    public void On_Death()
+    {
+        Sequence deathSequence = DOTween.Sequence();
+        deathSequence.Append(transform.DOScale(0f, 0.5f).SetEase(Ease.InBack));
+        deathSequence.Join(transform.DORotate(new Vector3(0f, 0f, 360f), 0.5f, RotateMode.FastBeyond360));
+        deathSequence.OnComplete(() => Destroy(gameObject));
+    }
 }

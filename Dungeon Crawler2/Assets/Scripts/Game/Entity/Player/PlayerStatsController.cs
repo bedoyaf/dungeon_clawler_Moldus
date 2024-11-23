@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -17,6 +18,8 @@ public class PlayerStatsController : MonoBehaviour
     //helpers
     private PlayerShootingController shootingController;
 
+    private SpriteRenderer _spriteRenderer;
+
     void Start()
     {
         var playerHealthController = GetComponent<HealthController>();
@@ -24,6 +27,7 @@ public class PlayerStatsController : MonoBehaviour
         shootingController = GetComponent<PlayerShootingController>();
         animator=GetComponent<Animator>();
         healthController = GetComponent<HealthController>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         UpdatePlayerInfection();
     }
 
@@ -38,6 +42,7 @@ public class PlayerStatsController : MonoBehaviour
     private void CheckIfCanSwitchForm()
     {
         ColorEnemy originalInfection = currentInfection;
+        bool changed = false;
         if(currentInfection == ColorEnemy.None)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -46,7 +51,8 @@ public class PlayerStatsController : MonoBehaviour
                 {
                     pointsCounter.RedPoints = pointsCounter.RedPoints - pointsRequiredToTransform;
                     currentInfection = ColorEnemy.Red;
-                }                    
+                }
+                changed = true;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
@@ -55,6 +61,7 @@ public class PlayerStatsController : MonoBehaviour
                     pointsCounter.GreenPoints = pointsCounter.GreenPoints - pointsRequiredToTransform;
                     currentInfection = ColorEnemy.Green;
                 }
+                changed = true;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
@@ -63,9 +70,10 @@ public class PlayerStatsController : MonoBehaviour
                     pointsCounter.PurplePoints = pointsCounter.PurplePoints - pointsRequiredToTransform;
                     currentInfection = ColorEnemy.Purple;
                 }
+                changed = true;
             }
         }
-        if(originalInfection != currentInfection)
+        if(changed)
         {
             StartCoroutine(TransformationTime(transformationTimeSeconds));
             healthController.Heal(100);
@@ -129,4 +137,21 @@ public class PlayerStatsController : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+    /*
+    public void FlashRed()
+    {
+        Debug.Log("flash");
+        if (DOTween.IsTweening(_spriteRenderer))
+        {
+            return;
+        }
+
+        Color originalColor = _spriteRenderer.color;
+        Color changeColor = new Color(1f, 0f, 0f, 0.5f);
+        _spriteRenderer.DOColor(changeColor, 0.1f).OnComplete(() =>
+        {
+            _spriteRenderer.DOColor(originalColor, 0.1f);
+        });
+    }
+    */
 }

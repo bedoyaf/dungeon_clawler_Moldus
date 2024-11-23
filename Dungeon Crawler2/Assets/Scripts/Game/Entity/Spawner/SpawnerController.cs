@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,10 +20,14 @@ public class SpawnerController : MonoBehaviour
     private Transform EnemyParent; //hierarchy parent
     //Event
     private UnityAction<GameObject> onDeathCallback;
+
+    private SpriteRenderer _spriteRenderer;
+
     void Start()
     {
         var enemycontroller = GetComponent<HealthController>();
         enemycontroller.onDeathEvent.AddListener(SpawnerDeath);
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     /// <summary>
@@ -87,5 +92,20 @@ public class SpawnerController : MonoBehaviour
     {
         currentNumberOfEnemySpawn--;
     }
+    /*
+    public void FlashRed()
+    {
+        if (DOTween.IsTweening(_spriteRenderer))
+        {
+            return;
+        }
 
+        Color originalColor = _spriteRenderer.color;
+        Color changeColor = new Color(1f, 0f, 0f, 0.5f);
+        _spriteRenderer.DOColor(changeColor, 0.1f).OnComplete(() =>
+        {
+            _spriteRenderer.DOColor(originalColor, 0.1f);
+        });
+    }
+    */
 }

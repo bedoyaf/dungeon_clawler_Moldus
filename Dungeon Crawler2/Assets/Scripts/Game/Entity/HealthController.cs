@@ -32,7 +32,10 @@ public class HealthController : MonoBehaviour, IDamageable
         damage =(int)(damage * damageModifier);
         currentHealth -= damage;
         //Debug.Log($"{gameObject.name} took {damage} damage.");
-        FlashRed();
+        if(gameObject.CompareTag("Player")||gameObject.CompareTag("Enemy"))
+        {
+            FlashRed();
+        }
         if (onTakeDamage != null)
         {
             onTakeDamage.Invoke(damage);

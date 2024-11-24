@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Structure
   - Spawner
+  - Pillar
   layers:
   - Default
   - TransparentFX

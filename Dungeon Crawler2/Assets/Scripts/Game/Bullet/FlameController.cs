@@ -12,7 +12,7 @@ public class FlameController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Spawner"))
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Spawner") || collision.gameObject.CompareTag("Pillar"))
         {
             //IDamageable enemy = collision.GetComponent<>();  
 

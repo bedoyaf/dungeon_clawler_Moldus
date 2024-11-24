@@ -82,6 +82,10 @@ public class SpawnerController : MonoBehaviour
         Vector3 spawnPosition = new Vector3(randomPoint.x, randomPoint.y, 0) + transform.position;
         var newEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
         newEnemy.GetComponent<BasicEnemy>().Initialize(target, EnemySpawnPointsParent, EnemyParent, gameObject, onDeathCallback);
+
+        newEnemy.transform.localScale = Vector3.zero;
+
+        newEnemy.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBounce);
     }
 
 

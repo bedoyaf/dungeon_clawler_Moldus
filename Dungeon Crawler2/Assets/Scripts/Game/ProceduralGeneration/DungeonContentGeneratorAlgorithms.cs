@@ -1,9 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// Algorithms like bfs and spawner random spots that calculate info for the generator
@@ -92,5 +91,74 @@ public static class DungeonContentGeneratorAlgorithms
             }
         }
         return new Tuple<Vector2Int,Vector2Int>(start, end);
+    }
+
+
+
+    public static List<Vector2Int> PlacePillars(BoundsInt room, int minDistanceFromCenter, int minDistanceFromWalls)
+    {
+        if (room.size.x < minDistanceFromWalls * 3 || room.size.y < minDistanceFromWalls * 3)
+        {
+            Debug.LogWarning("Room is too small for pillar placement. Returning empty list.");
+            return new List<Vector2Int>();
+        }
+        int randomChoice = Random.Range(0, 3); 
+        switch (randomChoice)
+        {
+            case 0:
+                return PlacePillarsInCornersOfRoom(room, minDistanceFromCenter, minDistanceFromWalls);
+            case 1:
+                return PlacePillarsInRoomRandomly(room, minDistanceFromCenter, minDistanceFromWalls);
+            default:
+                return new List<Vector2Int>();
+        }
+    }
+
+    private static List<Vector2Int> PlacePillarsInRoomRandomly(BoundsInt room, int minDistanceFromCenter, int minDistanceFromWalls)
+    {
+        List<Vector2Int> pillars = new List<Vector2Int>();
+
+        for (int i = 0; i < 4; i++) // Generate 4 random pillars
+        {
+            int x = Random.Range(room.xMin + minDistanceFromWalls, room.xMax - minDistanceFromWalls);
+            int y = Random.Range(room.yMin + minDistanceFromWalls, room.yMax - minDistanceFromWalls);
+            pillars.Add(new Vector2Int(x, y));
+        }
+        return pillars;
+    }
+    public static List<Vector2Int> PlacePillarsInCornersOfRoom(BoundsInt room,int minDistanceFromCenter, int minDistanceFromWalls)
+    {
+        List<Vector2Int> pillarCords = new List<Vector2Int>();
+        Vector3Int roomCenter = new Vector3Int(
+        room.xMin + room.size.x / 2,
+        room.yMin + room.size.y / 2,
+        0
+        );
+
+        int maxRadius = Mathf.Min(
+            room.size.x / 2 - minDistanceFromWalls,
+            room.size.y / 2 - minDistanceFromWalls
+        );
+
+        int radius = Random.Range(minDistanceFromCenter, maxRadius);
+
+        Vector3Int[] offsets = new Vector3Int[]
+        {
+        new Vector3Int(radius, radius, 0),   // Top-right
+        new Vector3Int(-radius, radius, 0), // Top-left
+        new Vector3Int(radius, -radius, 0), // Bottom-right
+        new Vector3Int(-radius, -radius, 0) // Bottom-left
+        };
+
+        foreach (Vector3Int offset in offsets)
+        {
+            Vector3Int pillarPosition = roomCenter + offset;
+
+    //        if (room.Contains(pillarPosition))
+     //       {
+                pillarCords.Add(new Vector2Int(pillarPosition[0], pillarPosition[1])); // Custom method to place a pillar (instantiate object, etc.)
+       //     }
+        }
+        return pillarCords;
     }
 }

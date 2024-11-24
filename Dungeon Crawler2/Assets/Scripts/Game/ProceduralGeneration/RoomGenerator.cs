@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// Main Dungeon Generation
@@ -55,6 +56,9 @@ public class ProceduralGenerationRoomGenerator : AbstractDungeonGenerator
         GenerateRandomColorForRooms(roomsWithoutStartAndEnd, floor, roomColors);
         //generates walls of rooms
         WallGenerator.CreateWalls(floor, tileMapVisualizer);
+
+        PlacePillars(roomsWithoutStartAndEnd);
+
         //scans for pathfinding
         dungeonContentGenerator.ScanAreaForPathFinding();
         //places spawners
@@ -81,6 +85,24 @@ public class ProceduralGenerationRoomGenerator : AbstractDungeonGenerator
         }
         dungeonContentGenerator.PlaceSpawners(spawnersForEachRoom, colors, tileMapVisualizer);
     }
+
+
+
+
+    private void PlacePillars( List<BoundsInt> rooms)
+    {
+        List<List<Vector2Int>> pillarsForEachRoom = new List<List<Vector2Int>>();
+        foreach (var room in rooms)
+        {
+            int randomChoice = Random.Range(0, 3);
+            List<Vector2Int> currentRoomPillarCoords = DungeonContentGeneratorAlgorithms.PlacePillars(room, 2, 2); 
+            pillarsForEachRoom.Add(currentRoomPillarCoords);
+            Debug.Log(currentRoomPillarCoords.Count);
+        }
+        Debug.Log(pillarsForEachRoom.Count);
+        dungeonContentGenerator.PlacePillars(pillarsForEachRoom, tileMapVisualizer);
+    }
+
     /// <summary>
     /// Juist removes the rooms containing the points in ignoreTheseRooms from the rooms list
     /// </summary>

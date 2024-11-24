@@ -16,12 +16,13 @@ public class DungeonContentGenerator : MonoBehaviour
 {
     //prefabs
     [SerializeField] private GameObject spawner;
+    [SerializeField] private GameObject pillar;
     [SerializeField] private GameObject Player;
     [SerializeField] private GameObject redEnemy, purpleEnemy, greenEnemy;
     [SerializeField] private GameObject start, end; //of levels
 
     [SerializeField] private GameObject parentSpawner; //for hierarchy
-    [SerializeField] private GameObject EnemySpawnPointsParent, EnemyParent; //for hierarchy
+    [SerializeField] private GameObject EnemySpawnPointsParent, EnemyParent, PillarParent; //for hierarchy
 
     [SerializeField] private AstarPath pathfinding;
     [SerializeField] private GameObject statsCounter; //just here to send the incrementation function to the enemy death event
@@ -136,6 +137,26 @@ public class DungeonContentGenerator : MonoBehaviour
                 return new UnityEngine.Color(0.5f, 0, 0.5f); // Purple
             default:
                 return UnityEngine.Color.white;
+        }
+    }
+
+    private void DestroyPillars()
+    {
+        foreach (Transform child in PillarParent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+    public void PlacePillars(List<List<Vector2Int>> pillarsForEachRoom, TileMapVisualizer tileMapVisualizer)
+    {
+        DestroyPillars();
+        for (int i = 0; i < pillarsForEachRoom.Count; i++)
+        {
+            foreach (var pillarPos in pillarsForEachRoom[i])
+            {
+                Debug.Log("pokladam pillar");
+                GameObject Pillar = Instantiate(pillar, tileMapVisualizer.GetRealCoordsFromFloorTileMap(pillarPos), Quaternion.identity, PillarParent.transform);
+            }
         }
     }
 }

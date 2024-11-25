@@ -97,9 +97,7 @@ public class ProceduralGenerationRoomGenerator : AbstractDungeonGenerator
             int randomChoice = Random.Range(0, 3);
             List<Vector2Int> currentRoomPillarCoords = DungeonContentGeneratorAlgorithms.PlacePillars(room, 2, 2); 
             pillarsForEachRoom.Add(currentRoomPillarCoords);
-            Debug.Log(currentRoomPillarCoords.Count);
         }
-        Debug.Log(pillarsForEachRoom.Count);
         dungeonContentGenerator.PlacePillars(pillarsForEachRoom, tileMapVisualizer);
     }
 

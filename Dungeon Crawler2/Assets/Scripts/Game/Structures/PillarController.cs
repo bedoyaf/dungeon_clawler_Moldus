@@ -26,7 +26,7 @@ public class PillarController : MonoBehaviour
     }
     public void OnDamage()
     {
-        transform.DOShakePosition(0.2f, 0.2f, 10, 90);
+        transform.DOShakePosition(0.2f, 0.1f, 7, 90);
         if (healthController.currentHealth<(healthController.maxHealth*2)/3 && size_stage == 0)
         {
             size_stage = 1;

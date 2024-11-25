@@ -154,8 +154,11 @@ public class DungeonContentGenerator : MonoBehaviour
         {
             foreach (var pillarPos in pillarsForEachRoom[i])
             {
-                Debug.Log("pokladam pillar");
-                GameObject Pillar = Instantiate(pillar, tileMapVisualizer.GetRealCoordsFromFloorTileMap(pillarPos), Quaternion.identity, PillarParent.transform);
+                Vector3 coorsFromTilemap = tileMapVisualizer.GetRealCoordsFromFloorTileMap(pillarPos);
+                float CellSize = tileMapVisualizer.GetTilemapCellSize();
+                Debug.Log(CellSize);
+                Vector3 coords = new Vector3(coorsFromTilemap.x+CellSize,coorsFromTilemap.y+CellSize, coorsFromTilemap.z);
+                GameObject Pillar = Instantiate(pillar, coords, Quaternion.identity, PillarParent.transform);
             }
         }
     }

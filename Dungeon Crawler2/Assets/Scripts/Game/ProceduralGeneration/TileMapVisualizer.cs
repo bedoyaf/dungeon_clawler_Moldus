@@ -176,6 +176,9 @@ public class TileMapVisualizer : MonoBehaviour
         return floorTilemap.CellToWorld(new Vector3Int(tilecoords.x, tilecoords.y, 0));
     }
 
-
+    public float GetTilemapCellSize()
+    {
+        return floorTilemap.layoutGrid.cellSize.x; 
+    }
 }
 

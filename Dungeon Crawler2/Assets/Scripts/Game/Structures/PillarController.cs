@@ -11,6 +11,8 @@ public class PillarController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private HealthController healthController;
 
+    private DungeonContentGenerator dungeonContentGenerator;
+
     private int size_stage = 0;
     void Start()
     {
@@ -42,6 +44,16 @@ public class PillarController : MonoBehaviour
     public void OnDeath()
     {
         spriteRenderer.DOFade(0f, 0.5f)
-        .OnComplete(() => Destroy(gameObject));
+        .OnComplete(() =>
+        {
+        Destroy(gameObject); // Destroy the pillar
+        dungeonContentGenerator.ScanSpecificAreaForPathfinding(transform.position, 10f); // Update graph after destruction
+        });
     }
+
+    public void SetDungeonContentGenerator(DungeonContentGenerator _newDungeonContentGenerator)
+    {
+        dungeonContentGenerator = _newDungeonContentGenerator;
+    }
+
 }

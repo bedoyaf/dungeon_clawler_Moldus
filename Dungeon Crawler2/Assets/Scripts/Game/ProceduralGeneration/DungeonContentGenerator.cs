@@ -61,7 +61,7 @@ public class DungeonContentGenerator : MonoBehaviour
     /// </summary>
     public void ScanAreaForPathFinding()
     {
-        StartCoroutine(ScanAfterDelay(0.01f));
+        StartCoroutine(ScanAfterDelay(0.001f));
     }
 
     private IEnumerator ScanAfterDelay(float delay)
@@ -69,6 +69,16 @@ public class DungeonContentGenerator : MonoBehaviour
         yield return new WaitForSeconds(delay); // Wait for the specified delay
         pathfinding.Scan(); // Perform the scan
     }
+
+
+
+    public void ScanSpecificAreaForPathfinding(Vector3 pillarPosition, float pillarRadius)
+    {
+        Bounds updateBounds = new Bounds(pillarPosition, Vector3.one * pillarRadius * 2);
+        AstarPath.active.UpdateGraphs(updateBounds);
+    }
+
+
 
     /// <summary>
     /// All the setup for spawning an Enemy
@@ -156,9 +166,9 @@ public class DungeonContentGenerator : MonoBehaviour
             {
                 Vector3 coorsFromTilemap = tileMapVisualizer.GetRealCoordsFromFloorTileMap(pillarPos);
                 float CellSize = tileMapVisualizer.GetTilemapCellSize();
-                Debug.Log(CellSize);
                 Vector3 coords = new Vector3(coorsFromTilemap.x+CellSize,coorsFromTilemap.y+CellSize, coorsFromTilemap.z);
                 GameObject Pillar = Instantiate(pillar, coords, Quaternion.identity, PillarParent.transform);
+                Pillar.GetComponent<PillarController>().SetDungeonContentGenerator(gameObject.GetComponent<DungeonContentGenerator>());
             }
         }
     }

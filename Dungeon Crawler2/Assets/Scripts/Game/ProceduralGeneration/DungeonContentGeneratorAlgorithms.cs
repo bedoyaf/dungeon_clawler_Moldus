@@ -118,6 +118,8 @@ public static class DungeonContentGeneratorAlgorithms
     {
         List<Vector2Int> pillars = new List<Vector2Int>();
 
+        int num = Random.Range(0,2);
+
         for (int i = 0; i < 4; i++) // Generate 4 random pillars
         {
             int x = Random.Range(room.xMin + minDistanceFromWalls, room.xMax - minDistanceFromWalls);

@@ -388,8 +388,8 @@ MonoBehaviour:
   onTakeDamage:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5806957447596646692}
-        m_TargetAssemblyTypeName: BasicEnemy, Assembly-CSharp
+      - m_Target: {fileID: -3250917428696316798}
+        m_TargetAssemblyTypeName: HealthController, Assembly-CSharp
         m_MethodName: FlashRed
         m_Mode: 1
         m_Arguments:
@@ -403,9 +403,9 @@ MonoBehaviour:
   onDeathEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5806957447596646692}
-        m_TargetAssemblyTypeName: BasicEnemy, Assembly-CSharp
-        m_MethodName: On_Death
+      - m_Target: {fileID: -3250917428696316798}
+        m_TargetAssemblyTypeName: HealthController, Assembly-CSharp
+        m_MethodName: OnDestroy
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -415,3 +415,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onHeal:
+    m_PersistentCalls:
+      m_Calls: []

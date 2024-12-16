@@ -32,7 +32,7 @@ public class HealthController : MonoBehaviour, IDamageable
         damage =(int)(damage * damageModifier);
         currentHealth -= damage;
         //Debug.Log($"{gameObject.name} took {damage} damage.");
-        if(gameObject.CompareTag("Player")||gameObject.CompareTag("Enemy"))
+        if(gameObject.CompareTag("Player")||gameObject.CompareTag("Enemy") || gameObject.CompareTag("Spawner"))
         {
             FlashRed();
         }
@@ -82,14 +82,14 @@ public class HealthController : MonoBehaviour, IDamageable
         }
 
         Color originalColor = _spriteRenderer.color;
-        Color changeColor = new Color(1f, 0f, 0f, 0.5f);
+        Color changeColor = new Color(1f, 0f, 0f, 0.5f) * 1.5f;
         _spriteRenderer.DOColor(changeColor, 0.1f).OnComplete(() =>
         {
             _spriteRenderer.DOColor(originalColor, 0.1f);
         });
 
     }
-    void OnDestroy()
+    public void OnDestroy()
     {
         if (_spriteRenderer != null)
         {

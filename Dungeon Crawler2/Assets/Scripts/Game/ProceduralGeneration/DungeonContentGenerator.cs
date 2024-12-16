@@ -166,7 +166,7 @@ public class DungeonContentGenerator : MonoBehaviour
             {
                 Vector3 coorsFromTilemap = tileMapVisualizer.GetRealCoordsFromFloorTileMap(pillarPos);
                 float CellSize = tileMapVisualizer.GetTilemapCellSize();
-                Vector3 coords = new Vector3(coorsFromTilemap.x+CellSize,coorsFromTilemap.y+CellSize, coorsFromTilemap.z);
+                Vector3 coords = new Vector3(coorsFromTilemap.x+CellSize/2,coorsFromTilemap.y+CellSize/2, coorsFromTilemap.z);
                 GameObject Pillar = Instantiate(pillar, coords, Quaternion.identity, PillarParent.transform);
                 Pillar.GetComponent<PillarController>().SetDungeonContentGenerator(gameObject.GetComponent<DungeonContentGenerator>());
             }

@@ -93,7 +93,7 @@ public class BulletController : MonoBehaviour
     /// </summary>
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (gameObject.CompareTag("FriendlyBullet") && collision.CompareTag("Enemy"))
+        if (gameObject.CompareTag("FriendlyBullet") && (collision.CompareTag("Enemy")|| collision.CompareTag("Boss")))
         {
             IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
 
@@ -101,7 +101,6 @@ public class BulletController : MonoBehaviour
             {
                 damageable.TakeDamage(damage);
             }
-            Debug.Log("jdu se znièit");
             Destroy(gameObject);
         }
         else if (gameObject.CompareTag("EnemyBullet") && collision.CompareTag("Player"))

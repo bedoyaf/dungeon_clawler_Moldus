@@ -89,7 +89,7 @@ public class ProceduralGenerationRoomGenerator : AbstractDungeonGenerator
 
 
 
-    private void PlacePillars( List<BoundsInt> rooms)
+    public void PlacePillars( List<BoundsInt> rooms)
     {
         List<List<Vector2Int>> pillarsForEachRoom = new List<List<Vector2Int>>();
         foreach (var room in rooms)
@@ -137,7 +137,7 @@ public class ProceduralGenerationRoomGenerator : AbstractDungeonGenerator
     /// <param name="rooms">bounds of all the rooms</param>
     /// <param name="floor">all the coordinates of the floor</param>
     /// <param name="roomColors">All the generates colors of enemytypes for each room</param>
-    private void GenerateRandomColorForRooms(List<BoundsInt> rooms, HashSet<Vector2Int> floor, List<ColorEnemy> roomColors)
+    public void GenerateRandomColorForRooms(List<BoundsInt> rooms, HashSet<Vector2Int> floor, List<ColorEnemy> roomColors)
     {
         foreach (var room in rooms)
         {
@@ -152,7 +152,7 @@ public class ProceduralGenerationRoomGenerator : AbstractDungeonGenerator
     /// </summary>
     /// <param name="rooms">bounds of all the rooms</param>
     /// <returns>list of all the coordinates of the centers of rooms</returns>
-    private List<Vector2Int> GetCentersOfRooms(List<BoundsInt> rooms)
+    public List<Vector2Int> GetCentersOfRooms(List<BoundsInt> rooms)
     {
         List<Vector2Int> centers = new List<Vector2Int>();
         foreach (var room in rooms)

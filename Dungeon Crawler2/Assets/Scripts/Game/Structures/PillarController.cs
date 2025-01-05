@@ -2,6 +2,7 @@ using DG.Tweening;
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class PillarController : MonoBehaviour
 {
@@ -43,6 +44,8 @@ public class PillarController : MonoBehaviour
 
     public void OnDeath()
     {
+        spriteRenderer.DOKill();
+        GetComponent<ShadowCaster2D>().enabled =false;
         spriteRenderer.DOFade(0f, 0.5f)
         .OnComplete(() =>
         {

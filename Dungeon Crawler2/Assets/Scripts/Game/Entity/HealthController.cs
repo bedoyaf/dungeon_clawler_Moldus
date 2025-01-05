@@ -24,6 +24,7 @@ public class HealthController : MonoBehaviour, IDamageable
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+
     /// <summary>
     /// just subtracts from currentHealth with rescpets to damageModifier, and if needed makes the object die dead
     /// </summary>
@@ -32,7 +33,7 @@ public class HealthController : MonoBehaviour, IDamageable
         damage =(int)(damage * damageModifier);
         currentHealth -= damage;
         //Debug.Log($"{gameObject.name} took {damage} damage.");
-        if(gameObject.CompareTag("Player")||gameObject.CompareTag("Enemy") || gameObject.CompareTag("Spawner"))
+        if(gameObject.CompareTag("Player")||gameObject.CompareTag("Enemy") || gameObject.CompareTag("Spawner") || gameObject.CompareTag("Boss"))
         {
             FlashRed();
         }

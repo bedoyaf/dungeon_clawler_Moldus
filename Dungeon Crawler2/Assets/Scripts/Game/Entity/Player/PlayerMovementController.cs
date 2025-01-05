@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerMovementController : MonoBehaviour
@@ -8,6 +9,7 @@ public class PlayerMovementController : MonoBehaviour
     //configuratable
     [SerializeField]
     private float speed;
+    [SerializeField] private float smoothingTime = 0.1f;
 
     //helpers
     private Rigidbody2D _rigidbody;
@@ -26,20 +28,36 @@ public class PlayerMovementController : MonoBehaviour
 
     void Update()
     {
-        movementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        movementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
 
-        float movementMagnitude = smoothedMovementInput.magnitude;
-        _animator.SetBool("running", movementMagnitude > 0.1f); 
+        _animator.SetBool("running", movementInput.magnitude > 0);
+
+
     }
 
     void FixedUpdate()
     {
-        smoothedMovementInput = Vector2.SmoothDamp(smoothedMovementInput, movementInput, ref movementInputSmoothVelocity, 0.1f);
-        _rigidbody.linearVelocity = smoothedMovementInput * speed;
+        // smoothedMovementInput = Vector2.SmoothDamp(smoothedMovementInput, movementInput, ref movementInputSmoothVelocity, 0.1f);
+        //smoothedMovementInput = Vector2.SmoothDamp(smoothedMovementInput, movementInput, ref movementInputSmoothVelocity, smoothingTime);
+        //  Vector2 targetPosition = _rigidbody.position + movementInput * speed * Time.fixedDeltaTime;
+        //_rigidbody.linearVelocity = smoothedMovementInput * speed;
+        //_rigidbody.linearVelocity = smoothedMovementInput * speed;
+        // _rigidbody.MovePosition(targetPosition);
+
+        if (movementInput.magnitude > 0)
+        {
+            Vector2 targetPosition = _rigidbody.position + movementInput * speed * Time.deltaTime;
+            _rigidbody.MovePosition(targetPosition);
+        }
+        else
+        {
+            // Stop the character by setting velocity to zero
+            _rigidbody.linearVelocity = Vector2.zero;
+        }
     }
 
-    private void OnMove(InputValue inputValue)
-    {
-        movementInput = inputValue.Get<Vector2>();
-    }
+   // private void OnMove(InputValue inputValue)
+   // {
+   //     movementInput = inputValue.Get<Vector2>();
+ //   }
 }

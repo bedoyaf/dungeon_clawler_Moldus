@@ -10,7 +10,7 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     public void PlayGame()
     {
-        SceneManager.LoadSceneAsync("SampleScene");
+        SceneManager.LoadSceneAsync("Game");
     }
     /// <summary>
     /// Shuts down the game

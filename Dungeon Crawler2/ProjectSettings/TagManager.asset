@@ -10,6 +10,7 @@ TagManager:
   - Structure
   - Spawner
   - Pillar
+  - Boss
   layers:
   - Default
   - TransparentFX

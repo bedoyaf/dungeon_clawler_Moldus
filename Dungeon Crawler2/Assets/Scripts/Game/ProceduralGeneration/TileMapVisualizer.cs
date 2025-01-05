@@ -95,6 +95,19 @@ public class TileMapVisualizer : MonoBehaviour
         floorTilemap.ClearAllTiles();
         wallTilemap.ClearAllTiles();
     }
+
+
+    public void ClearArea(BoundsInt room)
+    {
+        for (int x = room.xMin; x < room.xMax; x++)
+        {
+            for (int y = room.yMin; y < room.yMax; y++)
+            {
+                floorTilemap.SetTile(new Vector3Int(x, y, 0), null);
+                wallTilemap.SetTile(new Vector3Int(x, y, 0), null);
+            }
+        }
+    }
     /// <summary>
     /// Calls Paint single with a wallTilemap
     /// </summary>

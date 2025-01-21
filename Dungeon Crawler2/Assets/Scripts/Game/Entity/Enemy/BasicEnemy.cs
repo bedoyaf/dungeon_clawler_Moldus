@@ -165,17 +165,20 @@ public abstract class BasicEnemy : MonoBehaviour, IEnemy
 
         if (distanceToTarget > shootingRange || hasObstacle)
         {
+            Debug.Log("jdu po nem");
             aiPath.canMove = true;
             destinationSetter.target = target;
             isShooting = false;
         }
         else
         {
+            aiPath.canMove = false;
             isShooting = true;
         }
 
         if (isShooting)
         {
+            Debug.Log("strilim");
             withConsiderationToTimeAttack();
         }
     }

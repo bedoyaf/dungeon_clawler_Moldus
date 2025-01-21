@@ -59,6 +59,7 @@ public class BossSetupController : MonoBehaviour
     [ContextMenu("Generate Boss Room")]
     public void SetupBoss()
     {
+        endSpawnPoint.SetActive(false);
         var room = BasicDungeonGenerationAlgorithms.GenerateSimpleRoom(roomSize, roomCoords);
         var floor = BasicDungeonGenerationAlgorithms.CreateRoomFloor(room);
 
@@ -111,7 +112,6 @@ public class BossSetupController : MonoBehaviour
 
         Vector3 playerSpawnTile = new Vector2((roomCenterWorld.x + southEdgeCenterWorld.x) / 2,(roomCenterWorld.y/2 + southEdgeCenterWorld.y) / 2);
         playerSpawnPoint.transform.position = playerSpawnTile;
-
     }
 
     void spawnBoss()//add change based on color
@@ -121,8 +121,16 @@ public class BossSetupController : MonoBehaviour
 
 
 
-
+        var minOfRoom = tileMapVisualizerScript.GetRealCoordsFromFloorTileMap(roomCoords);
+        var maxOfRoom = tileMapVisualizerScript.GetRealCoordsFromFloorTileMap(roomCoords+roomSize);
+        boss.GetComponent<HealthController>().onDeathEvent.AddListener(manageBossDeath);
         boss.GetComponent<RedBoss>().Initialize(player.transform, this.transform, this.transform, gameObject, onDeathCallback);
+        boss.GetComponent<RedBoss>().setupRedBoss(minOfRoom, maxOfRoom);
+    }
+
+    void manageBossDeath(GameObject o)
+    {
+        endSpawnPoint.SetActive(true);
     }
 
     void setupPlayerForBoss()

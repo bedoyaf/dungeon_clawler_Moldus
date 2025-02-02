@@ -29,7 +29,7 @@ public class BossSetupController : MonoBehaviour
 
     [SerializeField] private GameObject healthBar;
 
-    private GameObject boss;
+    private GameObject currentBoss;
     private UnityAction<GameObject> onDeathCallback;
     void Start()
     {
@@ -81,7 +81,7 @@ public class BossSetupController : MonoBehaviour
 
         //     dungeonContentGenerator.DestroyEnemies();
 
-        spawnBoss();
+        spawnBoss(ColorEnemy.Purple);
         setupPlayerForBoss();
 
         setupHealthBar();
@@ -90,8 +90,13 @@ public class BossSetupController : MonoBehaviour
     void setupHealthBar()
     {
         healthBar.SetActive(true);
-        var healthController = boss.GetComponent<HealthController>();
+        var healthController = currentBoss.GetComponent<HealthController>();
         healthBar.GetComponent<BossHealthBarController>().setupHelathController(healthController);
+    }
+
+    void closeHealthBar()
+    {
+        healthBar.SetActive(false);
     }
 
     void PlaceSpawnPoints(BoundsInt room)
@@ -114,23 +119,33 @@ public class BossSetupController : MonoBehaviour
         playerSpawnPoint.transform.position = playerSpawnTile;
     }
 
-    void spawnBoss()//add change based on color
-    {
+    void spawnBoss(ColorEnemy c)//add change based on color
+    {   
 
-        boss = Instantiate(RedBoss, bossSpawnPoint.transform.position, Quaternion.identity);
-
-
-
-        var minOfRoom = tileMapVisualizerScript.GetRealCoordsFromFloorTileMap(roomCoords);
-        var maxOfRoom = tileMapVisualizerScript.GetRealCoordsFromFloorTileMap(roomCoords+roomSize);
-        boss.GetComponent<HealthController>().onDeathEvent.AddListener(manageBossDeath);
-        boss.GetComponent<RedBoss>().Initialize(player.transform, this.transform, this.transform, gameObject, onDeathCallback);
-        boss.GetComponent<RedBoss>().setupRedBoss(minOfRoom, maxOfRoom);
+        if (c == ColorEnemy.Red)
+        {
+            currentBoss = Instantiate(RedBoss, bossSpawnPoint.transform.position, Quaternion.identity);
+            var minOfRoom = tileMapVisualizerScript.GetRealCoordsFromFloorTileMap(roomCoords);
+            var maxOfRoom = tileMapVisualizerScript.GetRealCoordsFromFloorTileMap(roomCoords + roomSize);
+            currentBoss.GetComponent<HealthController>().onDeathEvent.AddListener(manageBossDeath);
+            currentBoss.GetComponent<RedBoss>().Initialize(player.transform, this.transform, this.transform, gameObject, onDeathCallback);
+            currentBoss.GetComponent<RedBoss>().setupRedBoss(minOfRoom, maxOfRoom);
+        }
+        else if (c == ColorEnemy.Purple)
+        {
+            currentBoss = Instantiate(PurpleBoss, bossSpawnPoint.transform.position, Quaternion.identity);
+            var minOfRoom = tileMapVisualizerScript.GetRealCoordsFromFloorTileMap(roomCoords);
+            var maxOfRoom = tileMapVisualizerScript.GetRealCoordsFromFloorTileMap(roomCoords + roomSize);
+            currentBoss.GetComponent<HealthController>().onDeathEvent.AddListener(manageBossDeath);
+            currentBoss.GetComponent<PurpleBossController>().Initialize(player.transform, this.transform, this.transform, gameObject, onDeathCallback);
+        }
     }
 
     void manageBossDeath(GameObject o)
     {
         endSpawnPoint.SetActive(true);
+        closeHealthBar();
+        Destroy(currentBoss);
     }
 
     void setupPlayerForBoss()

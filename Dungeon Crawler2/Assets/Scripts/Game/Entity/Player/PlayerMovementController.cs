@@ -9,7 +9,6 @@ public class PlayerMovementController : MonoBehaviour
     //configuratable
     [SerializeField]
     private float speed;
-    [SerializeField] private float smoothingTime = 0.1f;
 
     //helpers
     private Rigidbody2D _rigidbody;

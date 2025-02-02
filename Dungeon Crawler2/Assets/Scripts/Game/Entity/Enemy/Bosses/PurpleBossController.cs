@@ -1,0 +1,55 @@
+using System.Collections;
+using UnityEngine;
+
+public class PurpleBossController : BasicEnemy
+{
+    [SerializeField]
+    private GameObject bulletPrefab;
+    [SerializeField]
+    private BulletData bulletData;
+
+    [SerializeField] float shootInterval = 1.0f;
+    [SerializeField] float rotationAngle = 20f;
+    [SerializeField] int numberOfDirections = 4;
+    private float currentAngle = 0f;
+
+    void Start()
+    {
+        ConfigurateBasicFields();
+        StartCoroutine(PurpleEnemyBehavior());
+        aiPath.canMove = false;
+    }
+
+    protected IEnumerator PurpleEnemyBehavior()
+    {
+        while (true)
+        {
+            Attack();
+            currentAngle += rotationAngle; 
+            yield return new WaitForSeconds(shootInterval);
+        }
+    }
+
+    public override void Attack()
+    {
+        float angleStep = 360f / numberOfDirections; 
+        float startAngle = currentAngle;
+        for (int i = 0; i < numberOfDirections; i++)
+        {
+            // Calculate the angle for the current direction
+            float currentShootAngle = startAngle + i * angleStep;
+            Vector2 shootDirection = new Vector2(Mathf.Cos(currentShootAngle * Mathf.Deg2Rad), Mathf.Sin(currentShootAngle * Mathf.Deg2Rad));
+            Shoot(shootDirection);
+        }
+    }
+
+    private void Shoot(Vector2 shootDirection)
+    {
+        float bulletSpeed = _rigidBody.linearVelocity.magnitude;
+        Vector3 currentPosition = transform.position;
+        currentPosition.z = 0;
+        GameObject bullet = Instantiate(bulletPrefab, currentPosition, Quaternion.identity);
+        bullet.GetComponent<BulletController>().setBulletData(bulletData);
+        bullet.GetComponent<BulletController>().Initialize(gameObject, shootDirection, currentPosition, bulletSpeed);
+    }
+}

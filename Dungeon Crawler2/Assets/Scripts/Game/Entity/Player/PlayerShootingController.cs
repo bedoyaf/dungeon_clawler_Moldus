@@ -17,7 +17,7 @@ public class PlayerShootingController : MonoBehaviour
     //flame
     [SerializeField] private GameObject flamePrefab;
     [SerializeField] private Transform flamePoint;
-    private float flameRate = 0.1f;
+    //private float flameRate = 0.1f;
     private bool isFiring = false;
     private GameObject currentFlameInstance;
     private float flameDistanceFromPlayer = 2f;

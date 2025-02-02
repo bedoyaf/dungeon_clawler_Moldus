@@ -49,7 +49,7 @@ public class BulletController : MonoBehaviour
         {
             tag = "FriendlyBullet";
         }
-        else if (shooter.CompareTag("Enemy"))
+        else if (shooter.CompareTag("Enemy") || shooter.CompareTag("Boss"))
         {
             tag = "EnemyBullet";
         }
@@ -84,8 +84,8 @@ public class BulletController : MonoBehaviour
         damage = (int)(newbulletData.damage * playerBiasModifier);
         despawnDistance = newbulletData.despawnDistance;
         transform.Rotate(0, 0, bulletData.rotationAngle);
-        AudioSource _audioSource = GetComponent<AudioSource>();
-        _audioSource.clip = bulletData.audioClip;
+     //   AudioSource _audioSource = GetComponent<AudioSource>();
+   // _audioSource.clip = bulletData.audioClip;
     }
 
     /// <summary>
@@ -113,7 +113,7 @@ public class BulletController : MonoBehaviour
             }
             Destroy(gameObject);
         }
-        else if ((collision.CompareTag("Spawner")||collision.CompareTag("Pillar")) && gameObject.CompareTag("FriendlyBullet"))
+        else if ((collision.CompareTag("Spawner")||collision.CompareTag("Pillar")) && (gameObject.CompareTag("FriendlyBullet") || gameObject.CompareTag("EnemyBullet")))
         {
             IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
 

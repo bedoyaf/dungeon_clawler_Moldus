@@ -9,7 +9,7 @@ public class BossBombController : MonoBehaviour
     private Vector2 targetPosition;
     private bool hasExploded = false;
     [SerializeField] GameObject explosionEffect;
-    [SerializeField] private float explosionTime = 2f;
+   // [SerializeField] private float explosionTime = 2f;
     [SerializeField] private float explosionRadius = 3f;
     [SerializeField] private int damage = 30;
 

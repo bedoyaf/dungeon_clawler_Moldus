@@ -11,6 +11,7 @@ public class PurpleEnemyController : BasicEnemy
     void Start()
     {
         ConfigurateBasicFields();
+        setupEnemyDeathEvents();
         StartCoroutine(EnemyBehavior());
         spriteFlipCustomizer = false;
         colorOfEnemy = ColorEnemy.Purple;

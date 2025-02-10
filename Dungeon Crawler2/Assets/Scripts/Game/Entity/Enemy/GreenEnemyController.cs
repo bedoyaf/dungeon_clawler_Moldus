@@ -11,6 +11,7 @@ public class GreenEnemyController : BasicEnemy
     void Start()
     {
         ConfigurateBasicFields();
+        setupEnemyDeathEvents();
         StartCoroutine(EnemyBehavior());
         spriteFlipCustomizer = false;
         colorOfEnemy = ColorEnemy.Green;

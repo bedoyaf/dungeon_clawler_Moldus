@@ -25,9 +25,10 @@ public class RedBoss : BasicEnemy
     void Start()
     {
         ConfigurateBasicFields();
+        var enemycontroller = GetComponent<HealthController>();
+        enemycontroller.onDeathEvent.AddListener(On_Death);
         StartCoroutine(EnemyBehavior());
         spriteFlipCustomizer = false;
-        colorOfEnemy = ColorEnemy.Purple;
     }
 
 
@@ -79,8 +80,9 @@ public class RedBoss : BasicEnemy
         ThrowBomb();
     }
     
-    public new void On_Death()
+    private void On_Death()
     {
+        dead = true;
         teleportTween?.Kill();
 
         Sequence deathSequence = DOTween.Sequence();

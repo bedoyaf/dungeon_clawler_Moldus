@@ -1,0 +1,650 @@
+fileFormatVersion: 2
+guid: 12bdf1ba8544c40468a89ddefbe6ff06
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4880946118922930819
+    second: FireRateUpgradeIcon_0
+  - first:
+      213: -3251123043892298768
+    second: FireRateUpgradeIcon_1
+  - first:
+      213: -7576170960459519518
+    second: FireRateUpgradeIcon_2
+  - first:
+      213: -5483478780361519785
+    second: FireRateUpgradeIcon_3
+  - first:
+      213: -9092005132935370210
+    second: FireRateUpgradeIcon_4
+  - first:
+      213: 2488869543210865859
+    second: FireRateUpgradeIcon_5
+  - first:
+      213: -4581575747225362119
+    second: FireRateUpgradeIcon_6
+  - first:
+      213: 741211884904506169
+    second: FireRateUpgradeIcon_7
+  - first:
+      213: -8051056904060852827
+    second: FireRateUpgradeIcon_8
+  - first:
+      213: -4073057721247172340
+    second: FireRateUpgradeIcon_9
+  - first:
+      213: -1907555939914767523
+    second: FireRateUpgradeIcon_10
+  - first:
+      213: 786091889230931168
+    second: FireRateUpgradeIcon_11
+  - first:
+      213: 8326333418308007827
+    second: FireRateUpgradeIcon_12
+  - first:
+      213: 4533731435588767041
+    second: FireRateUpgradeIcon_13
+  - first:
+      213: -915490722212337393
+    second: FireRateUpgradeIcon_14
+  - first:
+      213: -5123924567262327006
+    second: FireRateUpgradeIcon_15
+  - first:
+      213: -4903436013889258369
+    second: FireRateUpgradeIcon_16
+  - first:
+      213: 8931026351766450393
+    second: FireRateUpgradeIcon_17
+  - first:
+      213: 3076577553072836523
+    second: FireRateUpgradeIcon_18
+  - first:
+      213: 3145167485918715140
+    second: FireRateUpgradeIcon_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FireRateUpgradeIcon_0
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 515
+        width: 331
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d75f6cd7d55634cb0800000000000000
+      internalID: -4880946118922930819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireRateUpgradeIcon_1
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 452
+        width: 105
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fb76b711d0b1e2d0800000000000000
+      internalID: -3251123043892298768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireRateUpgradeIcon_2
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 490
+        width: 325
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e92e28d6a80cd690800000000000000
+      internalID: -7576170960459519518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireRateUpgradeIcon_3
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 455
+        width: 342
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75dc82b1a15c6e3b0800000000000000
+      internalID: -5483478780361519785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireRateUpgradeIcon_4
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 419
+        width: 178
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1aeb5bc085b2d180800000000000000
+      internalID: -9092005132935370210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireRateUpgradeIcon_5
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 358
+        width: 114
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c45f57b9ad3a8220800000000000000
+      internalID: 2488869543210865859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireRateUpgradeIcon_6
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 393
+        width: 172
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9316613d129fa60c0800000000000000
+      internalID: -4581575747225362119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireRateUpgradeIcon_7
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 357
+        width: 195
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 933e70f3840594a00800000000000000
+      internalID: 741211884904506169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireRateUpgradeIcon_8
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 309
+        width: 297
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a52ffee666e44090800000000000000
+      internalID: -8051056904060852827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireRateUpgradeIcon_9
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 255
+        width: 104
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c09766f15979977c0800000000000000
+      internalID: -4073057721247172340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireRateUpgradeIcon_10
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 285
+        width: 292
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d53a134bafff685e0800000000000000
+      internalID: -1907555939914767523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireRateUpgradeIcon_11
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 256
+        width: 294
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e4ec6a8862c8ea00800000000000000
+      internalID: 786091889230931168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireRateUpgradeIcon_12
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 190
+        width: 94
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39776bf01241d8370800000000000000
+      internalID: 8326333418308007827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireRateUpgradeIcon_13
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 135
+        width: 91
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14d4a4d48bc0bee30800000000000000
+      internalID: 4533731435588767041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireRateUpgradeIcon_14
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 163
+        width: 74
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f092e53e9068b43f0800000000000000
+      internalID: -915490722212337393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireRateUpgradeIcon_15
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 134
+        width: 103
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22f8e68f0c924e8b0800000000000000
+      internalID: -5123924567262327006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireRateUpgradeIcon_16
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 108
+        width: 309
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7cf545ccee73fbb0800000000000000
+      internalID: -4903436013889258369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireRateUpgradeIcon_17
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 68
+        width: 78
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d031b8f52161fb70800000000000000
+      internalID: 8931026351766450393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireRateUpgradeIcon_18
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 83
+        width: 296
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bafc8deebf232ba20800000000000000
+      internalID: 3076577553072836523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireRateUpgradeIcon_19
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 64
+        width: 308
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40d1b452a21e5ab20800000000000000
+      internalID: 3145167485918715140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      FireRateUpgradeIcon_0: -4880946118922930819
+      FireRateUpgradeIcon_1: -3251123043892298768
+      FireRateUpgradeIcon_10: -1907555939914767523
+      FireRateUpgradeIcon_11: 786091889230931168
+      FireRateUpgradeIcon_12: 8326333418308007827
+      FireRateUpgradeIcon_13: 4533731435588767041
+      FireRateUpgradeIcon_14: -915490722212337393
+      FireRateUpgradeIcon_15: -5123924567262327006
+      FireRateUpgradeIcon_16: -4903436013889258369
+      FireRateUpgradeIcon_17: 8931026351766450393
+      FireRateUpgradeIcon_18: 3076577553072836523
+      FireRateUpgradeIcon_19: 3145167485918715140
+      FireRateUpgradeIcon_2: -7576170960459519518
+      FireRateUpgradeIcon_3: -5483478780361519785
+      FireRateUpgradeIcon_4: -9092005132935370210
+      FireRateUpgradeIcon_5: 2488869543210865859
+      FireRateUpgradeIcon_6: -4581575747225362119
+      FireRateUpgradeIcon_7: 741211884904506169
+      FireRateUpgradeIcon_8: -8051056904060852827
+      FireRateUpgradeIcon_9: -4073057721247172340
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

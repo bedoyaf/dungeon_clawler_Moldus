@@ -21,12 +21,27 @@ public class RedEnemyController : BasicEnemy
     void Start()
     {
         ConfigurateBasicFields();
+        setupEnemyDeathEvents();
         StartCoroutine(EnemyBehavior());
         runAwaySpot = new GameObject("RunAwaySpot");
         runAwaySpot.transform.parent = spawnLocationsParent;
         spriteFlipCustomizer = false;
         colorOfEnemy = ColorEnemy.Red;
     }
+
+    protected new void setupEnemyDeathEvents()
+    {
+        var enemycontroller = GetComponent<HealthController>();
+        enemycontroller.onDeathEvent.AddListener(OnBasicEnemyDeathSpawnerUpdate);
+        enemycontroller.onDeathEvent.AddListener(DestroyRunAwaySpot);
+        enemycontroller.onDeathEvent.AddListener(On_Death);
+    }
+
+    private void DestroyRunAwaySpot(GameObject _)
+    {
+        Destroy(runAwaySpot);
+    }
+
     public override void Attack()
     {
         PlantBomb();
@@ -35,17 +50,18 @@ public class RedEnemyController : BasicEnemy
     /// <summary>
     /// Just correctly destroys the enemy
     /// </summary>
-    public override void EnemyDeath(GameObject dead)
+  /*  public void On_Death(GameObject dead)
     {
         Destroy(spawnLocation);
         Destroy(gameObject);
         Destroy(runAwaySpot);
-    }
+    }*/
 
     protected override IEnumerator EnemyBehavior()
     {
         while (true)
         {
+            if (dead) { break; }
             float distanceToTarget = Vector3.Distance(transform.position, target.position);
             if (distanceToTarget > EnemyVision)
             {

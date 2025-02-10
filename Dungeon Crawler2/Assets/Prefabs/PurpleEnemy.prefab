@@ -164,8 +164,8 @@ MonoBehaviour:
   onTakeDamage:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1876084912940105679}
-        m_TargetAssemblyTypeName: BasicEnemy, Assembly-CSharp
+      - m_Target: {fileID: 423101917190546333}
+        m_TargetAssemblyTypeName: HealthController, Assembly-CSharp
         m_MethodName: FlashRed
         m_Mode: 1
         m_Arguments:
@@ -318,7 +318,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 3
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1

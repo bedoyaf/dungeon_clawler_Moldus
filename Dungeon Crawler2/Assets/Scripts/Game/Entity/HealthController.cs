@@ -10,6 +10,7 @@ public class HealthController : MonoBehaviour, IDamageable
     [SerializeField] public int maxHealth = 100;
     [SerializeField] private float damageModifier = 1f; //so I can adjust how much damage that player/enemy takes
 
+    [SerializeField] public ShieldController shield;
     public bool isOnFire { get;  set; } = false;
     public int currentHealth { get; private set; }
     //events
@@ -30,22 +31,35 @@ public class HealthController : MonoBehaviour, IDamageable
     /// </summary>
     public void TakeDamage(int damage)
     {
-        damage =(int)(damage * damageModifier);
-        currentHealth -= damage;
-        //Debug.Log($"{gameObject.name} took {damage} damage.");
-        if(gameObject.CompareTag("Player")||gameObject.CompareTag("Enemy") || gameObject.CompareTag("Spawner") || gameObject.CompareTag("Boss"))
+        if (currentHealth > 0)
         {
-            FlashRed();
-        }
-        if (onTakeDamage != null)
-        {
-            onTakeDamage.Invoke(damage);
-        }
-        if (currentHealth <= 0)
-        {
-            currentHealth = 0;
+            damage = (int)(damage * damageModifier);
 
-            Die();
+            if(shield !=null)
+            {
+                int newdamage = shield.AbsorbDamage(damage); //temporary, might return damage
+                if (damage != newdamage)
+                {
+                    return;
+                }
+            }
+
+            currentHealth -= damage;
+            //Debug.Log($"{gameObject.name} took {damage} damage.");
+            if (gameObject.CompareTag("Player") || gameObject.CompareTag("Enemy") || gameObject.CompareTag("Spawner") || gameObject.CompareTag("Boss"))
+            {
+                FlashRed();
+            }
+            if (onTakeDamage != null)
+            {
+                onTakeDamage.Invoke(damage);
+            }
+            if (currentHealth <= 0)
+            {
+                currentHealth = 0;
+
+                Die();
+            }
         }
     }
 
@@ -61,14 +75,29 @@ public class HealthController : MonoBehaviour, IDamageable
         }
         onHeal.Invoke(amount);
     }
+    public void Heal()
+    {
+        currentHealth += maxHealth;
+        onHeal.Invoke(-1); //not sure if breaks anything
+    }
+
+    public void IncreaseMaxHealth(int amount)
+    {
+        int oldMaxhealth = maxHealth;
+        maxHealth = amount;
+        onHeal.Invoke(maxHealth-oldMaxhealth);
+    }
 
     /// <summary>
     /// invokes the Die event
     /// </summary>
     public void Die()
     {
-        //Debug.Log($"{gameObject.name} died!");
-        onDeathEvent?.Invoke(gameObject);
+       // Debug.Log($"{gameObject.name} died!");
+        if(onDeathEvent != null)
+        {
+            onDeathEvent.Invoke(gameObject);
+        }
     }
     public void LoadHealth(SaveData saveData)
     {

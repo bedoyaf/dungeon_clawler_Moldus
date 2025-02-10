@@ -1,4 +1,4 @@
-using DG.Tweening;
+/*using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,6 +16,8 @@ public class GreenBossControler : BasicEnemy
     void Start()
     {
         ConfigurateBasicFields();
+        var enemycontroller = GetComponent<HealthController>();
+        enemycontroller.onDeathEvent.AddListener(On_Death);
         StartCoroutine(EnemyBehavior());
         spriteFlipCustomizer = false;
         colorOfEnemy = ColorEnemy.Green;
@@ -66,3 +68,4 @@ public class GreenBossControler : BasicEnemy
 
 
 }
+*/

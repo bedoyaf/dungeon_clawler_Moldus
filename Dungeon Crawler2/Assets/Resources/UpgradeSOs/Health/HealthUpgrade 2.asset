@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bcf40e8732927f4497c6744c15d6fe0, type: 3}
+  m_Name: HealthUpgrade 2
+  m_EditorClassIdentifier: 
+  abilityName: Health 3
+  abilityIcon: {fileID: -3301379913200561869, guid: 54f9d42e24e7ffe4589ba88c88217b41, type: 3}
+  description: Increases the players health
+  level: 3
+  ability: health
+  mutualyExclusiveWith: []
+  healthIncrease: 100

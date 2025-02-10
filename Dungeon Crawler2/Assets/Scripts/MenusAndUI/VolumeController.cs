@@ -9,14 +9,15 @@ public class VolumeController : MonoBehaviour
 
     private void Start()
     {
+        int initialVolume = 0;
         Slider volumeSlider = GetComponent<Slider>();
-        SetVolume(volumeSlider.value);
+        volumeSlider.value = initialVolume;
+        SetVolume(initialVolume);
         volumeSlider.onValueChanged.AddListener(SetVolume);
     }
 
     public void SetVolume(float volume)
     {
-        Debug.Log("skibidi");
         audioMixer.SetFloat("MasterVolume", volume);
         PlayerPrefs.SetFloat("MasterVolume", volume);
     }

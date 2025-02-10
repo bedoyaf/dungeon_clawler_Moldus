@@ -55,6 +55,11 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
+    public void changeSpeed(int newSpeed)
+    {
+        speed = newSpeed;
+    }
+
    // private void OnMove(InputValue inputValue)
    // {
    //     movementInput = inputValue.Get<Vector2>();

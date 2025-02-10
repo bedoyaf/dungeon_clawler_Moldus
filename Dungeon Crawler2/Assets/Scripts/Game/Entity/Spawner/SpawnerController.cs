@@ -78,8 +78,33 @@ public class SpawnerController : MonoBehaviour
     /// </summary>
     private void SpawnEnemy()
     {
-        Vector2 randomPoint = Random.insideUnitCircle * spawnRadius;
-        Vector3 spawnPosition = new Vector3(randomPoint.x, randomPoint.y, 0) + transform.position;
+        Vector2 randomPoint;
+        Vector3 spawnPosition = new Vector3();
+        int maxAttempts = 10; 
+        int attempts = 0;
+
+        while (attempts < maxAttempts){
+            randomPoint = Random.insideUnitCircle * spawnRadius;
+            spawnPosition = new Vector3(randomPoint.x, randomPoint.y, 0) + transform.position;
+
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, (spawnPosition - transform.position).normalized, Vector2.Distance(transform.position, spawnPosition));
+
+            if (hit.collider == null || hit.collider.gameObject == gameObject || hit.collider.CompareTag("Enemy"))
+            {
+                break;
+            }
+
+            attempts++;
+        }
+
+        if (attempts == maxAttempts)
+        {
+            Debug.LogWarning("Could not find a valid spawn position after multiple attempts.");
+          //  return;
+        }
+
+        //Vector2 randomPoint = Random.insideUnitCircle * spawnRadius;
+        //Vector3 spawnPosition = new Vector3(randomPoint.x, randomPoint.y, 0) + transform.position;
         var newEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
         newEnemy.GetComponent<BasicEnemy>().Initialize(target, EnemySpawnPointsParent, EnemyParent, gameObject, onDeathCallback);
 

@@ -11,6 +11,7 @@ public class BossSetupController : MonoBehaviour
     [SerializeField] private GameObject DungeonGenerator = null;
     [SerializeField] private GameObject tileMapVisualizer= null;
     [SerializeField] private GameObject DungeonContentGenerator = null;
+    [SerializeField] private GameObject statsCounter = null;
     private ProceduralGenerationRoomGenerator dungeonGeneratorScript;
     private TileMapVisualizer tileMapVisualizerScript;
     private DungeonContentGenerator dungeonContentGeneratorScript;
@@ -24,13 +25,18 @@ public class BossSetupController : MonoBehaviour
     [SerializeField] private GameObject RedBoss;
     [SerializeField] private GameObject PurpleBoss;
     [SerializeField] private GameObject GreenBoss;
+    [SerializeField] private GameObject GreenBossMinion;
 
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject Camera;
 
     [SerializeField] private GameObject healthBar;
 
+    [SerializeField] private ColorEnemy chosenBoss= ColorEnemy.None;
+
     private GameObject currentBoss;
     private UnityAction<GameObject> onDeathCallback;
+
     void Start()
     {
         if (DungeonGenerator != null)
@@ -80,8 +86,14 @@ public class BossSetupController : MonoBehaviour
         //    dungeonContentGenerator.ScanAreaForPathFinding();
 
         //     dungeonContentGenerator.DestroyEnemies();
-
-        spawnBoss(ColorEnemy.Purple);
+        if(chosenBoss == ColorEnemy.None)
+        {
+            spawnBoss(roomColors[0]);
+        }
+        else
+        {
+            spawnBoss(chosenBoss);
+        }
         setupPlayerForBoss();
 
         setupHealthBar();
@@ -134,10 +146,16 @@ public class BossSetupController : MonoBehaviour
         else if (c == ColorEnemy.Purple)
         {
             currentBoss = Instantiate(PurpleBoss, bossSpawnPoint.transform.position, Quaternion.identity);
-            var minOfRoom = tileMapVisualizerScript.GetRealCoordsFromFloorTileMap(roomCoords);
-            var maxOfRoom = tileMapVisualizerScript.GetRealCoordsFromFloorTileMap(roomCoords + roomSize);
             currentBoss.GetComponent<HealthController>().onDeathEvent.AddListener(manageBossDeath);
             currentBoss.GetComponent<PurpleBossController>().Initialize(player.transform, this.transform, this.transform, gameObject, onDeathCallback);
+        }
+        else if(c == ColorEnemy.Green)
+        {
+            currentBoss = Instantiate(GreenBoss, bossSpawnPoint.transform.position, Quaternion.identity);
+            currentBoss.GetComponent<HealthController>().onDeathEvent.AddListener(manageBossDeath);
+            currentBoss.GetComponent<GreenEnemyController>().Initialize(player.transform, this.transform, this.transform, gameObject, onDeathCallback);
+
+            currentBoss.GetComponent<SpawnerController>().Initialize(GreenBossMinion, player.transform, this.transform, this.transform, statsCounter.GetComponent<EnemyKillCountController>().OnEnemyDeath); // statsCounter.GetComponent<EnemyKillCountController>().OnEnemyDeath
         }
     }
 
@@ -151,5 +169,6 @@ public class BossSetupController : MonoBehaviour
     void setupPlayerForBoss()
     {
         player.transform.position = playerSpawnPoint.transform.position;
+        Camera.transform.position = playerSpawnPoint.transform.position;
     }
 }

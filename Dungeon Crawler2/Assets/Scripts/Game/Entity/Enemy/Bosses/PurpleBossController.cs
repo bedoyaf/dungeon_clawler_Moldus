@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ public class PurpleBossController : BasicEnemy
     void Start()
     {
         ConfigurateBasicFields();
+        var enemycontroller = GetComponent<HealthController>();
+        enemycontroller.onDeathEvent.AddListener(On_Death);
         StartCoroutine(PurpleEnemyBehavior());
         aiPath.canMove = false;
     }
@@ -52,4 +55,11 @@ public class PurpleBossController : BasicEnemy
         bullet.GetComponent<BulletController>().setBulletData(bulletData);
         bullet.GetComponent<BulletController>().Initialize(gameObject, shootDirection, currentPosition, bulletSpeed);
     }
+   /* public new void On_Death()
+    {
+        Sequence deathSequence = DOTween.Sequence();
+        deathSequence.Append(transform.DOScale(0f, 0.5f).SetEase(Ease.InBack));
+        deathSequence.Join(transform.DORotate(new Vector3(0f, 0f, 360f), 0.5f, RotateMode.FastBeyond360));
+        deathSequence.OnComplete(() => Destroy(gameObject));
+    }*/
 }

@@ -18,6 +18,7 @@ public class DungeonContentGenerator : MonoBehaviour
     [SerializeField] private GameObject spawner;
     [SerializeField] private GameObject pillar;
     [SerializeField] private GameObject Player;
+    [SerializeField] private GameObject Camera;
     [SerializeField] private GameObject redEnemy, purpleEnemy, greenEnemy;
     [SerializeField] private GameObject start, end; //of levels
 
@@ -94,7 +95,7 @@ public class DungeonContentGenerator : MonoBehaviour
         end.transform.position = tileMapVisualizer.GetRealCoordsFromFloorTileMap(endPos);
         Player.SetActive(true);
         Player.transform.position = start.transform.position;
-
+        Camera.transform.position = start.transform.position;
     }
     /// <summary>
     /// Deletes old spawners and spawns the new ones with already generated coords

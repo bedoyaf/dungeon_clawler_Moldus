@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32f6d334f3f79934faf67226ec5bd7c1, type: 3}
+  m_Name: ShieldUpgrade
+  m_EditorClassIdentifier: 
+  abilityName: Shield
+  abilityIcon: {fileID: 1857503717392654605, guid: d23323fea7cc1b342a37085e301a3024, type: 3}
+  description: Grants protective shieldbarrier around the player, that blocks attacks,
+    and regenerates.
+  level: 1
+  ability: shield
+  mutualyExclusiveWith: []
+  shieldPrefab: {fileID: 6854317448805225597, guid: dc54c99724428054db2ff4400f64cec9, type: 3}

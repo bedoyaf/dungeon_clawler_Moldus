@@ -17,7 +17,7 @@ public class PlayerShootingController : MonoBehaviour
     //flame
     [SerializeField] private GameObject flamePrefab;
     [SerializeField] private Transform flamePoint;
-    //private float flameRate = 0.1f;
+
     private bool isFiring = false;
     private GameObject currentFlameInstance;
     private float flameDistanceFromPlayer = 2f;
@@ -36,6 +36,11 @@ public class PlayerShootingController : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0f) {
+            StopFlameThrower();
+        return; 
+        }
+
         FlipSpriteIfNecessary();
 
         if (Input.GetMouseButtonDown(0) && currentInfection != ColorEnemy.None) // 0 = left mouse button
@@ -194,4 +199,8 @@ public class PlayerShootingController : MonoBehaviour
         flamePoint.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
+    public void changeFireRate(float amount)
+    {
+        delayBetweenShots = amount;
+    }
 }

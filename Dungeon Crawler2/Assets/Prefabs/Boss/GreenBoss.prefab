@@ -17,7 +17,8 @@ GameObject:
   - component: {fileID: 1458639341712817460}
   - component: {fileID: 1701997283766836872}
   - component: {fileID: 8558814131410095594}
-  - component: {fileID: -5881021376829083610}
+  - component: {fileID: -2716383538601747896}
+  - component: {fileID: 4677425861803329011}
   m_Layer: 0
   m_Name: GreenBoss
   m_TagString: Boss
@@ -72,9 +73,9 @@ MonoBehaviour:
   onDeathEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RedBoss, Assembly-CSharp
-        m_MethodName: On_Death
+      - m_Target: {fileID: 5900271501762081191}
+        m_TargetAssemblyTypeName: HealthController, Assembly-CSharp
+        m_MethodName: OnDestroy
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -260,7 +261,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
@@ -312,7 +313,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.77, y: 0.0001}
   m_Direction: 0
---- !u!114 &-5881021376829083610
+--- !u!114 &-2716383538601747896
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -321,6 +322,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 4992300226305164637}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a40678481bfafab4585164d85140d3e1, type: 3}
+  m_Script: {fileID: 11500000, guid: 77db089d57d60284b935a84b50e83578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  EnemyVision: 20
+  movementSpeed: 20
+  spawnLocationsParent: {fileID: 0}
+  enemyParent: {fileID: 0}
+  shootingRange: 10
+  shootingCooldown: 2
+  bulletPrefab: {fileID: 620423418827414382, guid: 7cec1422d946ff24facb96d478247a1c, type: 3}
+  bulletData: {fileID: 11400000, guid: b4b7bf038f9e3f24580b21c699e5e704, type: 2}
+--- !u!114 &4677425861803329011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4992300226305164637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cf31bfd5527eee428df5eecd083240e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxEnemySpawn: 10
+  enemyPrefab: {fileID: 5245902733967467891, guid: 519fc36a454d24648a594cc26b445039, type: 3}
+  spawnRadius: 10
+  spawnInterval: 1

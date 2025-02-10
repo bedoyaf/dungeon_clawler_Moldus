@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 using DG.Tweening;
+using System;
 
 /// <summary>
 /// class that sets up functions that are universal for every enemy type, mainly pathfinding
@@ -39,24 +40,34 @@ public abstract class BasicEnemy : MonoBehaviour, IEnemy
     [SerializeField] protected float shootingRange, shootingCooldown;
     protected float shootTimer;
 
+    protected bool dead = false;
 
     void Start()
     {
         ConfigurateBasicFields();
         StartCoroutine(EnemyBehavior());
+        setupEnemyDeathEvents();
     }
 
-    protected void ConfigurateBasicFields()
+    protected virtual void ConfigurateBasicFields()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         destinationSetter = GetComponent<AIDestinationSetter>();
         aiPath = GetComponent<AIPath>();
         _rigidBody = GetComponent<Rigidbody2D>();
         destinationSetter.target = target;
-        var enemycontroller = GetComponent<HealthController>();
-        enemycontroller.onDeathEvent.AddListener(EnemyDeath);
-
+       // var enemycontroller = GetComponent<HealthController>();
+       // enemycontroller.onDeathEvent.AddListener(OnBasicEnemyDeathSpawnerUpdate);
+       // enemycontroller.onDeathEvent.AddListener(On_Death);
     }
+
+    protected void setupEnemyDeathEvents()
+    {
+        var enemycontroller = GetComponent<HealthController>();
+        enemycontroller.onDeathEvent.AddListener(OnBasicEnemyDeathSpawnerUpdate);
+        enemycontroller.onDeathEvent.AddListener(On_Death);
+    }
+
     /// <summary>
     /// Initializes the Enemy
     /// </summary>
@@ -100,7 +111,7 @@ public abstract class BasicEnemy : MonoBehaviour, IEnemy
     /// <summary>
     /// Enemy death that makes sure it destroys everithing and lets the spawner know it can spawn more enemies
     /// </summary>
-    public virtual void EnemyDeath(GameObject dead)
+   /* public virtual void EnemyDeath(GameObject dead)
     {
         if(spawner!= null)
         {
@@ -109,7 +120,7 @@ public abstract class BasicEnemy : MonoBehaviour, IEnemy
         Destroy(spawnLocation);
 
         Destroy(gameObject);
-    }
+    }*/
 
     public abstract void Attack();
     /// <summary>
@@ -127,6 +138,7 @@ public abstract class BasicEnemy : MonoBehaviour, IEnemy
     {
         while (true)
         {
+            if (dead) { break; }
             float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
             if (distanceToTarget > EnemyVision)
@@ -165,7 +177,6 @@ public abstract class BasicEnemy : MonoBehaviour, IEnemy
 
         if (distanceToTarget > shootingRange || hasObstacle)
         {
-            Debug.Log("jdu po nem");
             aiPath.canMove = true;
             destinationSetter.target = target;
             isShooting = false;
@@ -178,7 +189,6 @@ public abstract class BasicEnemy : MonoBehaviour, IEnemy
 
         if (isShooting)
         {
-            Debug.Log("strilim");
             withConsiderationToTimeAttack();
         }
     }
@@ -250,8 +260,20 @@ public abstract class BasicEnemy : MonoBehaviour, IEnemy
         });
     }
     */
-    public void On_Death()
+
+    public void OnBasicEnemyDeathSpawnerUpdate(GameObject a)
     {
+        if (spawner != null)
+        {
+            spawner.GetComponent<SpawnerController>().OneOfOurSpawnedEnemiesDies();
+        }
+    }
+
+    public void On_Death(GameObject _)
+    {
+        dead = true;
+        Destroy(spawnLocation);
+
         Sequence deathSequence = DOTween.Sequence();
         deathSequence.Append(transform.DOScale(0f, 0.5f).SetEase(Ease.InBack));
         deathSequence.Join(transform.DORotate(new Vector3(0f, 0f, 360f), 0.5f, RotateMode.FastBeyond360));

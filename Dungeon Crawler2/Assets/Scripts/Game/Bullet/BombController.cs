@@ -8,6 +8,7 @@ public class BombController : MonoBehaviour
     [SerializeField] private float explosionRadius = 3f;
     [SerializeField] private int damage=30;
     public GameObject explosionEffect; //just smoke visual object thats left after the explosion
+    [SerializeField] public float damageModifier = 1f;
 
     void Start()
     {
@@ -33,7 +34,7 @@ public class BombController : MonoBehaviour
             IDamageable damageable = nearbyObject.GetComponent<IDamageable>();
             if (damageable != null)
             {
-                damageable.TakeDamage(damage);
+                damageable.TakeDamage((int)(damage*damageModifier));
             }
         }
         Destroy(gameObject);

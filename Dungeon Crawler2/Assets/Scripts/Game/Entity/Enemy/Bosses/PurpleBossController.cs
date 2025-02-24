@@ -17,8 +17,7 @@ public class PurpleBossController : BasicEnemy
     void Start()
     {
         ConfigurateBasicFields();
-        var enemycontroller = GetComponent<HealthController>();
-        enemycontroller.onDeathEvent.AddListener(On_Death);
+        GetComponent<HealthController>().onDeathEvent.AddListener(On_Death);
         StartCoroutine(PurpleEnemyBehavior());
         aiPath.canMove = false;
     }
@@ -48,6 +47,7 @@ public class PurpleBossController : BasicEnemy
 
     private void Shoot(Vector2 shootDirection)
     {
+
         float bulletSpeed = _rigidBody.linearVelocity.magnitude;
         Vector3 currentPosition = transform.position;
         currentPosition.z = 0;

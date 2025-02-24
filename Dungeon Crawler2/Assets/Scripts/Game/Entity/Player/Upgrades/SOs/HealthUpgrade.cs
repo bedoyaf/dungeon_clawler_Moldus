@@ -7,8 +7,13 @@ public class HealthUpgrade : UpgradeSO
 
     public override void Activate(GameObject player)
     {
-        player.GetComponent<HealthController>().Heal();
         player.GetComponent<HealthController>().IncreaseMaxHealth(healthIncrease);
-        Debug.Log($"{abilityName} applied! Health increased by {healthIncrease}");
+        player.GetComponent<HealthController>().Heal();
+    }
+
+    public override void Revert(GameObject player)
+    {
+        player.GetComponent <HealthController>().Heal(-healthIncrease);
+        player.GetComponent<HealthController>().IncreaseMaxHealth(-healthIncrease);
     }
 }

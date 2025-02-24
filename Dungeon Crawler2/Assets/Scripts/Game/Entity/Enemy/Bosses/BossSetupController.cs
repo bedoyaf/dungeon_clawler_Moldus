@@ -34,6 +34,8 @@ public class BossSetupController : MonoBehaviour
 
     [SerializeField] private ColorEnemy chosenBoss= ColorEnemy.None;
 
+    List<GameObject> minions = new List<GameObject>();
+
     private GameObject currentBoss;
     private UnityAction<GameObject> onDeathCallback;
 
@@ -56,7 +58,7 @@ public class BossSetupController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.U))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             SetupBoss();
         }
@@ -74,7 +76,7 @@ public class BossSetupController : MonoBehaviour
         tileMapVisualizerScript.PaintFloorandPerspectiveWallTiles(floor);
 
         List<ColorEnemy> roomColors = new List<ColorEnemy>();
-         dungeonGeneratorScript.GenerateRandomColorForRooms(new List<BoundsInt>{ room }, floor, roomColors);
+        dungeonGeneratorScript.GenerateRandomColorForRooms(new List<BoundsInt>{ room }, floor, roomColors);
         //generates walls of rooms
         WallGenerator.CreateWalls(floor, tileMapVisualizerScript);
 
@@ -109,6 +111,11 @@ public class BossSetupController : MonoBehaviour
     void closeHealthBar()
     {
         healthBar.SetActive(false);
+    }
+
+    private void KillPreviousBoss()
+    {
+        Destroy(currentBoss);
     }
 
     void PlaceSpawnPoints(BoundsInt room)
@@ -153,9 +160,9 @@ public class BossSetupController : MonoBehaviour
         {
             currentBoss = Instantiate(GreenBoss, bossSpawnPoint.transform.position, Quaternion.identity);
             currentBoss.GetComponent<HealthController>().onDeathEvent.AddListener(manageBossDeath);
-            currentBoss.GetComponent<GreenEnemyController>().Initialize(player.transform, this.transform, this.transform, gameObject, onDeathCallback);
+            currentBoss.GetComponent<GreenEnemyController>().Initialize(player.transform, this.transform, this.transform, null);
 
-            currentBoss.GetComponent<SpawnerController>().Initialize(GreenBossMinion, player.transform, this.transform, this.transform, statsCounter.GetComponent<EnemyKillCountController>().OnEnemyDeath); // statsCounter.GetComponent<EnemyKillCountController>().OnEnemyDeath
+            currentBoss.GetComponent<GreenBossControler>().Initialize(GreenBossMinion, player.transform, this.transform, this.transform, statsCounter.GetComponent<EnemyKillCountController>().OnEnemyDeath); // statsCounter.GetComponent<EnemyKillCountController>().OnEnemyDeath
         }
     }
 

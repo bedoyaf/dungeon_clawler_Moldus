@@ -2,7 +2,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewUpgrade", menuName = "ScriptableObjects/Upgrades/New Upgrade")]
+//[CreateAssetMenu(fileName = "NewUpgrade", menuName = "ScriptableObjects/Upgrades/New Upgrade")]
 public abstract class UpgradeSO : ScriptableObject
 {
     [Header("UI Information")]
@@ -15,4 +15,5 @@ public abstract class UpgradeSO : ScriptableObject
     public List<string> mutualyExclusiveWith;
     //public List<string> prerequisits;
     public abstract void Activate(GameObject player);
+    public abstract void Revert(GameObject player);
 }

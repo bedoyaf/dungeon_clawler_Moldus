@@ -138,7 +138,7 @@ MonoBehaviour:
   shootingRange: 5
   shootingCooldown: 2
   bombPrefab: {fileID: 4137400275654543772, guid: db311ae1de4880a4bbee23f4fc44b2c7, type: 3}
-  bombPlantingDistance: 2
+  bombPlantingDistance: 3
   safeDistance: 10
   explosionCooldown: 2.5
 --- !u!114 &6289563841844085465
@@ -303,6 +303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   damageModifier: 2
+  shield: {fileID: 0}
   onTakeDamage:
     m_PersistentCalls:
       m_Calls:

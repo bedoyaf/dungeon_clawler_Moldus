@@ -41,7 +41,7 @@ public class UpgradesUIManager : MonoBehaviour
 
     private void UpgradePicked(UpgradeSO pickedUpgrade)
     {
-        Debug.Log("Picked upgrade: " + pickedUpgrade.abilityName);
+        //Debug.Log("Picked upgrade: " + pickedUpgrade.abilityName);
         onUpgradePicked.Invoke(pickedUpgrade);
     }
 

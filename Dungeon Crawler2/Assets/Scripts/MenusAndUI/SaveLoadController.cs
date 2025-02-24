@@ -14,21 +14,24 @@ public class SaveData
     public int RedPoints;
     public int GreenPoints;
     public int PurplePoints;
-    public SaveData(int currentHealth, int depthAchieved, int redPoints, int greenPoints, int purplePoints)
+    public List<UpgradeSO> unlockedUpgrades;
+    public SaveData(int currentHealth, int depthAchieved, int redPoints, int greenPoints, int purplePoints, List<UpgradeSO> unlockedUpgrades)
     {
         Health = currentHealth;
         DepthAchieved = depthAchieved;
         RedPoints = redPoints;
         GreenPoints = greenPoints;
         PurplePoints = purplePoints;
+        this.unlockedUpgrades = unlockedUpgrades;
     }
 }
 
 public class SaveLoadController : MonoBehaviour
 {
-     private ScoreTrackerController scoreTrackerController;
+    private ScoreTrackerController scoreTrackerController;
     private EnemyKillCountController enemyKillCountController;
     [SerializeField] private HealthController healthController;
+    [SerializeField] private UpgradeManager upgradeManager;
     [SerializeField] public UnityEvent<SaveData> Load;
     [SerializeField] string fileName = "saveData.json";
     private void Start()
@@ -41,8 +44,8 @@ public class SaveLoadController : MonoBehaviour
     /// </summary>
     public void SaveGame()
     {
-        SaveData saveData = new SaveData(healthController.currentHealth,scoreTrackerController.depthAchieved, enemyKillCountController.RedPoints, enemyKillCountController.GreenPoints, enemyKillCountController.PurplePoints);
-        string json = JsonUtility.ToJson(saveData); 
+        SaveData saveData = new SaveData(healthController.currentHealth, scoreTrackerController.depthAchieved, enemyKillCountController.RedPoints, enemyKillCountController.GreenPoints, enemyKillCountController.PurplePoints, upgradeManager.activatedUpgrades);
+        string json = JsonUtility.ToJson(saveData);
         System.IO.File.WriteAllText(Application.persistentDataPath + "/" + fileName, json);
     }
     /// <summary>

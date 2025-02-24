@@ -81,8 +81,27 @@ public abstract class BasicEnemy : MonoBehaviour, IEnemy
         setTarget(newTarget);
         setSpawnLocationsParent(spawnLocsParent);
         setEnemyParent(newEnemyParent);
-        GetComponent<HealthController>().onDeathEvent.AddListener(inCrementationOfPoints);
+        if(inCrementationOfPoints != null)
+        {
+            GetComponent<HealthController>().onDeathEvent.AddListener(inCrementationOfPoints);
+        }
         spawner =_mySpawner;
+    }
+
+    /// <summary>
+    /// Initializes the Enemy
+    /// </summary>
+    /// <param name="newTarget">The enemy target, in this case the player</param>
+    /// <param name="spawnLocsParent">the objects whose parent will be in the hierarchie the spawn point</param>
+    /// <param name="newEnemyParent">the objects whose parent will be in the hierarchie the enemy</param>
+    /// <param name="_mySpawner">The spawner that spawned this enemy</param>
+    /// <param name="inCrementationOfPoints">a listener that increments upon the enemys death the rgp points</param>
+    public void Initialize(Transform newTarget, Transform spawnLocsParent, Transform newEnemyParent, GameObject _mySpawner)
+    {
+        setTarget(newTarget);
+        setSpawnLocationsParent(spawnLocsParent);
+        setEnemyParent(newEnemyParent);
+        spawner = _mySpawner;
     }
 
     private void setTarget(Transform newTarget)

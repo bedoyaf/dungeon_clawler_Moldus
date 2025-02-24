@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf31bfd5527eee428df5eecd083240e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnemySpawn: 5
+  maxEnemySpawn: 3
   enemyPrefab: {fileID: 0}
   spawnRadius: 1
   spawnInterval: 3
@@ -121,6 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   damageModifier: 1
+  shield: {fileID: 0}
   onTakeDamage:
     m_PersistentCalls:
       m_Calls:

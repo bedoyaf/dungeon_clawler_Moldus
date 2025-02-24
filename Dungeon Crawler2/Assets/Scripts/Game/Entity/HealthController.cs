@@ -25,6 +25,14 @@ public class HealthController : MonoBehaviour, IDamageable
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            GetComponent<HealthController>()?.onDeathEvent.Invoke(gameObject);
+        }
+    }
+
 
     /// <summary>
     /// just subtracts from currentHealth with rescpets to damageModifier, and if needed makes the object die dead
@@ -73,18 +81,22 @@ public class HealthController : MonoBehaviour, IDamageable
         {
             currentHealth = maxHealth;
         }
+        else if(currentHealth<=0)
+        {
+            currentHealth = 1;
+        }
         onHeal.Invoke(amount);
     }
     public void Heal()
     {
-        currentHealth += maxHealth;
+        currentHealth = maxHealth;
         onHeal.Invoke(-1); //not sure if breaks anything
     }
 
     public void IncreaseMaxHealth(int amount)
     {
         int oldMaxhealth = maxHealth;
-        maxHealth = amount;
+        maxHealth = maxHealth+ amount;
         onHeal.Invoke(maxHealth-oldMaxhealth);
     }
 
@@ -93,10 +105,10 @@ public class HealthController : MonoBehaviour, IDamageable
     /// </summary>
     public void Die()
     {
-       // Debug.Log($"{gameObject.name} died!");
-        if(onDeathEvent != null)
+        // Debug.Log($"{gameObject.name} died!");
+        if (onDeathEvent != null)
         {
-            onDeathEvent.Invoke(gameObject);
+            onDeathEvent?.Invoke(gameObject);
         }
     }
     public void LoadHealth(SaveData saveData)

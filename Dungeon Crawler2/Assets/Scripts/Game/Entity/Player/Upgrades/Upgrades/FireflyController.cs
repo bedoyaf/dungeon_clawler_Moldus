@@ -1,0 +1,85 @@
+using Pathfinding;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.Events;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
+using UnityEditor;
+using UnityEngine.AI;
+using DG.Tweening;
+using System;
+using UnityEngine.UIElements;
+
+public class FireflyController : MonoBehaviour
+{
+    //path finding
+    [SerializeField] protected Transform target;
+    [SerializeField] private int movementSpeed = 5;
+    [SerializeField] private float distance_from_player = 10;
+    //[SerializeField] private float acceptable_distance_to_target = 1;
+    [SerializeField] private string TagOfEndOfLevel = "LevelExit";
+
+    protected AIDestinationSetter destinationSetter;
+    protected AIPath aiPath;
+    //helpers
+    private GameObject player;
+
+    void Start()
+    {
+        destinationSetter = GetComponent<AIDestinationSetter>();
+        aiPath = GetComponent<AIPath>();
+        destinationSetter.target = target;
+        aiPath.maxSpeed = movementSpeed;
+
+        var dungeonGenerator = FindFirstObjectByType<ProceduralGenerationRoomGenerator>();
+        if (dungeonGenerator != null)
+        {
+            dungeonGenerator.OnLevelRegeration.AddListener(OnLevelRegenerated);
+        }
+
+
+        StartCoroutine(FireflyBehaviour());
+    }
+
+    void Update()
+    {
+    }
+
+    public void Initialize( GameObject _player)
+    {
+        GameObject exit = GameObject.FindGameObjectWithTag(TagOfEndOfLevel);
+        target = exit.transform;
+        player = _player;
+    }
+
+    private IEnumerator FireflyBehaviour()
+    {
+        aiPath.canMove = true;
+        while (true)
+        {
+            float distanceToTarget = Vector3.Distance(transform.position, target.position);
+            float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+            if(distanceToPlayer > distance_from_player) 
+            {
+                destinationSetter.target = player.transform;
+                aiPath.canMove = true;
+            }
+            else if(distanceToPlayer <=distanceToTarget)
+            {
+                destinationSetter.target = target;
+                aiPath.canMove = true;
+            }
+
+            yield return null;
+        }
+    }
+    void OnLevelRegenerated()
+    {
+        GameObject exit = GameObject.FindGameObjectWithTag(TagOfEndOfLevel);
+        transform.position = player.transform.position;
+
+        target = exit.transform;
+        destinationSetter.target = target;
+    }
+}

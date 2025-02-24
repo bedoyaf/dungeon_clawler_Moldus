@@ -3,25 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem.Processors;
 
 public class SpawnerController : MonoBehaviour
 {
     //configurable
-    [SerializeField] private int maxEnemySpawn = 5;
-    [SerializeField] private GameObject enemyPrefab;
-    [SerializeField] private float spawnRadius=2f;
-    [SerializeField] private float spawnInterval = 3f;
+    [SerializeField] protected int maxEnemySpawn = 5;
+    [SerializeField] protected GameObject enemyPrefab;
+    [SerializeField] protected float spawnRadius=4f;
+    [SerializeField] protected float spawnInterval = 3f;
     //values
-    private float spawnTimer = 0f;
-    private int currentNumberOfEnemySpawn = 0;
+    protected float spawnTimer = 0f;
+    protected int currentNumberOfEnemySpawn = 0;
 
-    private Transform target;  //player
-    private Transform EnemySpawnPointsParent; //hierarchy parent
-    private Transform EnemyParent; //hierarchy parent
+    protected Transform target;  //player
+    protected Transform EnemySpawnPointsParent; //hierarchy parent
+    protected Transform EnemyParent; //hierarchy parent
     //Event
-    private UnityAction<GameObject> onDeathCallback;
+    protected UnityAction<GameObject> onDeathCallback;
 
-    private SpriteRenderer _spriteRenderer;
+    protected SpriteRenderer _spriteRenderer;
+
+    protected List<GameObject> spawned = new List<GameObject>();
+
+    protected bool dead = false;
 
     void Start()
     {
@@ -50,8 +55,9 @@ public class SpawnerController : MonoBehaviour
     /// <summary>
     /// Just destroys itself
     /// </summary>
-    public virtual void SpawnerDeath(GameObject dead)
+    public virtual void SpawnerDeath(GameObject dead_)
     {
+        dead = true;
         Destroy(gameObject);
     }
 
@@ -60,7 +66,7 @@ public class SpawnerController : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if(currentNumberOfEnemySpawn<maxEnemySpawn)
+        if(currentNumberOfEnemySpawn<maxEnemySpawn && !dead)
         {
             spawnTimer += Time.deltaTime; 
 
@@ -89,18 +95,28 @@ public class SpawnerController : MonoBehaviour
 
             RaycastHit2D hit = Physics2D.Raycast(transform.position, (spawnPosition - transform.position).normalized, Vector2.Distance(transform.position, spawnPosition));
 
-            if (hit.collider == null || hit.collider.gameObject == gameObject || hit.collider.CompareTag("Enemy"))
+
+            //lastValidSpawn = spawnPosition;
+            //attemptedSpawns.Add(spawnPosition);
+
+            if (hit.collider == null || hit.collider.gameObject == gameObject || hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Spawner"))
             {
                 break;
             }
 
             attempts++;
+
+            /*if(attempts>=maxAttempts)
+            {
+                Debug.Log(hit.collider.tag);
+            }*/
         }
+
 
         if (attempts == maxAttempts)
         {
             Debug.LogWarning("Could not find a valid spawn position after multiple attempts.");
-          //  return;
+            //return;
         }
 
         //Vector2 randomPoint = Random.insideUnitCircle * spawnRadius;
@@ -111,7 +127,28 @@ public class SpawnerController : MonoBehaviour
         newEnemy.transform.localScale = Vector3.zero;
 
         newEnemy.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBounce);
+
+        spawned.Add(newEnemy);
     }
+
+
+    /*
+    private List<Vector3> attemptedSpawns = new List<Vector3>();
+    private Vector3 lastValidSpawn = Vector3.zero;
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow; // Yellow for all attempts
+        foreach (Vector3 pos in attemptedSpawns)
+        {
+            Gizmos.DrawSphere(pos, 0.2f);
+        }
+
+        Gizmos.color = Color.green; // Green for successful spawns
+        Gizmos.DrawSphere(lastValidSpawn, 0.3f);
+    }
+
+    */
 
 
     /// <summary>

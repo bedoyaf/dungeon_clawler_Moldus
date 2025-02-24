@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 8558814131410095594}
   - component: {fileID: -2716383538601747896}
   - component: {fileID: 4677425861803329011}
+  - component: {fileID: -927074139847030568}
   m_Layer: 0
   m_Name: GreenBoss
   m_TagString: Boss
@@ -53,8 +54,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39310853c32007b45a0b0b3be9daa77a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 300
+  maxHealth: 600
   damageModifier: 1
+  shield: {fileID: 0}
   onTakeDamage:
     m_PersistentCalls:
       m_Calls:
@@ -341,9 +343,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4992300226305164637}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1cf31bfd5527eee428df5eecd083240e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxEnemySpawn: 10
+  enemyPrefab: {fileID: 5245902733967467891, guid: 519fc36a454d24648a594cc26b445039, type: 3}
+  spawnRadius: 10
+  spawnInterval: 1
+--- !u!114 &-927074139847030568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4992300226305164637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a40678481bfafab4585164d85140d3e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxEnemySpawn: 10

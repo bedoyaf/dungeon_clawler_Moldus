@@ -7,7 +7,7 @@ public class ShieldController : MonoBehaviour
 {
     [SerializeField] private int maxShieldHealth = 50;
     [SerializeField] private float rechargeDelay = 5f;  
-    [SerializeField] private int rechargeRate = 50;
+  //  [SerializeField] private int rechargeRate = 50;
 
     private int shieldHealth;
     private Coroutine rechargeCoroutine;
@@ -16,16 +16,31 @@ public class ShieldController : MonoBehaviour
 
     private bool flickering = false;
 
+    [Header("Audio Settings")]
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip shieldHitSound;
+    [SerializeField] private AudioClip shieldPowerUpSound;
+    [SerializeField] private AudioClip shieldBreakSound;
+
     void Start()
     {
         shieldHealth = maxShieldHealth;
         shieldRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
 
     }
 
     void Update()
     {
 
+    }
+
+    public void Initiate()
+    {
+        shieldHealth = maxShieldHealth;
+        shieldRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(shieldPowerUpSound);
     }
 
     private IEnumerator RechargeShield()
@@ -56,6 +71,7 @@ public class ShieldController : MonoBehaviour
             {
                 StopCoroutine(rechargeCoroutine);
             }
+            audioSource.PlayOneShot(shieldHitSound);
             rechargeCoroutine = StartCoroutine(RechargeShield());
             if(!flickering) FlickerOnHit();
             if(shieldHealth ==0) TurnOFFShield();
@@ -66,12 +82,14 @@ public class ShieldController : MonoBehaviour
 
     private void TurnOnShield()
     {
+        audioSource.PlayOneShot(shieldPowerUpSound);
         shieldRenderer.enabled = true;
         shieldRenderer.DOFade(1f, 0.5f); // Smoothly fade in
     }
 
     private void TurnOFFShield()
     {
+        audioSource.PlayOneShot(shieldBreakSound);
         shieldRenderer.DOKill();
         shieldRenderer.DOFade(0f, 0.5f).SetLoops(6, LoopType.Yoyo).OnComplete(() =>
         {

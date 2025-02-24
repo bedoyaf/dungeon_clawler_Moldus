@@ -7,8 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovementController : MonoBehaviour
 {
     //configuratable
-    [SerializeField]
-    private float speed;
+    [SerializeField] public float speed = 10f;
 
     //helpers
     private Rigidbody2D _rigidbody;
@@ -55,7 +54,7 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
-    public void changeSpeed(int newSpeed)
+    public void changeSpeed(float newSpeed)
     {
         speed = newSpeed;
     }

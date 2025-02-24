@@ -78,6 +78,7 @@ public class PlayerStatsController : MonoBehaviour
             StartCoroutine(TransformationTime(transformationTimeSeconds));
             healthController.Heal(100);
             UpdatePlayerInfection();
+            pointsCounter.UpdateTextPoints();
         }
     }
 

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2264e62a3f9e859438aa7f1bcbb85916, type: 3}
+  m_Name: DamageUpgrade 2
+  m_EditorClassIdentifier: 
+  abilityName: Damage 3
+  abilityIcon: {fileID: 3520324738242251595, guid: af2279b26fbc1b84db077b5c77b3eb4c, type: 3}
+  description: Increases damage for all weapons.
+  level: 3
+  ability: damage
+  mutualyExclusiveWith: []
+  newDamageModifier: 2.5

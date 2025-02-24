@@ -10,4 +10,5 @@ public class BulletData : ScriptableObject
     [SerializeField] public Sprite sprite;
     [SerializeField] public int rotationAngle = 0;
     [SerializeField] public AudioClip audioClip;
+    [SerializeField] public float damageModifier = 1f;
 }

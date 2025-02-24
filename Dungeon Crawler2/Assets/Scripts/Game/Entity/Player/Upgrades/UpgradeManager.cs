@@ -8,20 +8,25 @@ using UnityEngine.Events;
 public class UpgradeManager : MonoBehaviour
 {
     [SerializeField] private UpgradesUIManager UI;
-    [SerializeField] private List<UpgradeSO> allUpgrades;
+    [SerializeField] private List<UpgradeSO> allUpgrades;  //all the upgrades, 
 
     [SerializeField] private UnityEvent onOpeningShopUpgradeUI = new UnityEvent();
     [SerializeField] private UnityEvent onClosingShopUpgradeUI = new UnityEvent();
 
-    private List<UpgradeSO> availableUpgrades;
-    private List <UpgradeSO> activatedUpgrades = new List<UpgradeSO>();
+    [Header("Firefly setup")]
+    [SerializeField] private GameObject levelExit;
+
+    private List<UpgradeSO> availableUpgrades;  //available to be shown
+    public List<UpgradeSO> activatedUpgrades { get; private set; } = new List<UpgradeSO>();  //being used by the player
 
     private List<UpgradeSO> UpgradesOnCards;
 
     private int displayCardsNum = 3;
+
+
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             if (UpgradesOnCards==null) chooseAndDisplayNewUpgrades();
         }
@@ -43,7 +48,6 @@ public class UpgradeManager : MonoBehaviour
     public void chooseAndDisplayNewUpgrades()
     {
         var actualyAviableUpgrades = getAllAviableUpgrades();
-        Debug.Log(actualyAviableUpgrades.Count);
         if (actualyAviableUpgrades.Count==0)
         {
             Debug.LogWarning("Not enough upgrades available!");
@@ -116,5 +120,25 @@ public class UpgradeManager : MonoBehaviour
     private void OnDisable()
     {
         UI.RemoveUpgradeListener(HandlePickedUpgrade);
+    }
+
+
+    //Todo should update any upgrades that need it
+    public void RevertAllUpgrades()
+    {
+        foreach(var  upgrade in activatedUpgrades)
+        {
+            upgrade.Revert(gameObject);
+        }
+    }
+
+    public void LoadUpgrades(List<UpgradeSO> loadedUpgrades)
+    {
+        RevertAllUpgrades();
+        foreach(var upgrade in loadedUpgrades)
+        {
+            activatedUpgrades.Add(upgrade);
+            upgrade.Activate(gameObject);
+        }
     }
 }

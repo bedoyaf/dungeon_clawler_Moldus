@@ -65,10 +65,12 @@ public class RedBoss : BasicEnemy
             .OnComplete(() =>
             {
                 teleportTween = null;
+                teleporting = false;
             })
             .OnKill(() =>
             {
                 teleportTween = null;
+                teleporting = false;
             });
     }
 
@@ -84,6 +86,8 @@ public class RedBoss : BasicEnemy
     {
         dead = true;
         teleportTween?.Kill();
+        GetComponent<SpriteRenderer>().DOKill();
+        Destroy(spawnLocation);
 
         Sequence deathSequence = DOTween.Sequence();
         deathSequence.Append(transform.DOScale(0f, 0.5f).SetEase(Ease.InBack));

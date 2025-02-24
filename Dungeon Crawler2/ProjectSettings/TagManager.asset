@@ -11,6 +11,7 @@ TagManager:
   - Spawner
   - Pillar
   - Boss
+  - LevelExit
   layers:
   - Default
   - TransparentFX

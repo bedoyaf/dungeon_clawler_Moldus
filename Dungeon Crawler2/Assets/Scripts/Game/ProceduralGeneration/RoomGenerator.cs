@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 /// <summary>
@@ -19,6 +20,8 @@ public class ProceduralGenerationRoomGenerator : AbstractDungeonGenerator
     private int tilesForOneSpawner = 30, dispersionOfSpawners = 3;
 
     [SerializeField] private DungeonContentGenerator dungeonContentGenerator; //handles placing spawners and other
+
+    [SerializeField] public UnityEvent OnLevelRegeration;
 
     public void Awake()
     {
@@ -66,6 +69,8 @@ public class ProceduralGenerationRoomGenerator : AbstractDungeonGenerator
         dungeonContentGenerator.DestroyEnemies();
         //places the start and end of the level
         dungeonContentGenerator.PlaceStartAndEnd(startAndEnd.Item1, startAndEnd.Item2, tileMapVisualizer);
+
+        OnLevelRegeration?.Invoke();
     }
 
     /// <summary>

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerShootingController : MonoBehaviour
 {
@@ -9,10 +10,10 @@ public class PlayerShootingController : MonoBehaviour
     private ColorEnemy currentInfection = ColorEnemy.None; //determins weapons
     [SerializeField] private GameObject bulletPrefab;    
     [SerializeField] private GameObject bombPrefab;       
-    [SerializeField] BulletData longRangeBullet;
-    [SerializeField] BulletData shortRangeBullet;
+    [SerializeField] public BulletData longRangeBullet;
+    [SerializeField] public BulletData shortRangeBullet;
     private BulletData currentBulletData;
-    [SerializeField] private float delayBetweenShots = 1f; 
+    [SerializeField] public float delayBetweenShots { get; private set; } = 1f; 
     private float lastShotTime;
     //flame
     [SerializeField] private GameObject flamePrefab;
@@ -27,6 +28,9 @@ public class PlayerShootingController : MonoBehaviour
     //helpers
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rigidBody;
+
+    private float currentDamageModifier = 1f;
+    private float currentDamageModifierRage = 1f;
 
     void Start()
     {
@@ -202,5 +206,21 @@ public class PlayerShootingController : MonoBehaviour
     public void changeFireRate(float amount)
     {
         delayBetweenShots = amount;
+    }
+
+    public void IncreaseDamageModifier(float value)
+    {
+        currentDamageModifier = value;
+        longRangeBullet.damageModifier = currentDamageModifier * currentDamageModifierRage;
+        shortRangeBullet.damageModifier = currentDamageModifier * currentDamageModifierRage;
+        flamePrefab.GetComponent<FlameController>().damageModifier = currentDamageModifier * currentDamageModifierRage;
+    }
+
+    public void UpdateDamageModifiersRage(float value)
+    {
+        currentDamageModifierRage = value;
+        longRangeBullet.damageModifier = currentDamageModifier*currentDamageModifierRage;
+        shortRangeBullet.damageModifier = currentDamageModifier * currentDamageModifierRage;
+        flamePrefab.GetComponent<FlameController>().damageModifier = currentDamageModifier * currentDamageModifierRage;
     }
 }

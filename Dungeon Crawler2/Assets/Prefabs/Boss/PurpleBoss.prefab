@@ -52,8 +52,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39310853c32007b45a0b0b3be9daa77a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 300
+  maxHealth: 600
   damageModifier: 1
+  shield: {fileID: 0}
   onTakeDamage:
     m_PersistentCalls:
       m_Calls:
@@ -332,7 +333,7 @@ MonoBehaviour:
   shootingRange: 0
   shootingCooldown: 0
   bulletPrefab: {fileID: 620423418827414382, guid: 7cec1422d946ff24facb96d478247a1c, type: 3}
-  bulletData: {fileID: 11400000, guid: 4f4630331c3b1ab43892ae20391a9483, type: 2}
+  bulletData: {fileID: 11400000, guid: 85e2b221fc23b6c4ca40f65e42f712ac, type: 2}
   shootInterval: 0.4
   rotationAngle: 14
   numberOfDirections: 4

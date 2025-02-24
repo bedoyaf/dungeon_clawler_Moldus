@@ -37,9 +37,11 @@ public class BossHealthBarController : MonoBehaviour
     }
     public void UpdateHealthBar(int damage)
     {
+        healthBar.DOKill();
+        whiteHealthBar.DOKill();
         if (healthBar != null)
         {
-            healthBar.value = healthController.currentHealth;
+            //healthBar.value = healthController.currentHealth;
             float targetValue = healthController.currentHealth;
             healthBar.DOValue(targetValue, 0.5f).SetEase(Ease.OutQuad);
 

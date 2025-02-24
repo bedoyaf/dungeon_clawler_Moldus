@@ -69,7 +69,7 @@ public class EnemyKillCountController : MonoBehaviour
     /// <summary>
     /// Texts care of the UI text being up to date
     /// </summary>
-    private void UpdateTextPoints()
+    public void UpdateTextPoints()
     {
         textRedPoints.text = "R: " + RedPoints;
         textGreenPoints.text = "G: " + GreenPoints;

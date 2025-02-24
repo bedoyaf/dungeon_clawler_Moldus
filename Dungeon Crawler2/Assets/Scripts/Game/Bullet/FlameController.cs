@@ -9,6 +9,7 @@ public class FlameController : MonoBehaviour
 {
     [SerializeField] private int damage = 10;
     [SerializeField] private float damageInterval = 0.1f;
+    [SerializeField] public float damageModifier = 1f;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -37,7 +38,7 @@ public class FlameController : MonoBehaviour
         //enemy.IsTakingDamage = true; // Prevent multiple coroutines
         while (enemy != null && enemy.isOnFire) // Custom flag for tracking flame state
         {
-            enemy.TakeDamage(damage);
+            enemy.TakeDamage((int)(damage*damageModifier));
             yield return new WaitForSeconds(damageInterval);
         }
        // enemy.IsTakingDamage = false;

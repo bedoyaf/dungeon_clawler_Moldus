@@ -13,10 +13,11 @@ public class BulletController : MonoBehaviour
     [SerializeField] private float despawnDistance = 20f;
     [SerializeField] private BulletData bulletData;
     [SerializeField] private float playerBiasModifier = 1f; //to adjust if I want to make the player deal More damage
+    [SerializeField] public float damageModifier = 1f;
 
     void Start()
     {
-        damage = (int)(damage * playerBiasModifier);
+        damage = (int)(damage * playerBiasModifier *damageModifier);
     }
 
     void Update()
@@ -81,7 +82,7 @@ public class BulletController : MonoBehaviour
         var _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = newbulletData.sprite;
         speed = newbulletData.speed;
-        damage = (int)(newbulletData.damage * playerBiasModifier);
+        damage = (int)(newbulletData.damage * playerBiasModifier* damageModifier);
         despawnDistance = newbulletData.despawnDistance;
         transform.Rotate(0, 0, bulletData.rotationAngle);
      //   AudioSource _audioSource = GetComponent<AudioSource>();
@@ -99,7 +100,7 @@ public class BulletController : MonoBehaviour
 
             if (damageable != null)
             {
-                damageable.TakeDamage(damage);
+                damageable.TakeDamage((int)(damage*damageModifier));
             }
             Destroy(gameObject);
         }
@@ -109,7 +110,7 @@ public class BulletController : MonoBehaviour
 
             if (damageable != null)
             {
-                damageable.TakeDamage(damage);
+                damageable.TakeDamage((int)(damage * damageModifier));
             }
             Destroy(gameObject);
         }
@@ -119,7 +120,7 @@ public class BulletController : MonoBehaviour
 
             if (damageable != null)
             {
-                damageable.TakeDamage(damage);
+                damageable.TakeDamage((int)(damage * damageModifier));
             }
             Destroy(gameObject);
         }

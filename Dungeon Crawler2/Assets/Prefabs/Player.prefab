@@ -221,7 +221,6 @@ MonoBehaviour:
   bombPrefab: {fileID: 4137400275654543772, guid: db311ae1de4880a4bbee23f4fc44b2c7, type: 3}
   longRangeBullet: {fileID: 11400000, guid: fc8ca0d7dbfadfb4487686b9aaabeb7c, type: 2}
   shortRangeBullet: {fileID: 11400000, guid: b4b7bf038f9e3f24580b21c699e5e704, type: 2}
-  delayBetweenShots: 0.5
   flamePrefab: {fileID: 4916697542080984034, guid: 0e8e903ea1a2d8b45864464098426ec2, type: 3}
   flamePoint: {fileID: 2249143018507998317}
   flamerCooldown: 1
@@ -240,6 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   damageModifier: 1
+  shield: {fileID: 0}
   onTakeDamage:
     m_PersistentCalls:
       m_Calls:
@@ -256,6 +256,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   onDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onHeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &2016130605237298705
@@ -349,7 +352,7 @@ MonoBehaviour:
   m_ComponentVersion: 2
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
+  m_FalloffIntensity: 0.521
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 1
@@ -372,7 +375,7 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 360
+  m_PointLightInnerAngle: 355
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.83
   m_PointLightOuterRadius: 7.32

@@ -39,6 +39,8 @@ public class BossSetupController : MonoBehaviour
     private GameObject currentBoss;
     private UnityAction<GameObject> onDeathCallback;
 
+    [SerializeField] public UnityEvent OnBossCompleted;
+
     void Start()
     {
         if (DungeonGenerator != null)
@@ -101,14 +103,14 @@ public class BossSetupController : MonoBehaviour
         setupHealthBar();
     }
 
-    void setupHealthBar()
+    private void setupHealthBar()
     {
         healthBar.SetActive(true);
         var healthController = currentBoss.GetComponent<HealthController>();
         healthBar.GetComponent<BossHealthBarController>().setupHelathController(healthController);
     }
 
-    void closeHealthBar()
+    private void closeHealthBar()
     {
         healthBar.SetActive(false);
     }
@@ -118,7 +120,7 @@ public class BossSetupController : MonoBehaviour
         Destroy(currentBoss);
     }
 
-    void PlaceSpawnPoints(BoundsInt room)
+    private void PlaceSpawnPoints(BoundsInt room)
     {
         Vector2Int center = new Vector2Int((room.min.x + room.max.x) / 2, (room.min.y + room.max.y) / 2);
 
@@ -138,7 +140,7 @@ public class BossSetupController : MonoBehaviour
         playerSpawnPoint.transform.position = playerSpawnTile;
     }
 
-    void spawnBoss(ColorEnemy c)//add change based on color
+    private void spawnBoss(ColorEnemy c)//add change based on color
     {   
 
         if (c == ColorEnemy.Red)
@@ -166,16 +168,26 @@ public class BossSetupController : MonoBehaviour
         }
     }
 
-    void manageBossDeath(GameObject o)
+    private void manageBossDeath(GameObject o)
     {
         endSpawnPoint.SetActive(true);
         closeHealthBar();
         Destroy(currentBoss);
     }
 
-    void setupPlayerForBoss()
+    private void setupPlayerForBoss()
     {
         player.transform.position = playerSpawnPoint.transform.position;
         Camera.transform.position = playerSpawnPoint.transform.position;
+    }
+
+    public void BossFightCompleted()
+    {
+        OnBossCompleted.Invoke();
+    }
+
+    public void BossFightFailed()
+    {
+        healthBar.SetActive(false);
     }
 }

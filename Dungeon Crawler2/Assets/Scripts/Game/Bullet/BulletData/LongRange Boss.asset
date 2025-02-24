@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1efa79880d211c543a95590ba5ce904a, type: 3}
   m_Name: LongRange Boss
   m_EditorClassIdentifier: 
-  speed: 30
-  damage: 50
+  speed: 10
+  damage: 25
   despawnDistance: 60
   sprite: {fileID: -590080596, guid: 36b6023f4166af74585d57adaa8e2397, type: 3}
   rotationAngle: 0

@@ -18,7 +18,7 @@ public class FlameController : MonoBehaviour
             //IDamageable enemy = collision.GetComponent<>();  
 
             HealthController enemy = collision.GetComponent<HealthController>();
-            if (enemy != null && !enemy.isOnFire)
+            if (enemy != null && !enemy.isOnFire && gameObject.activeInHierarchy)
             {
                 enemy.isOnFire = true;
                 StartCoroutine(DamageOverTime(enemy));

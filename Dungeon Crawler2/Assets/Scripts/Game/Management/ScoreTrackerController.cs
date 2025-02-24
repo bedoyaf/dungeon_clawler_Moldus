@@ -8,6 +8,9 @@ public class ScoreTrackerController : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
     public int depthAchieved { get; private set; } = 0;
 
+
+
+
     /// <summary>
     /// Just Increments the score
     /// </summary>

@@ -114,7 +114,17 @@ public class BulletController : MonoBehaviour
             }
             Destroy(gameObject);
         }
-        else if ((collision.CompareTag("Spawner")||collision.CompareTag("Pillar")) && (gameObject.CompareTag("FriendlyBullet") || gameObject.CompareTag("EnemyBullet")))
+        else if (collision.CompareTag("Pillar") && (gameObject.CompareTag("FriendlyBullet") || gameObject.CompareTag("EnemyBullet")))
+        {
+            IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+
+            if (damageable != null)
+            {
+                damageable.TakeDamage((int)(damage * damageModifier));
+            }
+            Destroy(gameObject);
+        }
+        else if (collision.CompareTag("Spawner") && gameObject.CompareTag("FriendlyBullet") )
         {
             IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
 

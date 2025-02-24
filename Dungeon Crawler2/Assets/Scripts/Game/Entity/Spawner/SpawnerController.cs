@@ -30,8 +30,17 @@ public class SpawnerController : MonoBehaviour
 
     void Start()
     {
-        var enemycontroller = GetComponent<HealthController>();
-        enemycontroller.onDeathEvent.AddListener(SpawnerDeath);
+        var healthController = GetComponent<HealthController>();
+
+        UpgradePointsController upradePointsController = FindFirstObjectByType<UpgradePointsController>(); 
+        if (upradePointsController != null && !gameObject.CompareTag("Boss"))
+        {
+            healthController.onDeathEvent.AddListener(upradePointsController.IncrementUpgradePoints);
+        }
+
+        healthController.onDeathEvent.AddListener(SpawnerDeath);
+
+
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 

@@ -20,6 +20,7 @@ public class PlayerStatsController : MonoBehaviour
 
     private SpriteRenderer _spriteRenderer;
 
+
     void Start()
     {
         var playerHealthController = GetComponent<HealthController>();
@@ -51,8 +52,8 @@ public class PlayerStatsController : MonoBehaviour
                 {
                     pointsCounter.RedPoints = pointsCounter.RedPoints - pointsRequiredToTransform;
                     currentInfection = ColorEnemy.Red;
+                    changed = true;
                 }
-                changed = true;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
@@ -60,8 +61,8 @@ public class PlayerStatsController : MonoBehaviour
                 {
                     pointsCounter.GreenPoints = pointsCounter.GreenPoints - pointsRequiredToTransform;
                     currentInfection = ColorEnemy.Green;
+                    changed = true;
                 }
-                changed = true;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
@@ -69,8 +70,8 @@ public class PlayerStatsController : MonoBehaviour
                 {
                     pointsCounter.PurplePoints = pointsCounter.PurplePoints - pointsRequiredToTransform;
                     currentInfection = ColorEnemy.Purple;
+                    changed = true;
                 }
-                changed = true;
             }
         }
         if(changed)
@@ -138,21 +139,4 @@ public class PlayerStatsController : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-    /*
-    public void FlashRed()
-    {
-        Debug.Log("flash");
-        if (DOTween.IsTweening(_spriteRenderer))
-        {
-            return;
-        }
-
-        Color originalColor = _spriteRenderer.color;
-        Color changeColor = new Color(1f, 0f, 0f, 0.5f);
-        _spriteRenderer.DOColor(changeColor, 0.1f).OnComplete(() =>
-        {
-            _spriteRenderer.DOColor(originalColor, 0.1f);
-        });
-    }
-    */
 }

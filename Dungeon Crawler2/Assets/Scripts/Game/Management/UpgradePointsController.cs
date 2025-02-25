@@ -17,7 +17,6 @@ public class UpgradePointsController : MonoBehaviour
     private int startingValueForFormula;
 
     private bool isFlashing = false;
-    private bool isShowingUpgradeScreen = false;
     private Tween flashTween;
 
     void Start()

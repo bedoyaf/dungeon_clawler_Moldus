@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// instantiates a shield for the player that soaks up damage
+/// </summary>
 [CreateAssetMenu(fileName = "ShieldUpgrade", menuName = "Upgrades/Shield Upgrade")]
 public class ShieldUpgrade : UpgradeSO
 {

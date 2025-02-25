@@ -1,6 +1,9 @@
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Manages the bomb thrown by the red boss
+/// </summary>
 public class BossBombController : MonoBehaviour
 {
     private Rigidbody2D rb;
@@ -9,10 +12,13 @@ public class BossBombController : MonoBehaviour
     private Vector2 targetPosition;
     private bool hasExploded = false;
     [SerializeField] GameObject explosionEffect;
-   // [SerializeField] private float explosionTime = 2f;
     [SerializeField] private float explosionRadius = 3f;
     [SerializeField] private int damage = 30;
 
+    /// <summary>
+    /// sets up the direction the bomb should fly towards
+    /// </summary>
+    /// <param name="target">for direction</param>
     public void flyTowards(Vector2 target)
     {
         targetPosition = target;
@@ -42,6 +48,9 @@ public class BossBombController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Manages the explosion itself
+    /// </summary>
     void Explode()
     {
         hasExploded = true;
@@ -49,7 +58,6 @@ public class BossBombController : MonoBehaviour
         if (explosionEffect != null)
         {
             Instantiate(explosionEffect, transform.position, transform.rotation);
-            //Instantiate(new GameObject("ExplosionEffect"), transform.position, transform.rotation);
         }
 
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
@@ -64,8 +72,4 @@ public class BossBombController : MonoBehaviour
         }
         Destroy(gameObject);
     }
-
-
-
-
 }

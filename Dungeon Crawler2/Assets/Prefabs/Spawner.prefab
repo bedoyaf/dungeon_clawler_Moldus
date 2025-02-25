@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4600241372743406335}
   - component: {fileID: 249936313189589947}
   - component: {fileID: 3687272556011288013}
+  - component: {fileID: -7958208434647471640}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Spawner
@@ -103,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf31bfd5527eee428df5eecd083240e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnemySpawn: 5
+  maxEnemySpawn: 3
   enemyPrefab: {fileID: 0}
   spawnRadius: 1
   spawnInterval: 3
@@ -128,6 +129,18 @@ MonoBehaviour:
       - m_Target: {fileID: 4600241372743406335}
         m_TargetAssemblyTypeName: SpawnerController, Assembly-CSharp
         m_MethodName: FlashRed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4600241372743406335}
+        m_TargetAssemblyTypeName: SpawnerController, Assembly-CSharp
+        m_MethodName: OnDamage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -192,6 +205,103 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.63}
   m_Size: {x: 1.12, y: 2.38}
   m_Direction: 0
+--- !u!82 &-7958208434647471640
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6773027837370554919}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 2269342636372300970, guid: 8c2de8224dad1394ea20953ce15a5386, type: 2}
+  m_audioClip: {fileID: 8300000, guid: bc435539f34f26f4284a0d35d90e91db, type: 3}
+  m_Resource: {fileID: 8300000, guid: bc435539f34f26f4284a0d35d90e91db, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.022
+  m_Pitch: 0.83
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 256
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8219495560898193691
 GameObject:
   m_ObjectHideFlags: 0

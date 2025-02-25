@@ -2,6 +2,10 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+
+/// <summary>
+/// Handles the bosses health bar UI
+/// </summary>
 public class BossHealthBarController : MonoBehaviour
 {
     [SerializeField] private Slider healthBar;
@@ -14,7 +18,10 @@ public class BossHealthBarController : MonoBehaviour
     {
         healthBar = GetComponent<Slider>();
     }
-
+    /// <summary>
+    /// Updates it with a new healthController from the new boss
+    /// </summary>
+    /// <param name="newhealthController">bosses health controller</param>
     public void setupHelathController(HealthController newhealthController)
     {
         healthBar = GetComponent<Slider>();
@@ -25,16 +32,21 @@ public class BossHealthBarController : MonoBehaviour
         whiteHealthBar.value = maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
+    /// <summary>
+    /// updates the max health from the boss
+    /// </summary>
+    /// <param name="maxHealth_">the bosses maxhealth</param>
     public void SetMaxHealth(int maxHealth_)
     {
         maxHealth = maxHealth_;
         healthBar.maxValue = maxHealth_;
         whiteHealthBar.maxValue = maxHealth_;
     }
+
+    /// <summary>
+    /// Updates the health bar UI with visual tween
+    /// </summary>
+    /// <param name="damage">damage received</param>
     public void UpdateHealthBar(int damage)
     {
         healthBar.DOKill();

@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Increases max health and heals the player
+/// </summary>
 [CreateAssetMenu(fileName = "HealthUpgrade", menuName = "Upgrades/Health Upgrade")]
 public class HealthUpgrade : UpgradeSO
 {

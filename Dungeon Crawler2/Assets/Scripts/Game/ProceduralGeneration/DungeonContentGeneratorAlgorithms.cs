@@ -18,6 +18,8 @@ public static class DungeonContentGeneratorAlgorithms
     /// <returns>List of coordinates to place</returns>
     public static List<Vector2Int> PlaceCoordinatesCircularPatternInRoom(BoundsInt room,int numberOfObjects)
     {
+        int offset = 1;
+
         List<Vector2Int> positions = new List<Vector2Int>();
 
         Vector2Int roomCenter = new Vector2Int(
@@ -33,7 +35,7 @@ public static class DungeonContentGeneratorAlgorithms
         {
             float angle = (i / (float)numberOfObjects) * Mathf.PI * 2;
 
-            int randomRadius = UnityEngine.Random.Range(0, radius);
+            int randomRadius = UnityEngine.Random.Range(0, radius-offset);
 
             int x = Mathf.RoundToInt(roomCenter.x + Mathf.Cos(angle) * randomRadius);
             int y = Mathf.RoundToInt(roomCenter.y + Mathf.Sin(angle) * randomRadius);
@@ -94,7 +96,13 @@ public static class DungeonContentGeneratorAlgorithms
     }
 
 
-
+    /// <summary>
+    /// Picks one of the options how to generate coords for the pillars
+    /// </summary>
+    /// <param name="room">bounds of the room</param>
+    /// <param name="minDistanceFromCenter">minimal distance from the room center</param>
+    /// <param name="minDistanceFromWalls">minimal distance from the walls</param>
+    /// <returns>returns the coords for the pillars in the room</returns>
     public static List<Vector2Int> PlacePillars(BoundsInt room, int minDistanceFromCenter, int minDistanceFromWalls)
     {
         if (room.size.x < minDistanceFromWalls * 3 || room.size.y < minDistanceFromWalls * 3)
@@ -114,6 +122,14 @@ public static class DungeonContentGeneratorAlgorithms
         }
     }
 
+
+    /// <summary>
+    /// Gets random coords in the room
+    /// </summary>
+    /// <param name="room">bounds of the room</param>
+    /// <param name="minDistanceFromCenter">minimal distance from the room center</param>
+    /// <param name="minDistanceFromWalls">minimal distance from the walls</param>
+    /// <returns>returns the coords for the pillars in the room</returns>
     private static List<Vector2Int> PlacePillarsInRoomRandomly(BoundsInt room, int minDistanceFromCenter, int minDistanceFromWalls)
     {
         List<Vector2Int> pillars = new List<Vector2Int>();
@@ -128,6 +144,15 @@ public static class DungeonContentGeneratorAlgorithms
         }
         return pillars;
     }
+
+
+    /// <summary>
+    /// Generates coords of pillars in the room a rectangle
+    /// </summary>
+    /// <param name="room">bounds of the room</param>
+    /// <param name="minDistanceFromCenter">minimal distance from the room center</param>
+    /// <param name="minDistanceFromWalls">minimal distance from the walls</param>
+    /// <returns>returns the coords for the pillars in the room</returns>
     public static List<Vector2Int> PlacePillarsInCornersOfRoom(BoundsInt room,int minDistanceFromCenter, int minDistanceFromWalls)
     {
         List<Vector2Int> pillarCords = new List<Vector2Int>();
@@ -155,11 +180,7 @@ public static class DungeonContentGeneratorAlgorithms
         foreach (Vector3Int offset in offsets)
         {
             Vector3Int pillarPosition = roomCenter + offset;
-
-    //        if (room.Contains(pillarPosition))
-     //       {
-                pillarCords.Add(new Vector2Int(pillarPosition[0], pillarPosition[1])); // Custom method to place a pillar (instantiate object, etc.)
-       //     }
+            pillarCords.Add(new Vector2Int(pillarPosition[0], pillarPosition[1])); 
         }
         return pillarCords;
     }

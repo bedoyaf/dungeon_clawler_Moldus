@@ -28,6 +28,8 @@ public class DungeonContentGenerator : MonoBehaviour
     [SerializeField] private AstarPath pathfinding;
     [SerializeField] private GameObject statsCounter; //just here to send the incrementation function to the enemy death event
 
+    private List<Vector2Int> occupiedTiles = new List<Vector2Int>();
+
     /// <summary>
     /// Just destroys all spawners
     /// </summary>
@@ -70,8 +72,6 @@ public class DungeonContentGenerator : MonoBehaviour
         yield return new WaitForSeconds(delay); // Wait for the specified delay
         pathfinding.Scan(); // Perform the scan
     }
-
-
 
     public void ScanSpecificAreaForPathfinding(Vector3 pillarPosition, float pillarRadius)
     {
@@ -129,7 +129,13 @@ public class DungeonContentGenerator : MonoBehaviour
                 newSpawner.GetComponent<SpawnerController>().Initialize(enemyprefab, Player.transform, EnemySpawnPointsParent.transform, EnemyParent.transform, statsCounter.GetComponent<EnemyKillCountController>().OnEnemyDeath);
                 SpriteRenderer spriteRenderer = newSpawner.GetComponent<SpriteRenderer>();
                 spriteRenderer.color = GetColorFromEnum(colors[i]);
-
+                occupiedTiles.Add(spawnerPos);
+                occupiedTiles.Add(new Vector2Int(spawnerPos.x,spawnerPos.y+1));
+                occupiedTiles.Add(new Vector2Int(spawnerPos.x +1, spawnerPos.y));
+                occupiedTiles.Add(new Vector2Int(spawnerPos.x +1, spawnerPos.y + 1));
+                occupiedTiles.Add(new Vector2Int(spawnerPos.x, spawnerPos.y - 1));
+                occupiedTiles.Add(new Vector2Int(spawnerPos.x - 1, spawnerPos.y));
+                occupiedTiles.Add(new Vector2Int(spawnerPos.x - 1, spawnerPos.y - 1));
             }
         }
     }
@@ -151,6 +157,10 @@ public class DungeonContentGenerator : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// Just clears the dungeon of all the pillars
+    /// </summary>
     private void DestroyPillars()
     {
         foreach (Transform child in PillarParent.transform)
@@ -158,6 +168,13 @@ public class DungeonContentGenerator : MonoBehaviour
             Destroy(child.gameObject);
         }
     }
+
+
+    /// <summary>
+    /// Playces all the pillars from the gived coordinates, checks if a spawner isnt already there
+    /// </summary>
+    /// <param name="pillarsForEachRoom">List of room lists of pillar coords</param>
+    /// <param name="tileMapVisualizer">self explanatory</param>
     public void PlacePillars(List<List<Vector2Int>> pillarsForEachRoom, TileMapVisualizer tileMapVisualizer)
     {
         DestroyPillars();
@@ -165,11 +182,18 @@ public class DungeonContentGenerator : MonoBehaviour
         {
             foreach (var pillarPos in pillarsForEachRoom[i])
             {
+                if (occupiedTiles.Contains(pillarPos))
+                {
+                    continue;
+                }
+
                 Vector3 coorsFromTilemap = tileMapVisualizer.GetRealCoordsFromFloorTileMap(pillarPos);
                 float CellSize = tileMapVisualizer.GetTilemapCellSize();
                 Vector3 coords = new Vector3(coorsFromTilemap.x+CellSize/2,coorsFromTilemap.y+CellSize/2, coorsFromTilemap.z);
+
                 GameObject Pillar = Instantiate(pillar, coords, Quaternion.identity, PillarParent.transform);
                 Pillar.GetComponent<PillarController>().SetDungeonContentGenerator(gameObject.GetComponent<DungeonContentGenerator>());
+                occupiedTiles.Add(pillarPos);
             }
         }
     }

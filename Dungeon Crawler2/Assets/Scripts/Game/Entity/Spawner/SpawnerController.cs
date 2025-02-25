@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem.Processors;
@@ -66,6 +67,19 @@ public class SpawnerController : MonoBehaviour
     /// </summary>
     public virtual void SpawnerDeath(GameObject dead_)
     {
+        if (TryGetComponent(out AudioSource audioSource) && audioSource.clip != null)
+        {
+            GameObject audioObject = new GameObject("TempAudio");
+            AudioSource tempAudioSource = audioObject.AddComponent<AudioSource>();
+            tempAudioSource.clip = audioSource.clip;
+            tempAudioSource.volume = audioSource.volume;
+            tempAudioSource.outputAudioMixerGroup = audioSource.outputAudioMixerGroup;
+            tempAudioSource.Play();
+            Destroy(audioObject, tempAudioSource.clip.length);
+        }
+        GetComponent<SpriteRenderer>().DOKill();
+        transform.DOKill();
+
         dead = true;
         Destroy(gameObject);
     }
@@ -140,26 +154,6 @@ public class SpawnerController : MonoBehaviour
         spawned.Add(newEnemy);
     }
 
-
-    /*
-    private List<Vector3> attemptedSpawns = new List<Vector3>();
-    private Vector3 lastValidSpawn = Vector3.zero;
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow; // Yellow for all attempts
-        foreach (Vector3 pos in attemptedSpawns)
-        {
-            Gizmos.DrawSphere(pos, 0.2f);
-        }
-
-        Gizmos.color = Color.green; // Green for successful spawns
-        Gizmos.DrawSphere(lastValidSpawn, 0.3f);
-    }
-
-    */
-
-
     /// <summary>
     /// decreases the number of current enemies, so it can spawn new ones
     /// </summary>
@@ -167,20 +161,11 @@ public class SpawnerController : MonoBehaviour
     {
         currentNumberOfEnemySpawn--;
     }
-    /*
-    public void FlashRed()
-    {
-        if (DOTween.IsTweening(_spriteRenderer))
-        {
-            return;
-        }
 
-        Color originalColor = _spriteRenderer.color;
-        Color changeColor = new Color(1f, 0f, 0f, 0.5f);
-        _spriteRenderer.DOColor(changeColor, 0.1f).OnComplete(() =>
-        {
-            _spriteRenderer.DOColor(originalColor, 0.1f);
-        });
+    public void OnDamage()
+    {
+        var originalPosition = transform.position;
+        transform.DOShakePosition(0.2f, 0.1f, 7, 90)
+        .OnComplete(() => transform.position = originalPosition);
     }
-    */
 }

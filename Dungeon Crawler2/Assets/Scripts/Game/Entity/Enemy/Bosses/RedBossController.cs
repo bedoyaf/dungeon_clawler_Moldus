@@ -1,18 +1,12 @@
 using DG.Tweening;
 using UnityEngine;
 
+/// <summary>
+/// Extends the basic enemy but makes it shoot a new type of attack and teleport
+/// </summary>
 public class RedBoss : BasicEnemy
 {
-    //weapons
     [SerializeField] GameObject bombPrefab;
-    //configurable for bomb
-//   [SerializeField] float bombPlantingDistance = 2f;
-    // [SerializeField] float explosionCooldown = 2.5f; // Cooldown between bomb planting
-
-    [SerializeField]
-    private GameObject bulletPrefab;
-    [SerializeField]
-    private BulletData bulletData;  //so its projectile is unique to the others
 
     [SerializeField] private float teleportDistance = 5f;
     [SerializeField] private Vector2 teleportBoundsMin;   
@@ -31,7 +25,6 @@ public class RedBoss : BasicEnemy
         spriteFlipCustomizer = false;
     }
 
-
     void Update()
     {
         if (Vector2.Distance(transform.position, target.position) < teleportDistance && !teleporting)
@@ -40,13 +33,21 @@ public class RedBoss : BasicEnemy
         }
     }
 
+    /// <summary>
+    /// sets up the red boss
+    /// by setting up the bounds for teleportation
+    /// </summary>
+    /// <param name="minteleport">min of bound for teleportation</param>
+    /// <param name="maxteleport">max of bound for teleportation</param>
     public void setupRedBoss(Vector2 minteleport, Vector2 maxteleport)
     {
         teleportBoundsMin = minteleport;
         teleportBoundsMax = maxteleport;
     }
 
-
+    /// <summary>
+    /// changes the bosses location within the room and adds a tween visual
+    /// </summary>
     private void Teleport()
     {
         teleporting = true;
@@ -61,7 +62,7 @@ public class RedBoss : BasicEnemy
             {
                 transform.position = randomPosition;
             })
-            .Append(transform.DOScale(1f, teleportDuration / 2).SetEase(Ease.OutBack))
+            .Append(transform.DOScale(1.3f, teleportDuration / 2).SetEase(Ease.OutBack))
             .OnComplete(() =>
             {
                 teleportTween = null;
@@ -81,7 +82,10 @@ public class RedBoss : BasicEnemy
     {
         ThrowBomb();
     }
-    
+
+    /// <summary>
+    /// Just makes sure the boss is destroyed safely
+    /// </summary>
     private void On_Death()
     {
         dead = true;

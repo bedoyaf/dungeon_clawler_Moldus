@@ -114,7 +114,7 @@ public class BulletController : MonoBehaviour
             }
             Destroy(gameObject);
         }
-        else if (collision.CompareTag("Pillar") && (gameObject.CompareTag("FriendlyBullet") || gameObject.CompareTag("EnemyBullet")))
+        else if (collision.CompareTag("Pillar") && (gameObject.CompareTag("FriendlyBullet") || gameObject.CompareTag("EnemyBullet"))) // all bullets -> pillars
         {
             IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
 
@@ -124,7 +124,7 @@ public class BulletController : MonoBehaviour
             }
             Destroy(gameObject);
         }
-        else if (collision.CompareTag("Spawner") && gameObject.CompareTag("FriendlyBullet") )
+        else if (collision.CompareTag("Spawner") && gameObject.CompareTag("FriendlyBullet") ) // friendlybullet -> Spawners
         {
             IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
 
@@ -134,7 +134,7 @@ public class BulletController : MonoBehaviour
             }
             Destroy(gameObject);
         }
-        else if (collision.CompareTag("Structure"))
+        else if (collision.CompareTag("Structure"))  // if hits wall detroy
         {
             Destroy(gameObject);
         }

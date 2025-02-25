@@ -23,6 +23,7 @@ public class ProceduralGenerationRoomGenerator : AbstractDungeonGenerator
 
     [SerializeField] public UnityEvent OnLevelRegeration;
 
+    [SerializeField] private int DungeonIncreaseOnEachIteration = 10;
     public void Awake()
     {
         RunProceduralGeneration();
@@ -60,12 +61,13 @@ public class ProceduralGenerationRoomGenerator : AbstractDungeonGenerator
         //generates walls of rooms
         WallGenerator.CreateWalls(floor, tileMapVisualizer);
 
+        PlaceSpawners(roomColors, roomsWithoutStartAndEnd);
+
         PlacePillars(roomsWithoutStartAndEnd);
 
         //scans for pathfinding
         dungeonContentGenerator.ScanAreaForPathFinding();
         //places spawners
-        PlaceSpawners(roomColors, roomsWithoutStartAndEnd);
         dungeonContentGenerator.DestroyEnemies();
         //places the start and end of the level
         dungeonContentGenerator.PlaceStartAndEnd(startAndEnd.Item1, startAndEnd.Item2, tileMapVisualizer);
@@ -187,5 +189,16 @@ public class ProceduralGenerationRoomGenerator : AbstractDungeonGenerator
             }
         }
         return floor;
+    }
+
+
+    /// <summary>
+    /// Increases the values that determin the dungeon size
+    /// useful for adding difficulty
+    /// </summary>
+    public void IncreaseDungeonSizeValues()
+    {
+        DungeonWidth += DungeonIncreaseOnEachIteration;
+        DungeonHeight += DungeonIncreaseOnEachIteration;
     }
 }

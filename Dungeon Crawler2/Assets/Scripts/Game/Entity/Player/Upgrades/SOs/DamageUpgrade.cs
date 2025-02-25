@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Adds damage to attacks, setup just calls function that increases modifiers
+/// </summary>
 [CreateAssetMenu(fileName = "DamageUpgrade", menuName = "Upgrades/Damage Upgrade")]
 public class DamageUpgrade : UpgradeSO
 {

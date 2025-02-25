@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Increases the shooting frequency, by changing values
+/// </summary>
 [CreateAssetMenu(fileName = "FireRateUpgrade", menuName = "Upgrades/FireRate Upgrade")]
 public class FireRateUpgrade : UpgradeSO
 {

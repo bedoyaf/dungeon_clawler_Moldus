@@ -4,9 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
+
+/// <summary>
+/// Handles pillars
+/// Those are immovable objects that block pathfinding and projectiles
+/// </summary>
 public class PillarController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     [SerializeField] private List<Sprite> sprites;
     private SpriteRenderer spriteRenderer;
@@ -22,14 +26,22 @@ public class PillarController : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer("Environment");
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
+
+
+    /// <summary>
+    /// Handles damage by adding visuals
+    /// makes it change sprite upon losing certain health and shakes it
+    /// </summary>
     public void OnDamage()
     {
-        transform.DOShakePosition(0.2f, 0.1f, 7, 90);
+        var originalPosition = transform.position;
+        transform.DOShakePosition(0.2f, 0.1f, 7, 90)
+        .OnComplete(() => transform.position = originalPosition);
+
         if (healthController.currentHealth<(healthController.maxHealth*2)/3 && size_stage == 0)
         {
             size_stage = 1;
@@ -42,6 +54,10 @@ public class PillarController : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// handles the pillars destruction by adding visuals and making sure it rescans path finding
+    /// </summary>
     public void OnDeath()
     {
         spriteRenderer.DOKill();
@@ -49,8 +65,8 @@ public class PillarController : MonoBehaviour
         spriteRenderer.DOFade(0f, 0.5f)
         .OnComplete(() =>
         {
-        Destroy(gameObject); // Destroy the pillar
-        dungeonContentGenerator.ScanSpecificAreaForPathfinding(transform.position, 10f); // Update graph after destruction
+        Destroy(gameObject); 
+        dungeonContentGenerator.ScanSpecificAreaForPathfinding(transform.position, 10f);
         });
     }
 

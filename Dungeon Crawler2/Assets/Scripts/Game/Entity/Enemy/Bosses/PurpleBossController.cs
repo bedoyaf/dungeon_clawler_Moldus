@@ -2,6 +2,9 @@ using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Extends the normal basic enemy, but makes it stand in place and shoot around
+/// </summary>
 public class PurpleBossController : BasicEnemy
 {
     [SerializeField]
@@ -22,6 +25,9 @@ public class PurpleBossController : BasicEnemy
         aiPath.canMove = false;
     }
 
+    /// <summary>
+    /// Changes the normal behaviour to be just shooting in circles
+    /// </summary>
     protected IEnumerator PurpleEnemyBehavior()
     {
         while (true)
@@ -32,6 +38,9 @@ public class PurpleBossController : BasicEnemy
         }
     }
 
+    /// <summary>
+    /// Shoots in x directions
+    /// </summary>
     public override void Attack()
     {
         float angleStep = 360f / numberOfDirections; 
@@ -45,6 +54,10 @@ public class PurpleBossController : BasicEnemy
         }
     }
 
+    /// <summary>
+    /// Just the instantiation of one bullet 
+    /// </summary>
+    /// <param name="shootDirection">the direction the bullet should go</param>
     private void Shoot(Vector2 shootDirection)
     {
 

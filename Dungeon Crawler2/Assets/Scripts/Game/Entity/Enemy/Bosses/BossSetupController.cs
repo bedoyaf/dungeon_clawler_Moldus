@@ -2,6 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Manages the generation of the boss room and the whole boss process
+/// </summary>
+/// <param name="target">for direction</param>
 [ExecuteInEditMode]
 public class BossSetupController : MonoBehaviour
 {
@@ -66,6 +70,9 @@ public class BossSetupController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Similar to the main dungeon generator, generates the room and sets up everything
+    /// </summary>
     [ContextMenu("Generate Boss Room")]
     public void SetupBoss()
     {
@@ -79,17 +86,13 @@ public class BossSetupController : MonoBehaviour
 
         List<ColorEnemy> roomColors = new List<ColorEnemy>();
         dungeonGeneratorScript.GenerateRandomColorForRooms(new List<BoundsInt>{ room }, floor, roomColors);
-        //generates walls of rooms
+
         WallGenerator.CreateWalls(floor, tileMapVisualizerScript);
 
         PlaceSpawnPoints(room);
 
         dungeonGeneratorScript.PlacePillars(new List<BoundsInt> { room });
 
-        //scans for pathfinding
-        //    dungeonContentGenerator.ScanAreaForPathFinding();
-
-        //     dungeonContentGenerator.DestroyEnemies();
         if(chosenBoss == ColorEnemy.None)
         {
             spawnBoss(roomColors[0]);
@@ -103,6 +106,9 @@ public class BossSetupController : MonoBehaviour
         setupHealthBar();
     }
 
+    /// <summary>
+    /// sets up UI of helthbar
+    /// </summary>
     private void setupHealthBar()
     {
         healthBar.SetActive(true);
@@ -110,16 +116,26 @@ public class BossSetupController : MonoBehaviour
         healthBar.GetComponent<BossHealthBarController>().setupHelathController(healthController);
     }
 
+    /// <summary>
+    /// hides UI of healthbar
+    /// </summary>
     private void closeHealthBar()
     {
         healthBar.SetActive(false);
     }
 
+    /// <summary>
+    /// Makes sure, there is no boss
+    /// </summary>
     private void KillPreviousBoss()
     {
         Destroy(currentBoss);
     }
 
+    /// <summary>
+    /// sets up where the playerspawn, boss spawn, and exit should be
+    /// </summary>
+    /// <param name="room">bounds of the boss room</param>
     private void PlaceSpawnPoints(BoundsInt room)
     {
         Vector2Int center = new Vector2Int((room.min.x + room.max.x) / 2, (room.min.y + room.max.y) / 2);
@@ -140,6 +156,10 @@ public class BossSetupController : MonoBehaviour
         playerSpawnPoint.transform.position = playerSpawnTile;
     }
 
+    /// <summary>
+    /// sets up the boss itself, with respect to colour
+    /// </summary>
+    /// <param name="c">one of the 3 colour types for bosses</param>
     private void spawnBoss(ColorEnemy c)//add change based on color
     {   
 
@@ -168,6 +188,10 @@ public class BossSetupController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// sets up the death of the boss, so the player can get away
+    /// </summary>
+    /// <param name="o">not used</param>
     private void manageBossDeath(GameObject o)
     {
         endSpawnPoint.SetActive(true);
@@ -175,19 +199,29 @@ public class BossSetupController : MonoBehaviour
         Destroy(currentBoss);
     }
 
+    /// <summary>
+    /// Just teleports the player and camera to the boss room
+    /// </summary>
     private void setupPlayerForBoss()
     {
         player.transform.position = playerSpawnPoint.transform.position;
         Camera.transform.position = playerSpawnPoint.transform.position;
     }
 
+    /// <summary>
+    /// Calls out the completion of the boss fight
+    /// </summary>
     public void BossFightCompleted()
     {
         OnBossCompleted.Invoke();
     }
 
+    /// <summary>
+    /// Calls out the unsuccesful completion of the bossfight
+    /// </summary>
     public void BossFightFailed()
     {
-        healthBar.SetActive(false);
+        closeHealthBar();
+        Destroy(currentBoss);
     }
 }

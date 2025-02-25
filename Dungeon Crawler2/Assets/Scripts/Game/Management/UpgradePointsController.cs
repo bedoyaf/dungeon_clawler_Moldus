@@ -2,6 +2,9 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Manages the number of points needed for upgrade
+/// </summary>
 public class UpgradePointsController : MonoBehaviour
 {
 
@@ -14,11 +17,13 @@ public class UpgradePointsController : MonoBehaviour
     private int startingValueForFormula;
 
     private bool isFlashing = false;
+    private bool isShowingUpgradeScreen = false;
     private Tween flashTween;
 
     void Start()
     {
         startingValueForFormula = pointsNeededForUpgrade;
+        UpdateUI();
     }
 
     private void Update()
@@ -30,6 +35,10 @@ public class UpgradePointsController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Adds one point upon destroying spawner
+    /// </summary>
+    /// <param name="spawner">destroyed spawner</param>
     public void IncrementUpgradePoints(GameObject spawner)
     {
         if (currentPoints < pointsNeededForUpgrade)
@@ -43,6 +52,19 @@ public class UpgradePointsController : MonoBehaviour
         UpdateUI();
     }
 
+    /// <summary>
+    /// automaticly gets all the points
+    /// </summary>
+    public void fillPointCounter()
+    {
+        currentPoints = pointsNeededForUpgrade;
+        FlashUI();
+        UpdateUI();
+    }
+
+    /// <summary>
+    /// Adds a flashing to the UI, so the player can see that he has enaugh points
+    /// </summary>
     public void FlashUI()
     {
         if (isFlashing) return;  
@@ -53,6 +75,10 @@ public class UpgradePointsController : MonoBehaviour
             .SetLoops(-1, LoopType.Yoyo)
             .SetEase(Ease.InOutQuad);
     }
+
+    /// <summary>
+    /// Stops the visual of flashing
+    /// </summary>
     private void StopFlashing()
     {
         isFlashing = false;
@@ -60,6 +86,9 @@ public class UpgradePointsController : MonoBehaviour
         textMesh.alpha = 1f; 
     }
 
+    /// <summary>
+    /// Handles when enaugh points have been collected
+    /// </summary>
     private void OnReachingEnaughPoints()
     {
         currentPoints = 0;
@@ -68,10 +97,14 @@ public class UpgradePointsController : MonoBehaviour
         UpdateUI();
     }
 
+    /// <summary>
+    /// Formula point increase
+    /// </summary>
+    /// <returns>the new value</returns>
     private int IncreasePointsNeededForUpgrade()
     {
         formulaIndex++;
-        return Mathf.RoundToInt(startingValueForFormula + 4 * Mathf.Log(formulaIndex + 1, 2));
+        return Mathf.RoundToInt(startingValueForFormula + 1 * Mathf.Log(formulaIndex + 1, 2));
     }
 
     private void UpdateUI()

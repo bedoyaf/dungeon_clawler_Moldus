@@ -136,6 +136,7 @@ MonoBehaviour:
   despawnDistance: 10
   bulletData: {fileID: 0}
   playerBiasModifier: 1
+  damageModifier: 1
 --- !u!58 &8420502050239795236
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -179,13 +180,13 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 620423418827414382}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2269342636372300970, guid: 8c2de8224dad1394ea20953ce15a5386, type: 2}
   m_audioClip: {fileID: 8300000, guid: 13630373898d129419b153be3ee99f28, type: 3}
   m_Resource: {fileID: 8300000, guid: 13630373898d129419b153be3ee99f28, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.426
   m_Pitch: 1
   Loop: 0
   Mute: 0

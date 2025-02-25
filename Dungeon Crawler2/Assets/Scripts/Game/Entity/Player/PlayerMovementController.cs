@@ -12,6 +12,7 @@ public class PlayerMovementController : MonoBehaviour
     //helpers
     private Rigidbody2D _rigidbody;
     private Animator _animator;
+    private AudioSource _audioSource;
 
     //input
     private Vector2 movementInput;
@@ -22,6 +23,7 @@ public class PlayerMovementController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _rigidbody.freezeRotation = true;
         _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -35,15 +37,10 @@ public class PlayerMovementController : MonoBehaviour
 
     void FixedUpdate()
     {
-        // smoothedMovementInput = Vector2.SmoothDamp(smoothedMovementInput, movementInput, ref movementInputSmoothVelocity, 0.1f);
-        //smoothedMovementInput = Vector2.SmoothDamp(smoothedMovementInput, movementInput, ref movementInputSmoothVelocity, smoothingTime);
-        //  Vector2 targetPosition = _rigidbody.position + movementInput * speed * Time.fixedDeltaTime;
-        //_rigidbody.linearVelocity = smoothedMovementInput * speed;
-        //_rigidbody.linearVelocity = smoothedMovementInput * speed;
-        // _rigidbody.MovePosition(targetPosition);
-
         if (movementInput.magnitude > 0)
         {
+            //_audioSource.Stop();
+            //_audioSource.Play();
             Vector2 targetPosition = _rigidbody.position + movementInput * speed * Time.deltaTime;
             _rigidbody.MovePosition(targetPosition);
         }
@@ -58,9 +55,4 @@ public class PlayerMovementController : MonoBehaviour
     {
         speed = newSpeed;
     }
-
-   // private void OnMove(InputValue inputValue)
-   // {
-   //     movementInput = inputValue.Get<Vector2>();
- //   }
 }

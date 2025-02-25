@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Increases the players speed value
+/// </summary>
 [CreateAssetMenu(fileName = "SpeedUpgrade", menuName = "Upgrades/Speed Upgrade")]
 public class SpeedUpgrade : UpgradeSO
 {

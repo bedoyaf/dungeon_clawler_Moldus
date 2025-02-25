@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Instantiates a firefly that guides the player to the exit
+/// </summary>
 [CreateAssetMenu(fileName = "FireflyUpgrade", menuName = "Upgrades/Firefly Upgrade")]
 public class FireFlyUpgrade : UpgradeSO
 {

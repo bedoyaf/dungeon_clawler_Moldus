@@ -11,13 +11,16 @@ using DG.Tweening;
 using System;
 using UnityEngine.UIElements;
 
+/// <summary>
+/// Manages a ball of light that follows the player and guides him to the exit
+/// </summary>
 public class FireflyController : MonoBehaviour
 {
     //path finding
     [SerializeField] protected Transform target;
     [SerializeField] private int movementSpeed = 5;
     [SerializeField] private float distance_from_player = 10;
-    //[SerializeField] private float acceptable_distance_to_target = 1;
+
     [SerializeField] private string TagOfEndOfLevel = "LevelExit";
 
     protected AIDestinationSetter destinationSetter;
@@ -38,14 +41,13 @@ public class FireflyController : MonoBehaviour
             dungeonGenerator.OnLevelRegeration.AddListener(OnLevelRegenerated);
         }
 
-
         StartCoroutine(FireflyBehaviour());
     }
 
-    void Update()
-    {
-    }
-
+    /// <summary>
+    /// sets up the firefly by giving it the exit and player
+    /// </summary>
+    /// <param name="_player"></param>
     public void Initialize( GameObject _player)
     {
         GameObject exit = GameObject.FindGameObjectWithTag(TagOfEndOfLevel);
@@ -53,6 +55,9 @@ public class FireflyController : MonoBehaviour
         player = _player;
     }
 
+    /// <summary>
+    /// Makes it follow the player, or go to the exit
+    /// </summary>
     private IEnumerator FireflyBehaviour()
     {
         aiPath.canMove = true;
@@ -74,7 +79,11 @@ public class FireflyController : MonoBehaviour
             yield return null;
         }
     }
-    void OnLevelRegenerated()
+
+    /// <summary>
+    /// Makes sure the firefly is setup properly after a new level has been regenerated 
+    /// </summary>
+    private void OnLevelRegenerated()
     {
         GameObject exit = GameObject.FindGameObjectWithTag(TagOfEndOfLevel);
         transform.position = player.transform.position;

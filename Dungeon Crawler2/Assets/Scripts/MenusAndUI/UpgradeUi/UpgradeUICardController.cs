@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// handles UI of the upgrade card
+/// </summary>
 public class UpgradeUICardController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public static event Action<UpgradeSO> OnUpgradePicked; 
     [SerializeField] private TextMeshProUGUI UIname;
     [SerializeField] private Image image;
-    //[SerializeField] private string description="";
     [SerializeField] private Button button;
 
     private UpgradeSO currentUpgrade;
@@ -18,13 +20,15 @@ public class UpgradeUICardController : MonoBehaviour, IPointerEnterHandler, IPoi
         button.onClick.AddListener(OnCardPicked);
     }
 
+    /// <summary>
+    /// updates the visuals of the upgrade card
+    /// </summary>
+    /// <param name="upgrade">the upgrade to be shown</param>
     public void updateCard(UpgradeSO upgrade)
     {
         currentUpgrade = upgrade;
         UIname.text = upgrade.abilityName;
         image.sprite = upgrade.abilityIcon;
-        //description = upgrade.description;
-        //name.text = upgrade.name;
     }
     private void OnCardPicked()
     {

@@ -1,6 +1,9 @@
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// the tooltip that shows the upgrade description
+/// </summary>
 public class UpgradeTooltipController : MonoBehaviour
 {
     public static UpgradeTooltipController Instance { get; private set; }

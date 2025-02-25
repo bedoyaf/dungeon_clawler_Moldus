@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// activates the rage damage modifier
+/// </summary>
 [CreateAssetMenu(fileName = "RageUpgrade", menuName = "Upgrades/Rage Upgrade")]
 public class RageUpgrade : UpgradeSO
 {

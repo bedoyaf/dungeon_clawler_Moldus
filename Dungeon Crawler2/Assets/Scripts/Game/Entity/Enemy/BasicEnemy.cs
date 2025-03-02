@@ -263,22 +263,6 @@ public abstract class BasicEnemy : MonoBehaviour, IEnemy
         }
         return false;
     }
-    /*
-    public void FlashRed()
-    {
-        if (DOTween.IsTweening(_spriteRenderer))
-        {
-            return;
-        }
-
-        Color originalColor = _spriteRenderer.color;
-        Color changeColor = new Color(1f, 0f, 0f, 0.5f);
-        _spriteRenderer.DOColor(changeColor, 0.1f).OnComplete(() =>
-        {
-            _spriteRenderer.DOColor(originalColor, 0.1f);
-        });
-    }
-    */
 
     public void OnBasicEnemyDeathSpawnerUpdate(GameObject a)
     {

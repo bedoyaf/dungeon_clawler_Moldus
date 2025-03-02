@@ -139,7 +139,7 @@ public class SpawnerController : MonoBehaviour
         if (attempts == maxAttempts)
         {
             Debug.LogWarning("Could not find a valid spawn position after multiple attempts.");
-            //return;
+            return;
         }
 
         //Vector2 randomPoint = Random.insideUnitCircle * spawnRadius;

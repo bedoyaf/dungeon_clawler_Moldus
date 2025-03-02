@@ -8,7 +8,7 @@ public class PlayerShootingController : MonoBehaviour
 {
     //attack
     private ColorEnemy currentInfection = ColorEnemy.None; //determins weapons
-    [SerializeField] private GameObject bulletPrefab;    
+    [SerializeField] public GameObject bulletPrefab;
     [SerializeField] private GameObject bombPrefab;       
     [SerializeField] public BulletData longRangeBullet;
     [SerializeField] public BulletData shortRangeBullet;
@@ -31,6 +31,8 @@ public class PlayerShootingController : MonoBehaviour
 
     private float currentDamageModifier = 1f;
     private float currentDamageModifierRage = 1f;
+
+    [SerializeField] private StatusEffectAbstract statusEffect;
 
     void Start()
     {
@@ -175,6 +177,7 @@ public class PlayerShootingController : MonoBehaviour
 
         bullet.GetComponent<BulletController>().Initialize(gameObject,shootDirection, currentPosition, bulletSpeed);
         bullet.GetComponent<BulletController>().setBulletData(currentBulletData);
+        bullet.GetComponent<BulletController>().SetStatusEffect(statusEffect);
 
     }
 
@@ -184,7 +187,11 @@ public class PlayerShootingController : MonoBehaviour
     /// </summary>
     void PlantBomb()
     {
-        Instantiate(bombPrefab, transform.position, Quaternion.identity);
+        var bomb = Instantiate(bombPrefab, transform.position, Quaternion.identity);
+        if(statusEffect!=null)
+        {
+            bomb.GetComponent<BombController>().AddStatusEffect(statusEffect);
+        }
     }
 
     /// <summary>
@@ -222,5 +229,10 @@ public class PlayerShootingController : MonoBehaviour
         longRangeBullet.damageModifier = currentDamageModifier*currentDamageModifierRage;
         shortRangeBullet.damageModifier = currentDamageModifier * currentDamageModifierRage;
         flamePrefab.GetComponent<FlameController>().damageModifier = currentDamageModifier * currentDamageModifierRage;
+    }
+
+    public void AssignStatusEffect(StatusEffectAbstract effect)
+    {
+        statusEffect = effect;
     }
 }

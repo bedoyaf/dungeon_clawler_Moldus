@@ -15,6 +15,7 @@ public class BulletController : MonoBehaviour
     [SerializeField] private float playerBiasModifier = 1f; //to adjust if I want to make the player deal More damage
     [SerializeField] public float damageModifier = 1f;
 
+    [SerializeField] public StatusEffectAbstract statusEffect;
     void Start()
     {
         damage = (int)(damage * playerBiasModifier *damageModifier);
@@ -29,6 +30,7 @@ public class BulletController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     /// <summary>
     /// Initializes the bullet
     /// </summary>
@@ -41,6 +43,7 @@ public class BulletController : MonoBehaviour
         SetTag(shooter);
         SetDirection(direction, _originalPosition, additionalBulletSpeed);
     }
+
     /// <summary>
     /// Sets the tag for checking collisions later
     /// </summary>
@@ -59,6 +62,7 @@ public class BulletController : MonoBehaviour
             Debug.LogWarning("Shooter does not have a valid tag. Cannot set bullet tag.");
         }
     }
+
     /// <summary>
     /// Sets the bullets the bullet should fly towards
     /// </summary>
@@ -73,6 +77,7 @@ public class BulletController : MonoBehaviour
         rb.linearVelocity = direction * speed;
         originalPosition = _originalPosition;
     }
+
     /// <summary>
     /// Just configurates the bullets by data, helps to create a bunch of bullet types
     /// </summary>
@@ -94,23 +99,33 @@ public class BulletController : MonoBehaviour
     /// </summary>
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (gameObject.CompareTag("FriendlyBullet") && (collision.CompareTag("Enemy")|| collision.CompareTag("Boss")))
+        if (gameObject.CompareTag("FriendlyBullet") && (collision.CompareTag("Enemy")|| collision.CompareTag("Boss")))  // player ->enemy
         {
             IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
 
             if (damageable != null)
             {
                 damageable.TakeDamage((int)(damage*damageModifier));
+                if(statusEffect!= null)
+                {
+                    var appliedEffect = collision.gameObject.AddComponent(statusEffect.GetType()) as StatusEffectAbstract;
+                    appliedEffect.Apply(collision.gameObject);
+                }
             }
             Destroy(gameObject);
         }
-        else if (gameObject.CompareTag("EnemyBullet") && collision.CompareTag("Player"))
+        else if (gameObject.CompareTag("EnemyBullet") && collision.CompareTag("Player")) //enemy -> player
         {
             IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
 
             if (damageable != null)
             {
                 damageable.TakeDamage((int)(damage * damageModifier));
+                if (statusEffect != null)
+                {
+                    var appliedEffect = collision.gameObject.AddComponent(statusEffect.GetType()) as StatusEffectAbstract;
+                    appliedEffect.Apply( collision.gameObject);
+                }
             }
             Destroy(gameObject);
         }
@@ -137,6 +152,15 @@ public class BulletController : MonoBehaviour
         else if (collision.CompareTag("Structure"))  // if hits wall detroy
         {
             Destroy(gameObject);
+        }
+    }
+
+    public void SetStatusEffect(StatusEffectAbstract effect)
+    {
+        statusEffect = effect;
+        if (statusEffect != null)
+        {
+            GetComponent<SpriteRenderer>().color = statusEffect.color;
         }
     }
 

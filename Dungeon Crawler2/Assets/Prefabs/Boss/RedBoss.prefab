@@ -326,15 +326,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  EnemyVision: 15
+  EnemyVision: 30
   movementSpeed: 5
   spawnLocationsParent: {fileID: 0}
   enemyParent: {fileID: 0}
   shootingRange: 10
   shootingCooldown: 1
   bombPrefab: {fileID: 4137400275654543772, guid: 75ce08c905af80447b72ee396c4e182f, type: 3}
-  bulletPrefab: {fileID: 620423418827414382, guid: 7cec1422d946ff24facb96d478247a1c, type: 3}
-  bulletData: {fileID: 11400000, guid: fc8ca0d7dbfadfb4487686b9aaabeb7c, type: 2}
   teleportDistance: 5
   teleportBoundsMin: {x: 0, y: 0}
   teleportBoundsMax: {x: 0, y: 0}

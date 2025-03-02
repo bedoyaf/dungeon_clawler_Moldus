@@ -319,7 +319,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 3
+  m_Mass: 10
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
@@ -385,6 +385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   damageModifier: 2
+  shield: {fileID: 0}
   onTakeDamage:
     m_PersistentCalls:
       m_Calls:

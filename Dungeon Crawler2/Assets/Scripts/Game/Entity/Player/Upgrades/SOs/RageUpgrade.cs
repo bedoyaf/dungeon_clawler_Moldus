@@ -8,7 +8,7 @@ public class RageUpgrade : UpgradeSO
 {
     public override void Activate(GameObject player)
     {
-        if (player.GetComponent<RageController>() == null) // Prevent duplicates
+        if (player.GetComponent<RageController>() == null) 
         {
             player.AddComponent<RageController>();
         }
@@ -19,8 +19,11 @@ public class RageUpgrade : UpgradeSO
         player.GetComponent<PlayerShootingController>().UpdateDamageModifiersRage(1f);
         RageController controller = player.GetComponent<RageController>();
         
+
+
         if (controller != null)
         {
+            controller.DestroyRageImage();
             Destroy(controller);
         }
     }

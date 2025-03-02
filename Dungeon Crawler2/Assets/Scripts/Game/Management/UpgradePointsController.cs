@@ -9,7 +9,7 @@ public class UpgradePointsController : MonoBehaviour
 {
 
     [SerializeField] public int currentPoints = 0;
-    [SerializeField] private int pointsNeededForUpgrade = 6;
+    [SerializeField] public int pointsNeededForUpgrade = 6;
     [SerializeField] private TextMeshProUGUI textMesh;
     [SerializeField] private UpgradeManager upgradeManager;
 
@@ -111,4 +111,22 @@ public class UpgradePointsController : MonoBehaviour
         textMesh.text = $"Spores: {currentPoints}/{pointsNeededForUpgrade}";
     }
 
+    public void ResetPoints()
+    {
+        StopFlashing();
+        currentPoints = 0;
+        pointsNeededForUpgrade = startingValueForFormula;
+        UpdateUI();
+    }
+
+    public void LoadPoints(SaveData saveData)
+    {
+        currentPoints = saveData.upgradePoints;
+        pointsNeededForUpgrade = saveData.pointsNeeded;
+        if(currentPoints>=pointsNeededForUpgrade)
+        {
+            FlashUI();
+        }
+        UpdateUI();
+    }
 }

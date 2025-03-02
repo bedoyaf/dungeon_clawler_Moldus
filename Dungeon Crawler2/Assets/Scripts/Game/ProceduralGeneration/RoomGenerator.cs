@@ -24,8 +24,17 @@ public class ProceduralGenerationRoomGenerator : AbstractDungeonGenerator
     [SerializeField] public UnityEvent OnLevelRegeration;
 
     [SerializeField] private int DungeonIncreaseOnEachIteration = 10;
+
+    public int lastSeed { private set; get; }
+    public int currentSeed {  private set; get; }
+    private int lastRoomHeight;
+    private int lastRoomWidth;
+
+    private int originalHeight, originalWidth;
     public void Awake()
     {
+        originalHeight = DungeonHeight;
+        originalWidth = DungeonWidth;
         RunProceduralGeneration();
     }
     /// <summary>
@@ -33,6 +42,25 @@ public class ProceduralGenerationRoomGenerator : AbstractDungeonGenerator
     /// </summary>
     public override void RunProceduralGeneration()
     {
+        currentSeed = GenerateSeed();
+        UnityEngine.Random.InitState(currentSeed);
+        tileMapVisualizer.Clear();
+        GenerateNewDungon();
+    }
+
+    public void RunProceduralGenerationLastLevel()
+    {
+        if(lastSeed != 0)
+        {
+            currentSeed = lastSeed;
+            DungeonHeight = lastRoomHeight;
+            DungeonWidth = lastRoomWidth;
+        }
+        else
+        {
+            currentSeed = GenerateSeed();
+        }
+        UnityEngine.Random.InitState(currentSeed);
         tileMapVisualizer.Clear();
         GenerateNewDungon();
     }
@@ -200,5 +228,30 @@ public class ProceduralGenerationRoomGenerator : AbstractDungeonGenerator
     {
         DungeonWidth += DungeonIncreaseOnEachIteration;
         DungeonHeight += DungeonIncreaseOnEachIteration;
+    }
+
+    /// <summary>
+    /// Returns a "random" number for seed
+    /// </summary>
+    /// <returns>a seed in int</returns>
+    private int GenerateSeed()
+    {
+        return DateTime.Now.GetHashCode(); 
+    }
+
+    /// <summary>
+    /// Changes the last seed to match a new succesful seed value
+    /// </summary>
+    public void StoreLastSeed()
+    {
+        lastSeed = currentSeed;
+        lastRoomHeight = DungeonHeight;
+        lastRoomWidth = DungeonWidth;
+    }
+
+    public void ResetGeneratorParameters()
+    {
+        lastRoomHeight = originalHeight;
+        lastRoomWidth = originalWidth;
     }
 }

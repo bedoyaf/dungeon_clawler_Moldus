@@ -29,7 +29,10 @@ public class ShieldUpgrade : UpgradeSO
 
     public override void Revert(GameObject player)
     {
-        Destroy(player.GetComponent<HealthController>().shield.gameObject);
-        player.GetComponent<HealthController>().shield = null;
+        if(player.GetComponent<HealthController>().shield != null)
+        {
+            Destroy(player.GetComponent<HealthController>().shield.gameObject);
+            player.GetComponent<HealthController>().shield = null;
+        }
     }
 }

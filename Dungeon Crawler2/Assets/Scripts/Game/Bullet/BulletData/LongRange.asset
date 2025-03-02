@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1efa79880d211c543a95590ba5ce904a, type: 3}
   m_Name: LongRange
   m_EditorClassIdentifier: 
-  speed: 30
+  speed: 20
   damage: 5
   despawnDistance: 60
   sprite: {fileID: -590080596, guid: 36b6023f4166af74585d57adaa8e2397, type: 3}
   rotationAngle: 0
   audioClip: {fileID: 8300000, guid: 13630373898d129419b153be3ee99f28, type: 3}
+  damageModifier: 1

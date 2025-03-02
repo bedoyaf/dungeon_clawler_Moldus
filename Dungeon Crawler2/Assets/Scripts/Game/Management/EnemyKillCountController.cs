@@ -17,6 +17,7 @@ public class EnemyKillCountController : MonoBehaviour
     [SerializeField] public int RedPoints  = 0;
     [SerializeField] public int PurplePoints  = 0;
     [SerializeField] public int GreenPoints  = 0;
+    [SerializeField] private int MaximumPoints = 99;
 
     void Start()
     {
@@ -44,13 +45,13 @@ public class EnemyKillCountController : MonoBehaviour
         switch (enemyType)
         {
             case ColorEnemy.Purple:
-                PurplePoints++;
+                if(PurplePoints < MaximumPoints)PurplePoints++;
                 break;
             case ColorEnemy.Green:
-                GreenPoints++;
+                if (GreenPoints < MaximumPoints) GreenPoints++;
                 break;
             case ColorEnemy.Red:
-                RedPoints++;
+                if (RedPoints < MaximumPoints) RedPoints++;
                 break;
         }
         UpdateTextPoints();

@@ -1,4 +1,8 @@
+﻿using System.Collections;
+using System.Diagnostics.Contracts;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 /// <summary>
 /// Activates damage modifiers for the player when health is low enaugh 
@@ -13,16 +17,12 @@ public class RageController : MonoBehaviour
     private PlayerShootingController shootingController;
     private bool rage = false;
 
-    [SerializeField] private Color rageColor = new Color(1f, 0f, 0f, 0.2f); 
-    private SpriteRenderer spriteRenderer;
-    private Color originalColor;
+    private Image rageImage;
 
     void Start()
     {
         healthController = GetComponent<HealthController>();
         shootingController = GetComponent<PlayerShootingController>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        originalColor = spriteRenderer.color;
     }
 
     void Update()
@@ -39,6 +39,7 @@ public class RageController : MonoBehaviour
 
     private void ActivateRage()
     {
+        TriggerRageFlash();
         rage = true;
         shootingController.UpdateDamageModifiersRage(damageModifierFromRage);
     }
@@ -46,5 +47,68 @@ public class RageController : MonoBehaviour
     {
         rage =false;
         shootingController.UpdateDamageModifiersRage(1f);
+    }
+
+
+    public void TriggerRageFlash()
+    {
+        if (rageImage == null)
+        {
+            CreateRageImage();
+        }
+        StartCoroutine(FlashRoutine());
+    }
+
+    private void CreateRageImage()
+    {
+        Canvas canvas = FindFirstObjectByType<Canvas>();
+
+        if (canvas == null)
+        {
+            Debug.LogError("No Canvas found in the scene!");
+            return;
+        }
+
+        GameObject rageImageGO = new GameObject("RageOverlay");
+        rageImageGO.transform.SetParent(canvas.transform, false);
+
+        rageImage = rageImageGO.AddComponent<Image>();
+        rageImage.color = new Color(1, 0, 0, 0);
+
+        RectTransform rt = rageImage.GetComponent<RectTransform>();
+        rt.anchorMin = Vector2.zero;
+        rt.anchorMax = Vector2.one;
+        rt.offsetMin = Vector2.zero;
+        rt.offsetMax = Vector2.zero;
+    }
+
+    private IEnumerator FlashRoutine()
+    {
+        float duration = 0.5f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration / 2)
+        {
+            rageImage.color = new Color(1, 0, 0, Mathf.Lerp(0, 1, elapsedTime / (duration / 2)));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.1f);
+
+        elapsedTime = 0f;
+        while (elapsedTime < duration / 2)
+        {
+            rageImage.color = new Color(1, 0, 0, Mathf.Lerp(1, 0, elapsedTime / (duration / 2)));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        rageImage.color = new Color(1, 0, 0, 0);
+    }
+
+    public void DestroyRageImage()
+    {
+        Destroy(rageImage);
     }
 }

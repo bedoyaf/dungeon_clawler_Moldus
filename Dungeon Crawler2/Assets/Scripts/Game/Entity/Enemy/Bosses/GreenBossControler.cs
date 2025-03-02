@@ -19,6 +19,8 @@ public class GreenBossControler : SpawnerController
                 e.GetComponent<HealthController>().TakeDamage(1000);
             }
         }
+        GetComponent<SpriteRenderer>().DOKill();
+        transform.DOKill();
         Destroy(gameObject);
     }
 }

@@ -196,7 +196,7 @@ public class BossSetupController : MonoBehaviour
     {
         endSpawnPoint.SetActive(true);
         closeHealthBar();
-        Destroy(currentBoss);
+        //Destroy(currentBoss);
     }
 
     /// <summary>

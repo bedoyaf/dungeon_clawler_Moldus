@@ -155,9 +155,16 @@ public class UpgradeManager : MonoBehaviour
     /// </summary>
     public void RevertAllUpgrades()
     {
+        List<UpgradeSO> upgrades = new List<UpgradeSO>();
         foreach(var  upgrade in activatedUpgrades)
         {
             upgrade.Revert(gameObject);
+            upgrades.Add(upgrade);
+        }
+        foreach(var upgrade in upgrades)
+        {
+            availableUpgrades.Add(upgrade);
+            activatedUpgrades.Remove(upgrade);
         }
     }
 
@@ -165,8 +172,9 @@ public class UpgradeManager : MonoBehaviour
     /// Reverts all the upgrades and then Activates all the upgrades loaded from the save 
     /// </summary>
     /// <param name="loadedUpgrades">upgrades loaded from the save</param>
-    public void LoadUpgrades(List<UpgradeSO> loadedUpgrades)
+    public void LoadUpgrades(SaveData savedata)
     {
+        List<UpgradeSO> loadedUpgrades = savedata.unlockedUpgrades;
         RevertAllUpgrades();
         foreach(var upgrade in loadedUpgrades)
         {

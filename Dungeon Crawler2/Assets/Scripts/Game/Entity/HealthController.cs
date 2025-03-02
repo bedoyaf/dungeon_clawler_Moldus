@@ -53,7 +53,6 @@ public class HealthController : MonoBehaviour, IDamageable
             }
 
             currentHealth -= damage;
-            //Debug.Log($"{gameObject.name} took {damage} damage.");
             if (gameObject.CompareTag("Player") || gameObject.CompareTag("Enemy") || gameObject.CompareTag("Spawner") || gameObject.CompareTag("Boss"))
             {
                 FlashRed();

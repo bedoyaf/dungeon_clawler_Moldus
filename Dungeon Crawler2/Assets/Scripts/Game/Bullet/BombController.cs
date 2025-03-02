@@ -10,6 +10,8 @@ public class BombController : MonoBehaviour
     public GameObject explosionEffect; //just smoke visual object thats left after the explosion
     [SerializeField] public float damageModifier = 1f;
 
+    public StatusEffectAbstract statusEffect;
+
     void Start()
     {
         // starts the countdown to explosion
@@ -35,11 +37,21 @@ public class BombController : MonoBehaviour
             if (damageable != null)
             {
                 damageable.TakeDamage((int)(damage*damageModifier));
+                if (statusEffect != null)
+                {
+                    var appliedEffect = nearbyObject.gameObject.AddComponent(statusEffect.GetType()) as StatusEffectAbstract;
+                    appliedEffect.Apply(nearbyObject.gameObject);
+                }
             }
         }
         Destroy(gameObject);
     }
 
+    public void AddStatusEffect(StatusEffectAbstract statusEffect)
+    {
+        this.statusEffect = statusEffect;
+        GetComponent<SpriteRenderer>().color = statusEffect.color;
+    }
     void Update()
     {
         Invoke("Explode", explosionTime);

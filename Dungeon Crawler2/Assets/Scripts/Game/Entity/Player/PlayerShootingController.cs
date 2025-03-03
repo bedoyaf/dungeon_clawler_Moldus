@@ -175,7 +175,7 @@ public class PlayerShootingController : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         Vector3 currentPosition = transform.position;
 
-        bullet.GetComponent<BulletController>().Initialize(gameObject,shootDirection, currentPosition, bulletSpeed);
+        bullet.GetComponent<BulletController>().Initialize(gameObject,shootDirection, currentPosition, bulletSpeed+currentBulletData.speed);
         bullet.GetComponent<BulletController>().setBulletData(currentBulletData);
         bullet.GetComponent<BulletController>().SetStatusEffect(statusEffect);
 

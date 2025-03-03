@@ -123,6 +123,11 @@ public class UpgradePointsController : MonoBehaviour
     {
         currentPoints = saveData.upgradePoints;
         pointsNeededForUpgrade = saveData.pointsNeeded;
+        if (pointsNeededForUpgrade <= 0)
+        {
+            pointsNeededForUpgrade = startingValueForFormula;
+        }
+
         if(currentPoints>=pointsNeededForUpgrade)
         {
             FlashUI();

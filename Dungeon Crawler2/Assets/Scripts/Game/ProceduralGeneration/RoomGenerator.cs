@@ -21,6 +21,7 @@ public class ProceduralGenerationRoomGenerator : AbstractDungeonGenerator
 
     [SerializeField] private DungeonContentGenerator dungeonContentGenerator; //handles placing spawners and other
 
+    [SerializeField] public UnityEvent OnGenerationStart;
     [SerializeField] public UnityEvent OnLevelRegeration;
 
     [SerializeField] private int DungeonIncreaseOnEachIteration = 10;
@@ -43,6 +44,9 @@ public class ProceduralGenerationRoomGenerator : AbstractDungeonGenerator
     public override void RunProceduralGeneration()
     {
         currentSeed = GenerateSeed();
+        lastSeed = currentSeed;
+        lastRoomHeight = DungeonHeight;
+        lastRoomWidth = DungeonWidth;
         UnityEngine.Random.InitState(currentSeed);
         tileMapVisualizer.Clear();
         GenerateNewDungon();

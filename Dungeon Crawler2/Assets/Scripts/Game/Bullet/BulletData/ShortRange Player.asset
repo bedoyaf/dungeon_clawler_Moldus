@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1efa79880d211c543a95590ba5ce904a, type: 3}
   m_Name: ShortRange Player
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 5
   damage: 60
-  despawnDistance: 5
+  despawnDistance: 4
   sprite: {fileID: 865996259, guid: 36b6023f4166af74585d57adaa8e2397, type: 3}
   rotationAngle: 0
   audioClip: {fileID: 8300000, guid: cd812ff4e8aa5fa4c998d1e3777b6ad5, type: 3}

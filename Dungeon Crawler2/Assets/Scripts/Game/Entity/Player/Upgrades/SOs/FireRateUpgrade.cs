@@ -7,16 +7,20 @@ using UnityEngine;
 public class FireRateUpgrade : UpgradeSO
 {
     public float delayBetweenShots = 0.5f;
-    private float original_delayBetweenShots;
+    private float original_delayBetweenShotsRed;
+    private float original_delayBetweenShotsGreen;
+    private float original_delayBetweenShotsPurple;
 
     public override void Activate(GameObject player)
     {
-        original_delayBetweenShots = player.GetComponent<PlayerShootingController>().delayBetweenShots;
-        player.GetComponent<PlayerShootingController>().changeFireRate(delayBetweenShots);
+        original_delayBetweenShotsRed = player.GetComponent<PlayerShootingController>().delayBetweenShotsRed;
+        original_delayBetweenShotsGreen = player.GetComponent<PlayerShootingController>().delayBetweenShotsGreen;
+        original_delayBetweenShotsPurple = player.GetComponent<PlayerShootingController>().delayBetweenShotsPurple;
+        player.GetComponent<PlayerShootingController>().changeFireRateMultiply(delayBetweenShots);
     }
 
     public override void Revert(GameObject player)
     {
-        player.GetComponent<PlayerShootingController>().changeFireRate(original_delayBetweenShots);
+        player.GetComponent<PlayerShootingController>().changeFireRate(original_delayBetweenShotsRed, original_delayBetweenShotsGreen,original_delayBetweenShotsPurple);
     }
 }

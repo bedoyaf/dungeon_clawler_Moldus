@@ -17,5 +17,4 @@ MonoBehaviour:
   description: Increases the frequency of projectiles being shot
   level: 1
   ability: fireRate
-  mutualyExclusiveWith: []
-  delayBetweenShots: 0.8
+  delayBetweenShots: 0.5

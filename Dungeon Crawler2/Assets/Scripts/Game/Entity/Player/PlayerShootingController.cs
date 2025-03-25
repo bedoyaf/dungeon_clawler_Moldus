@@ -9,11 +9,14 @@ public class PlayerShootingController : MonoBehaviour
     //attack
     private ColorEnemy currentInfection = ColorEnemy.None; //determins weapons
     [SerializeField] public GameObject bulletPrefab;
-    [SerializeField] private GameObject bombPrefab;       
+    [SerializeField] private GameObject bombPrefab;
     [SerializeField] public BulletData longRangeBullet;
     [SerializeField] public BulletData shortRangeBullet;
     private BulletData currentBulletData;
-    [SerializeField] public float delayBetweenShots { get; private set; } = 1f; 
+    //   [SerializeField] public float delayBetweenShots  = 0.5f;
+    [SerializeField] public float delayBetweenShotsRed = 0.5f;
+    [SerializeField] public float delayBetweenShotsPurple = 0.5f;
+    [SerializeField] public float delayBetweenShotsGreen = 0.5f;
     private float lastShotTime;
     //flame
     [SerializeField] private GameObject flamePrefab;
@@ -42,9 +45,10 @@ public class PlayerShootingController : MonoBehaviour
 
     void Update()
     {
-        if (Time.timeScale == 0f) {
+        if (Time.timeScale == 0f)
+        {
             StopFlameThrower();
-        return; 
+            return;
         }
 
         FlipSpriteIfNecessary();
@@ -62,7 +66,7 @@ public class PlayerShootingController : MonoBehaviour
         {
             StopFlameThrower();
         }
-            UpdateFlamePointDirection();
+        UpdateFlamePointDirection();
     }
 
     /// <summary>
@@ -138,24 +142,28 @@ public class PlayerShootingController : MonoBehaviour
     /// </summary>
     public void Attack()
     {
-        if (Time.time - lastShotTime > delayBetweenShots)
+        bool attacked = false;
+        if (currentInfection == ColorEnemy.Purple && Time.time - lastShotTime > delayBetweenShotsPurple)
         {
-            if(currentInfection == ColorEnemy.Purple)
-            {
-                Shoot();
-            }
-            else if(currentInfection == ColorEnemy.Red)
-            {
-                PlantBomb();
-            }
-            else if(currentInfection == ColorEnemy.Green)
-            {
-                Shoot();
-            }
-            else
-            {
-                Debug.Log("no infection");
-            }
+            Shoot();
+            attacked = true;
+        }
+        else if (currentInfection == ColorEnemy.Red && Time.time - lastShotTime > delayBetweenShotsRed)
+        {
+            PlantBomb();
+            attacked = true;
+        }
+        else if (currentInfection == ColorEnemy.Green && Time.time - lastShotTime > delayBetweenShotsGreen)
+        {
+            Shoot();
+            attacked = true;
+        }
+        else if(Time.time - lastShotTime > delayBetweenShotsRed || Time.time - lastShotTime > delayBetweenShotsGreen || Time.time - lastShotTime > delayBetweenShotsPurple)
+        {
+            Debug.Log("no infection");
+        }
+        if(attacked)
+        {
             lastShotTime = Time.time;
         }
     }
@@ -171,11 +179,11 @@ public class PlayerShootingController : MonoBehaviour
         Vector2 shootDirection = (mousePosition - transform.position).normalized;
 
         float bulletSpeed = rigidBody.linearVelocity.magnitude;//*dotProduct;
-                                                  // Debug.Log(bulletSpeed);
+                                                               // Debug.Log(bulletSpeed);
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         Vector3 currentPosition = transform.position;
 
-        bullet.GetComponent<BulletController>().Initialize(gameObject,shootDirection, currentPosition, bulletSpeed+currentBulletData.speed);
+        bullet.GetComponent<BulletController>().Initialize(gameObject, shootDirection, currentPosition, bulletSpeed + currentBulletData.speed);
         bullet.GetComponent<BulletController>().setBulletData(currentBulletData);
         bullet.GetComponent<BulletController>().SetStatusEffect(statusEffect);
 
@@ -188,7 +196,7 @@ public class PlayerShootingController : MonoBehaviour
     void PlantBomb()
     {
         var bomb = Instantiate(bombPrefab, transform.position, Quaternion.identity);
-        if(statusEffect!=null)
+        if (statusEffect != null)
         {
             bomb.GetComponent<BombController>().AddStatusEffect(statusEffect);
         }
@@ -210,9 +218,20 @@ public class PlayerShootingController : MonoBehaviour
         flamePoint.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
-    public void changeFireRate(float amount)
+    public void changeFireRateMultiply(float amount)
     {
-        delayBetweenShots = amount;
+        // delayBetweenShots = amount;
+        delayBetweenShotsRed *= amount;
+        delayBetweenShotsGreen *= amount;
+        delayBetweenShotsPurple *= amount;
+    }
+
+    public void changeFireRate(float amountRed, float amountGreen, float amountPurple)
+    {
+        // delayBetweenShots = amount;
+        delayBetweenShotsRed = amountRed;
+        delayBetweenShotsGreen = amountGreen;
+        delayBetweenShotsPurple = amountPurple;
     }
 
     public void IncreaseDamageModifier(float value)
@@ -226,7 +245,7 @@ public class PlayerShootingController : MonoBehaviour
     public void UpdateDamageModifiersRage(float value)
     {
         currentDamageModifierRage = value;
-        longRangeBullet.damageModifier = currentDamageModifier*currentDamageModifierRage;
+        longRangeBullet.damageModifier = currentDamageModifier * currentDamageModifierRage;
         shortRangeBullet.damageModifier = currentDamageModifier * currentDamageModifierRage;
         flamePrefab.GetComponent<FlameController>().damageModifier = currentDamageModifier * currentDamageModifierRage;
     }

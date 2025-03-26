@@ -10601,7 +10601,7 @@ MonoBehaviour:
     rid: 344211179342397707
   m_ShadowCastingSource: 2
   m_ShadowMesh:
-    m_Mesh: {fileID: 2062490072}
+    m_Mesh: {fileID: 2076217422}
     m_LocalBounds:
       m_Center: {x: 21, y: 69, z: 0}
       m_Extent: {x: 119, y: 71, z: 0}
@@ -13031,7 +13031,7 @@ MonoBehaviour:
   textPurplePoints: {fileID: 53107953}
   textGreenPoints: {fileID: 779308733}
   RedPoints: 0
-  PurplePoints: 5
+  PurplePoints: 0
   GreenPoints: 0
   MaximumPoints: 99
 --- !u!114 &1024800662
@@ -47591,7 +47591,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2056210177}
   m_CullTransparentMesh: 1
---- !u!43 &2062490072
+--- !u!43 &2076217422
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

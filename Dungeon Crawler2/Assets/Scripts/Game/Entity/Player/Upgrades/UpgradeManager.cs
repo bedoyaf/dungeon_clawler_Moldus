@@ -13,7 +13,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private List<UpgradeSO> allUpgrades;  //all the upgrades, 
 
     [SerializeField] private UnityEvent onOpeningShopUpgradeUI = new UnityEvent();
-    [SerializeField] private UnityEvent onClosingShopUpgradeUI = new UnityEvent();
+    //[SerializeField] private UnityEvent onClosingShopUpgradeUI = new UnityEvent();
 
     [Header("Firefly setup")]
     [SerializeField] private GameObject levelExit;
@@ -21,22 +21,20 @@ public class UpgradeManager : MonoBehaviour
     private List<UpgradeSO> availableUpgrades;  //available to be shown
     public List<UpgradeSO> activatedUpgrades { get; private set; } = new List<UpgradeSO>();  //being used by the player
 
-    private List<UpgradeSO> UpgradesOnCards;
+    private List<UpgradeSO> UpgradesOnCards = null;
 
     private int displayCardsNum = 3;
 
-    private bool isShowingUpgrades = false;
+    public bool isShowingUpgrades = false;
+
+    [SerializeField] UpgradePointsController upgradePointsController;
 
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P) && UpgradesOnCards==null)
         {
             if (UpgradesOnCards==null) chooseAndDisplayNewUpgrades();
-        }
-        if(Input.GetKeyDown(KeyCode.KeypadEnter)&& isShowingUpgrades)
-        {
-            CloseUpgradeScreen();
         }
     }
 
@@ -57,6 +55,7 @@ public class UpgradeManager : MonoBehaviour
     /// </summary>
     public void chooseAndDisplayNewUpgrades()
     {
+        isShowingUpgrades = true;
         var actualyAviableUpgrades = getAllAviableUpgrades();
         if (actualyAviableUpgrades.Count==0)
         {
@@ -130,14 +129,17 @@ public class UpgradeManager : MonoBehaviour
     private void HandlePickedUpgrade(UpgradeSO pickedUpgrade)
     {
         UI.gameObject.SetActive(false);
-        onClosingShopUpgradeUI.Invoke();
+ //       onClosingShopUpgradeUI.Invoke();
         foreach (var u in UpgradesOnCards)
         {
             if(u != pickedUpgrade) availableUpgrades.Add(u);
         }
         UpgradesOnCards = null;
+        isShowingUpgrades = false;
         activatedUpgrades.Add(pickedUpgrade);
         pickedUpgrade.Activate(gameObject);
+
+        upgradePointsController.FinishedPickingUpgrade();
     }
 
     private void OnEnable()
@@ -198,18 +200,5 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Closes upgrade screen, when no upgrade has been picked
-    /// </summary>
-    public void CloseUpgradeScreen()
-    {
-        isShowingUpgrades = false;
-        UI.gameObject.SetActive(false);
-        onClosingShopUpgradeUI.Invoke();
-        foreach (var u in UpgradesOnCards)
-        {
-            availableUpgrades.Add(u);
-        }
-        UpgradesOnCards = null;
-    }
+
 }

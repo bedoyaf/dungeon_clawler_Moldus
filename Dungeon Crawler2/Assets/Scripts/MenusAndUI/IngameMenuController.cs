@@ -7,7 +7,8 @@ public enum CurrentMenu
 {
     None,
     Pause,
-    GameOver
+    GameOver,
+    Upgrade
 }
 
 /// <summary>
@@ -18,7 +19,7 @@ public class IngameMenuController : MonoBehaviour
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] public UnityEvent onRestart;
-    private CurrentMenu currentMenu = CurrentMenu.None;
+    public CurrentMenu currentMenu = CurrentMenu.None;
 
     /// <summary>
     /// Just checks if Esc was pressed, then pauses/unpauses
@@ -29,7 +30,7 @@ public class IngameMenuController : MonoBehaviour
         {
             if (currentMenu == CurrentMenu.Pause)
                 ResumeGame();
-            else
+            else if(currentMenu == CurrentMenu.None)
                 PauseGame();
         }
     }

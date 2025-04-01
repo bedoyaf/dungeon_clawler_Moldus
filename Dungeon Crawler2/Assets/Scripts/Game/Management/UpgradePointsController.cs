@@ -19,17 +19,28 @@ public class UpgradePointsController : MonoBehaviour
     private bool isFlashing = false;
     private Tween flashTween;
 
+    private bool isShowingUpgrades = false;
+
+    [SerializeField] UpgradesUIManager upgradesUIManager;
+
     void Start()
     {
         startingValueForFormula = pointsNeededForUpgrade;
+        if (currentPoints >= pointsNeededForUpgrade)
+        {
+            FlashUI();
+        }
         UpdateUI();
     }
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Space) && currentPoints >= pointsNeededForUpgrade && isFlashing)
+        if (Input.GetKeyDown(KeyCode.Space) && currentPoints >= pointsNeededForUpgrade && isFlashing && !isShowingUpgrades)
         {
-            StopFlashing();
+            OnReachingEnaughPoints();
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape) && isShowingUpgrades)
+        {
             OnReachingEnaughPoints();
         }
     }
@@ -90,9 +101,32 @@ public class UpgradePointsController : MonoBehaviour
     /// </summary>
     private void OnReachingEnaughPoints()
     {
+        if(!isShowingUpgrades && !upgradeManager.isShowingUpgrades)
+        {
+            isShowingUpgrades = true;
+            Debug.Log("vyber nove zmrdy");
+            upgradeManager.chooseAndDisplayNewUpgrades();
+        }
+        else
+        {
+            if (isShowingUpgrades)
+            {
+                isShowingUpgrades = false;
+                upgradesUIManager.CloseUpgradeUI();
+            }
+            else
+            {
+                isShowingUpgrades = true;
+                upgradesUIManager.ShowUpgradeUI();
+            }
+        }
+    }
+
+    public void FinishedPickingUpgrade()
+    {
+        StopFlashing();
         currentPoints = 0;
         pointsNeededForUpgrade = IncreasePointsNeededForUpgrade();
-        upgradeManager.chooseAndDisplayNewUpgrades();
         UpdateUI();
     }
 

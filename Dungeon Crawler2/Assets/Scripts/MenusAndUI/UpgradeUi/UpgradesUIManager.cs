@@ -12,7 +12,11 @@ public class UpgradesUIManager : MonoBehaviour
 {
     [SerializeField] private UnityEvent<UpgradeSO> onUpgradePicked = new UnityEvent<UpgradeSO>();
 
+    [SerializeField] private UnityEvent onHideUpgradeMenu = new UnityEvent();
+
     [SerializeField] private List<GameObject> cards;
+
+    [SerializeField] IngameMenuController controller;
 
 
     /// <summary>
@@ -21,6 +25,8 @@ public class UpgradesUIManager : MonoBehaviour
     /// <param name="upgrades">upgrades to be shown</param>
     public void ShowUpgradeCards(List<UpgradeSO> upgrades)
     {
+        controller.currentMenu = CurrentMenu.Upgrade;
+
         if (cards.Count < upgrades.Count || upgrades.Count ==0) { Debug.LogWarning("Incorrect number of cards and upgrades in UI"); }
         setActiveCards(true);
         int i = 0;
@@ -55,6 +61,19 @@ public class UpgradesUIManager : MonoBehaviour
         UpgradeUICardController.OnUpgradePicked += UpgradePicked;
     }
 
+    public void CloseUpgradeUI()
+    {
+        controller.currentMenu = CurrentMenu.None;
+        onHideUpgradeMenu.Invoke();
+        gameObject.SetActive(false);
+    }
+
+    public void ShowUpgradeUI()
+    {
+        controller.currentMenu = CurrentMenu.Upgrade;
+        gameObject.SetActive(true);
+    }
+
 
     /// <summary>
     /// pressed the certain upgrade card
@@ -62,6 +81,7 @@ public class UpgradesUIManager : MonoBehaviour
     /// <param name="pickedUpgrade">the upgrade picked</param>
     private void UpgradePicked(UpgradeSO pickedUpgrade)
     {
+        controller.currentMenu = CurrentMenu.None;
         onUpgradePicked.Invoke(pickedUpgrade);
     }
 

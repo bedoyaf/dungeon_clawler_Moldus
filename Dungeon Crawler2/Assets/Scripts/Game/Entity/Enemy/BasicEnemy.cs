@@ -42,6 +42,8 @@ public abstract class BasicEnemy : MonoBehaviour, IEnemy
 
     protected bool dead = false;
 
+    [SerializeField] protected float slowdownFactor = 5f;
+
     void Start()
     {
         ConfigurateBasicFields();
@@ -177,6 +179,7 @@ public abstract class BasicEnemy : MonoBehaviour, IEnemy
                 if (currentState == EnemyState.Idle)
                 {
                     aiPath.canMove = false;
+                    _rigidBody.linearVelocity = Vector2.Lerp(_rigidBody.linearVelocity, Vector2.zero, slowdownFactor * Time.fixedDeltaTime);
                 }
                 else
                 {
@@ -203,6 +206,8 @@ public abstract class BasicEnemy : MonoBehaviour, IEnemy
         else
         {
             aiPath.canMove = false;
+            _rigidBody.linearVelocity = Vector2.Lerp(_rigidBody.linearVelocity, Vector2.zero, slowdownFactor * Time.fixedDeltaTime);
+
             isShooting = true;
         }
 

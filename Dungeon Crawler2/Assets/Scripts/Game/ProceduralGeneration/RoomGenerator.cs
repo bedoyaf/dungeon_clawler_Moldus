@@ -211,14 +211,7 @@ public class ProceduralGenerationRoomGenerator : AbstractDungeonGenerator
         HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
         foreach (var room in rooms)
         {
-            for (int i = offset; i < room.size.x - offset; i++)
-            {
-                for (int j = offset; j < room.size.y - offset; j++)
-                {
-                    Vector2Int position = (Vector2Int)room.min + new Vector2Int(i, j);
-                    floor.Add(position);
-                }
-            }
+            floor.UnionWith(BasicDungeonGenerationAlgorithms.CreateRoomFloor(room));
         }
         return floor;
     }
